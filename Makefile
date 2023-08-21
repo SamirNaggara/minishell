@@ -19,6 +19,8 @@ SOURCES	=	./main.c \
 			./executor/pipe.c \
 			./executor/cmd.c \
 			./executor/exec.c \
+			./executor/redirections.c \
+			./executor/child.c \
 			./utils/add_slash.c \
 
 
