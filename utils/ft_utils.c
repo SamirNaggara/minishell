@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 14:14:22 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/22 22:06:04 by snaggara         ###   ########.fr       */
+/*   Created: 2023/08/23 13:28:43 by snaggara          #+#    #+#             */
+/*   Updated: 2023/08/23 13:28:54 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-
-void	ft_close_pipe(int *pipe)
+int	ft_is_same_str(char *str1, char *str2)
 {
-	close(pipe[0]);
-	close(pipe[1]);
-}
+	int	i;
 
-void	ft_close_pipes(t_data *data)
-{
-	if (data->pipe[0][0] != -1)
-		close(data->pipe[0][0]);
-	if (data->pipe[0][1] != -1)
-		close(data->pipe[0][1]);
-	if (data->pipe[1][0] != -1)
-		close(data->pipe[1][0]);
-	if (data->pipe[1][1] != -1)
-		close(data->pipe[1][1]);
+	i = 0;
+	while (str1[i] && str2[i] && str1[i] == str2[i])
+		i++;
+	if ((!str1[i] || str1[i] == 10) && (!str2[i] || str2[i] == 10))
+		return (1);
+	return (0);
 }

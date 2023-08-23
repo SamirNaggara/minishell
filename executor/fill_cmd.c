@@ -8,7 +8,7 @@ void	ft_fill_simple_cmd1(t_simple_cmd *simple_cmd)
 
 	cmd = malloc(sizeof(char) * 4);
 	ft_bzero(cmd, 4);
-	ft_strlcpy(cmd, "pat", 4);
+	ft_strlcpy(cmd, "cat", 4);
 	
 
 	
@@ -20,8 +20,8 @@ void	ft_fill_simple_cmd1(t_simple_cmd *simple_cmd)
 	simple_cmd->redirections = NULL;
 	simple_cmd->next = NULL;
 	simple_cmd->index = 0;
-	simple_cmd->fd_in = STDIN_FILENO;
-	simple_cmd->fd_out = STDOUT_FILENO;
+	simple_cmd->fd_in = -1;
+	simple_cmd->fd_out = -1;
 }
 
 void	ft_fill_simple_cmd2(t_simple_cmd *simple_cmd)
@@ -29,13 +29,13 @@ void	ft_fill_simple_cmd2(t_simple_cmd *simple_cmd)
 	char *cmd;
 	char *arg;
 
-	cmd = malloc(sizeof(char) * 3);
-	ft_bzero(cmd, 3);
-	ft_strlcpy(cmd, "ls", 3);
+	cmd = malloc(sizeof(char) * 5);
+	ft_bzero(cmd, 5);
+	ft_strlcpy(cmd, "head", 5);
 
 	arg = malloc(sizeof(char) * 3);
 	ft_bzero(arg, 3);
-	ft_strlcpy(arg, "-l", 3);
+	ft_strlcpy(arg, "-5", 3);
 
 	simple_cmd->cmd_args = (char **)malloc(sizeof(char *) * 3);
 	simple_cmd->cmd_args[0] = cmd;
@@ -46,8 +46,8 @@ void	ft_fill_simple_cmd2(t_simple_cmd *simple_cmd)
 	simple_cmd->redirections = NULL;
 	simple_cmd->next = NULL;
 	simple_cmd->index = 1;
-	simple_cmd->fd_in = STDIN_FILENO;
-	simple_cmd->fd_out = STDOUT_FILENO;
+	simple_cmd->fd_in = -1;
+	simple_cmd->fd_out = -1;
 }
 
 void	ft_fill_simple_cmd3(t_simple_cmd *simple_cmd)
@@ -66,8 +66,8 @@ void	ft_fill_simple_cmd3(t_simple_cmd *simple_cmd)
 	simple_cmd->redirections = NULL;
 	simple_cmd->next = NULL;
 	simple_cmd->index = 2;
-	simple_cmd->fd_in = STDIN_FILENO;
-	simple_cmd->fd_out = STDOUT_FILENO;
+	simple_cmd->fd_in = -1;
+	simple_cmd->fd_out = -1;
 }
 
 void	ft_fill_simple_cmd4(t_simple_cmd *simple_cmd)
@@ -94,17 +94,17 @@ void	ft_fill_simple_cmd4(t_simple_cmd *simple_cmd)
 	simple_cmd->redirections = NULL;
 	simple_cmd->next = NULL;
 	simple_cmd->index = 3;
-	simple_cmd->fd_in = STDIN_FILENO;
-	simple_cmd->fd_out = STDOUT_FILENO;
+	simple_cmd->fd_in = -1;
+	simple_cmd->fd_out = -1;
 }
 
 void	ft_fill_simple_cmd5(t_simple_cmd *simple_cmd)
 {
 	char *cmd;
 
-	cmd = malloc(sizeof(char) * 5);
-	ft_bzero(cmd, 5);
-	ft_strlcpy(cmd, "pwd", 4);
+	cmd = malloc(sizeof(char) * 4);
+	ft_bzero(cmd, 4);
+	ft_strlcpy(cmd, "cat", 4);
 
 
 
@@ -116,7 +116,7 @@ void	ft_fill_simple_cmd5(t_simple_cmd *simple_cmd)
 	simple_cmd->redirections = NULL;
 	simple_cmd->next = NULL;
 	simple_cmd->index = 4;
-	simple_cmd->fd_in = STDIN_FILENO;
-	simple_cmd->fd_out = STDOUT_FILENO;
+	simple_cmd->fd_in = -1;
+	simple_cmd->fd_out = -1;
 }
 

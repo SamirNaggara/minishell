@@ -21,7 +21,10 @@ SOURCES	=	./main.c \
 			./executor/exec.c \
 			./executor/redirections.c \
 			./executor/child.c \
+			./executor/free_struct.c \
+			./executor/here_doc.c \
 			./utils/add_slash.c \
+			./utils/ft_utils.c \
 
 
 

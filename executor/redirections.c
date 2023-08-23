@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:24:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/21 14:36:32 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:56:57 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,14 @@ int	ft_handle_redirection(t_data *data, t_simple_cmd *cmd)
 	redirection = cmd->redirections;
 	while (redirection)
 	{
-		if (redirection->token == INF)
-		{
-			if (!ft_inf_token(cmd, redirection))
-				return (0);
-		}
-		else if (redirection->token == SUP)
-		{
-			if (!ft_sup_token(cmd, redirection))
-				return (0);
-		}
+		if (!ft_inf_inf_token(cmd, redirection))
+			return (0);
+		if (!ft_inf_token(cmd, redirection))
+			return (0);
+		if (!ft_sup_token(cmd, redirection))
+			return (0);
+		if (!ft_sup_sup_token(cmd, redirection))
+			return (0);
 		redirection = redirection->next;
 	}
 	return (1);
@@ -70,8 +68,21 @@ int	ft_handle_redirection(t_data *data, t_simple_cmd *cmd)
 int	ft_sup_token(t_simple_cmd *cmd, t_lexer *redirection)
 {
 	if (redirection->token != SUP)
-		return (0);
+		return (1);
 	cmd->fd_out = open(redirection->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (cmd->fd_out == -1)
+	{
+		perror("File fdout not open properly");
+		return (0);
+	}
+	return (1);
+}
+
+int	ft_sup_sup_token(t_simple_cmd *cmd, t_lexer *redirection)
+{
+	if (redirection->token != SUPSUP)
+		return (1);
+	cmd->fd_out = open(redirection->word, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (cmd->fd_out == -1)
 	{
 		perror("File fdout not open properly");
@@ -83,12 +94,22 @@ int	ft_sup_token(t_simple_cmd *cmd, t_lexer *redirection)
 int	ft_inf_token(t_simple_cmd *cmd, t_lexer *redirection)
 {
 	if (redirection->token != INF)
-		return (0);
+		return (1);
 	cmd->fd_in = open(redirection->word, O_RDONLY, 0644);
 	if (cmd->fd_in == -1)
 	{
 		perror("File fdin not open properly");
 		return (0);
 	}
+	return (1);
+}
+
+int	ft_inf_inf_token(t_simple_cmd *cmd, t_lexer *redirection)
+{
+	if (redirection->token != INFINF)
+		return (1);
+	if (!ft_handle_here_doc(cmd, redirection))
+		return (0);
+	redirection->token = INF;
 	return (1);
 }

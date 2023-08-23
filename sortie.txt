@@ -1,1 +1,56 @@
-/home/sam-acer/Documents/42/circle_3/minishell
+total 144
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 148
+-rw-rw-r-- 1 sam-acer sam-acer    81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  23 12:30 executor
+drwxrwxr-x 2 sam-acer sam-acer  4096 août  16 14:07 lexer
+total 152
+-rw-rw-r-- 1 sam-acer sam-acer     81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer   4096 août  23 13:00 executor
+drwxrwxr-x 2 sam-acer sam-acer   4096 août  16 14:07 lexer
+total 152
+-rw-rw-r-- 1 sam-acer sam-acer     81 août  21 12:47 entree.txt
+drwxrwxr-x 2 sam-acer sam-acer   4096 août  23 13:00 executor
+drwxrwxr-x 2 sam-acer sam-acer   4096 août  16 14:07 lexer
