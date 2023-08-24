@@ -6,13 +6,11 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:14:22 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/22 22:06:04 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/25 00:11:56 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-
 
 void	ft_close_pipe(int *pipe)
 {

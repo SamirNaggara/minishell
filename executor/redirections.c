@@ -6,12 +6,11 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:24:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/23 12:56:57 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/25 00:13:14 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 /*
 	On test la commande et les redirections
@@ -46,8 +45,6 @@ int	ft_handle_redirection(t_data *data, t_simple_cmd *cmd)
 	redirection = cmd->redirections;
 	while (redirection)
 	{
-		if (!ft_inf_inf_token(cmd, redirection))
-			return (0);
 		if (!ft_inf_token(cmd, redirection))
 			return (0);
 		if (!ft_sup_token(cmd, redirection))
@@ -101,15 +98,5 @@ int	ft_inf_token(t_simple_cmd *cmd, t_lexer *redirection)
 		perror("File fdin not open properly");
 		return (0);
 	}
-	return (1);
-}
-
-int	ft_inf_inf_token(t_simple_cmd *cmd, t_lexer *redirection)
-{
-	if (redirection->token != INFINF)
-		return (1);
-	if (!ft_handle_here_doc(cmd, redirection))
-		return (0);
-	redirection->token = INF;
 	return (1);
 }

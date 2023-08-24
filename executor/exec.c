@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:30:11 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/21 12:01:02 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/25 00:01:02 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,28 @@ int	ft_exec_cmd(t_data *data, t_simple_cmd *cmd)
 	int		i;
 	char	*full_cmd;
 
-
 	i = 0;
 	while (data->paths[i])
 	{
-		full_cmd = ft_strjoin(data->paths[i++], cmd->cmd_args[0]);
+		full_cmd = ft_strjoin(data->paths[i], cmd->cmd_args[0]);
 		if (!full_cmd)
-			return (0); // Some freeing to do
+			return (ft_free_path_before(data->paths, i), 0);
 		execve(full_cmd, cmd->cmd_args, data->envp);
 		free(full_cmd);
+		i++;
 	}
 	execve(cmd->cmd_args[0], cmd->cmd_args, NULL);
 	perror("Command not found");
-	// Some freeing to do
 	return (1);
+}
+
+void	ft_free_path_before(char **path, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i)
+		free(path[j++]);
 }
 
 int	ft_cmd_valid(t_data *data, t_simple_cmd *cmd)
@@ -38,24 +46,18 @@ int	ft_cmd_valid(t_data *data, t_simple_cmd *cmd)
 	int		i;
 	char	*full_cmd;
 
-
 	i = 0;
 	while (data->paths[i])
 	{
 		full_cmd = ft_strjoin(data->paths[i++], cmd->cmd_args[0]);
 		if (!full_cmd)
-			return (0); // Some freeing to do
+			return (ft_free_path_before(data->paths, i), 0);
 		if (access(full_cmd, X_OK) != -1)
-		{
-			free(full_cmd);
- 			return (1);
-		}
+			return (free(full_cmd), 1);
 		free(full_cmd);
 	}
 	if (access(cmd->cmd_args[0], X_OK) != -1)
 		return (1);
-
 	fd_printf(STDERR_FILENO, "%s%s\n", E_CMD_NOT_FOUND, cmd->cmd_args[0]);
-
 	return (0);
 }

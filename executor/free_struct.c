@@ -6,12 +6,11 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 22:25:16 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/23 12:25:38 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/25 00:09:47 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 void	ft_free_simple_cmd(t_data *data)
 {
@@ -42,7 +41,7 @@ void	ft_free_lexer(t_lexer *lexer)
 void	ft_free_double_tab(char **tab)
 {
 	while (*tab)
-	{	
+	{
 		free(*tab);
 		tab++;
 	}

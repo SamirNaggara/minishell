@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/23 13:52:07 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/24 23:57:13 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,30 +106,37 @@ void	ft_close_pipes(t_data *data);
 int		ft_process_cmd1(t_data *data, t_simple_cmd *cmd);
 int		ft_exec_cmd(t_data *data, t_simple_cmd *cmd);
 char	*ft_add_slash(char *path);
-int	ft_nb_slash_to_add(char *path);
+int		ft_nb_slash_to_add(char *path);
 void	ft_child(t_data *data, t_simple_cmd *browse, int i);
 void	ft_fill_redirection1(t_lexer *redirection);
-int	ft_cmd_valid(t_data *data, t_simple_cmd *cmd);
-int	ft_handle_redirection(t_data *data, t_simple_cmd *cmd);
+int		ft_cmd_valid(t_data *data, t_simple_cmd *cmd);
+int		ft_handle_redirection(t_data *data, t_simple_cmd *cmd);
 void	ft_fill_redirection2(t_lexer *redirection);
-int	ft_test_cmd_and_redirections(t_data *data, t_simple_cmd *cmd);
-int	ft_first_child(t_data *data, t_simple_cmd *cmd, int i);
-int	ft_middle_child(t_data *data, t_simple_cmd *cmd, int i);
-int	ft_last_child(t_data *data, t_simple_cmd *cmd, int i);
-int	ft_inf_token(t_simple_cmd *cmd, t_lexer *redirection);
-int	ft_sup_token(t_simple_cmd *cmd, t_lexer *redirection);
-int	ft_redirect_fdin(t_simple_cmd *cmd);
-int	ft_redirect_fdout(t_simple_cmd *cmd);
+int		ft_test_cmd_and_redirections(t_data *data, t_simple_cmd *cmd);
+int		ft_first_child(t_data *data, t_simple_cmd *cmd, int i);
+int		ft_middle_child(t_data *data, t_simple_cmd *cmd, int i);
+int		ft_last_child(t_data *data, t_simple_cmd *cmd, int i);
+int		ft_inf_token(t_simple_cmd *cmd, t_lexer *redirection);
+int		ft_sup_token(t_simple_cmd *cmd, t_lexer *redirection);
+int		ft_redirect_fdin(t_simple_cmd *cmd);
+int		ft_redirect_fdout(t_simple_cmd *cmd);
 void	ft_close_redir_fds(t_data *data);
 void	ft_free_double_tab(char **tab);
 void	ft_free_simple_cmd(t_data *data);
 void	ft_free_lexer(t_lexer *lexer);
 void	ft_free_for_next_command(t_data *data);
 void	ft_free_path(t_data *data);
-int	ft_sup_sup_token(t_simple_cmd *cmd, t_lexer *redirection);
-int	ft_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection);
-int	ft_inf_inf_token(t_simple_cmd *cmd, t_lexer *redirection);
-int	ft_is_same_str(char *str1, char *str2);
+int		ft_sup_sup_token(t_simple_cmd *cmd, t_lexer *redirection);
+int		ft_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection);
+int		ft_inf_inf_token(t_simple_cmd *cmd, t_lexer *redirection);
+int		ft_is_same_str(char *str1, char *str2);
 void	ft_delete_here_doc_files(t_simple_cmd *cmd);
+int		ft_exec_one_cmd(t_data *data);
+int		ft_child_one_cmd(t_data *data);
+void	ft_finish_child(t_data *data, t_simple_cmd *cmd);
+int		ft_discriminate_child(t_data *data, t_simple_cmd *cmd, int i);
+int		ft_open_here_doc_file(t_simple_cmd *cmd, char *file_name);
+char	*ft_create_here_doc_filename(t_simple_cmd *cmd);
+void	ft_free_path_before(char **path, int i);
 
 #endif

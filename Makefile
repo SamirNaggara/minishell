@@ -17,16 +17,17 @@ SOURCES	=	./main.c \
 			./executor/fill_cmd.c \
 			./executor/process.c \
 			./executor/pipe.c \
-			./executor/cmd.c \
 			./executor/exec.c \
 			./executor/redirections.c \
 			./executor/child.c \
+			./executor/child2.c \
 			./executor/free_struct.c \
 			./executor/here_doc.c \
+			./executor/exec_one_cmd.c \
+			./executor/fill_redirection.c \
+			./executor/dup2.c \
 			./utils/add_slash.c \
 			./utils/ft_utils.c \
-
-
 
 OBJETS	=	$(SOURCES:.c=.o)			
 

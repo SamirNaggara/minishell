@@ -54,3 +54,5 @@ total 152
 -rw-rw-r-- 1 sam-acer sam-acer     81 août  21 12:47 entree.txt
 drwxrwxr-x 2 sam-acer sam-acer   4096 août  23 13:00 executor
 drwxrwxr-x 2 sam-acer sam-acer   4096 août  16 14:07 lexer
+salut
+L

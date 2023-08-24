@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/22 22:07:09 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/25 00:12:15 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_create_all_process(t_data *data)
 {
-	int	i;
+	int				i;
 	t_simple_cmd	*browse;
 
 	browse = data->first_cmd;
@@ -51,7 +51,6 @@ void	ft_create_process(t_data *data, t_simple_cmd *browse, int i)
 {
 	if (browse->next)
 		pipe(data->pipe[i % 2]);
-	
 	data->child[i] = fork();
 	if (data->child[i] == -1)
 		return (perror(E_CHILD));
@@ -60,12 +59,3 @@ void	ft_create_process(t_data *data, t_simple_cmd *browse, int i)
 	if (i != 0)
 		ft_close_pipe(data->pipe[(i - 1) % 2]);
 }
-
-// TO DO :
-// - Tes fonctions childs ne prennent pas encore en compte les redirections !
-
-// Tu prends en compte que si y'a stdin pour le premier ou le dernier enfant.
-// Mais il faut que pour chaque noeud, s'il y a une redirections, que le dup soit fait par la
-// - Il faut encore fermer tout les fichiers qui ont été ouvert
-
-// Peut etre faire une fonction qui free toutes tes structures
