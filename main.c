@@ -6,23 +6,71 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/24 23:46:10 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/26 14:19:13 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
 int	main(int ac, char **av, char **envp)
 {
-	t_data			data;
-
+	t_data	data;
+	
 	(void)ac;
 	(void)av;
-	ft_fill_data(&data);
 	data.envp = envp;
-	executor(&data);
+
+	ft_minishell_loop(&data);
+
 	return (0);
+	
 }
+
+void	ft_minishell_loop(t_data *data)
+{
+	while (1)
+	{
+		data->input = readline("Minishell ");
+		if (!data->input)
+			break ;
+		if (!*data->input)
+			continue ;
+		ft_lexer(data);
+		ft_visualise_lexer(data);
+		add_history(data->input);
+		rl_redisplay();
+		ft_fill_data(data);
+		executor(data);
+		free(data->input);
+	}
+}
+
+void	ft_visualise_lexer(t_data *data)
+{
+	t_lexer	*browse;
+
+	browse = data->lexer;
+	printf("\nLe lexer : \n");
+	while (browse)
+	{
+		printf("L'element %d : %s\n", browse->index, browse->word);
+		browse = browse->next;
+	}
+}
+
+// int	main(int ac, char **av, char **envp)
+// {
+// 	t_data			data;
+
+// 	(void)ac;
+// 	(void)av;
+
+// 	ft_fill_data(&data);
+// 	data.envp = envp;
+// 	executor(&data);
+// 	return (0);
+// }
 
 int	ft_fill_data(t_data *data)
 {

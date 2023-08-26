@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 00:04:36 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/25 00:08:39 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/25 23:54:11 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	ft_fill_simple_cmd1(t_simple_cmd *simple_cmd)
 {
 	char	*cmd;
 
-	cmd = malloc(sizeof(char) * 4);
-	ft_bzero(cmd, 4);
-	ft_strlcpy(cmd, "cat", 4);
+	cmd = malloc(sizeof(char) * 3);
+	ft_bzero(cmd, 3);
+	ft_strlcpy(cmd, "ls", 3);
 	simple_cmd->cmd_args = (char **)malloc(sizeof(char *) * 3);
 	simple_cmd->cmd_args[0] = cmd;
 	simple_cmd->cmd_args[1] = NULL;

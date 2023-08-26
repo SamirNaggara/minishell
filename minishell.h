@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/24 23:57:13 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/26 23:52:12 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include "libft-plus/libft/libft.h"
 #include "libft-plus/printf/ft_printf.h"
 #include "libft-plus/get-next-line/get_next_line.h"
@@ -86,7 +88,10 @@ typedef struct s_data
 	int				nb_cmd;
 	t_simple_cmd	*first_cmd;
 	pid_t			*child;
+	t_lexer			*lexer;
 	int				pipe[2][2];
+	int				loop;
+	char			*input;
 } t_data;
 
 /* Executor Part*/
@@ -138,5 +143,26 @@ int		ft_discriminate_child(t_data *data, t_simple_cmd *cmd, int i);
 int		ft_open_here_doc_file(t_simple_cmd *cmd, char *file_name);
 char	*ft_create_here_doc_filename(t_simple_cmd *cmd);
 void	ft_free_path_before(char **path, int i);
+
+/* Lexer */
+void	ft_minishell_loop(t_data *data);
+int	ft_lexer(t_data *data);
+int	ft_is_space(char c);
+t_lexer	*ft_delimite(t_lexer *lexer);
+int	ft_add_char(t_lexer *current, char c);
+t_lexer	*ft_begin_lexer(void);
+int	ft_is_beg_ope(char c);
+int	ft_is_ope(char c1, char c2);
+void	ft_visualise_lexer(t_data *data);
+int	ft_quote_not_over(t_data *data,  int *i);
+int	ft_is_second_part_op(t_data *data, t_lexer **current, int *i);
+int	ft_delimite_op(t_data *data, t_lexer **current, int *i);
+int	ft_end_double_quote(t_data *data, t_lexer **current, int *i);
+int	ft_end_single_quote(t_data *data, t_lexer **current, int *i);
+int	ft_start_single_quote(t_data *data, t_lexer **current, int *i);
+int	ft_start_double_quote(t_data *data, t_lexer **current, int *i);
+int	ft_start_begin_op(t_data *data, t_lexer **current, int *i);
+int	ft_space_separator(t_data *data, t_lexer **current, int *i);
+int	ft_lexer_in_loop(t_data *data, t_lexer **current, int *i);
 
 #endif

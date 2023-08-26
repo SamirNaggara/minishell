@@ -3,12 +3,12 @@ LIB_PATH	= 	libft-plus
 LIBFT 		= 	$(LIB_PATH)/libft.a
 PRINTF		=	$(LIB_PATH)/printf.a 
 GNL			=	$(LIB_PATH)/gnl.a 
-FLAGS		= 	-Wall -Wextra -Werror -g	
+FLAGS		= 	-Wall -Wextra -Werror 
 RM			= 	rm -f
 GREEN		= 	\033[0;32m
 BIG		= 	\033[0;1m
 RESET		= 	\033[0m
-CC	=	gcc $(FLAGS)
+CC	=	cc $(FLAGS)
 RM	=	rm -f				
 
 
@@ -28,6 +28,10 @@ SOURCES	=	./main.c \
 			./executor/dup2.c \
 			./utils/add_slash.c \
 			./utils/ft_utils.c \
+			./lexer/lexer.c \
+			./lexer/quotes.c \
+			./lexer/operator.c \
+			./lexer/space.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 
@@ -38,11 +42,11 @@ all		: lib $(NAME)
 
 $(NAME): $(OBJETS)
 	@echo "Création de l'executable $(NAME)"
-	@$(CC) $(FLAGS) -o $@ $^ $(PRINTF) $(LIBFT) $(GNL)
+	@$(CC) -o $@ $^ -lreadline $(PRINTF) $(LIBFT) $(GNL)
 
 %.o: %.c
 	@echo "Génération de $@"
-	@$(CC) $(FLAGS) -o $@ -c $< 
+	@$(CC) -o $@ -c $<  -lreadline
 
 lib	: 
 	@echo "Je déclenche le Makefile de Libft-plus\n"
