@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/26 14:19:13 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:56:06 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,6 @@ void	ft_minishell_loop(t_data *data)
 	}
 }
 
-void	ft_visualise_lexer(t_data *data)
-{
-	t_lexer	*browse;
-
-	browse = data->lexer;
-	printf("\nLe lexer : \n");
-	while (browse)
-	{
-		printf("L'element %d : %s\n", browse->index, browse->word);
-		browse = browse->next;
-	}
-}
 
 // int	main(int ac, char **av, char **envp)
 // {

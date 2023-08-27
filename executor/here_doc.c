@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:37:03 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/25 00:13:26 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:49:47 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ void	ft_delete_here_doc_files(t_simple_cmd *cmd)
 	}
 }
 
-int	ft_inf_inf_token(t_simple_cmd *cmd, t_lexer *redirection)
+int	ft_inf_inf_operator(t_simple_cmd *cmd, t_lexer *redirection)
 {
-	if (redirection->token != INFINF)
+	if (redirection->operator != INFINF)
 		return (1);
 	if (!ft_handle_here_doc(cmd, redirection))
 		return (0);
-	redirection->token = INF;
+	redirection->operator = INF;
 	return (1);
 }

@@ -32,6 +32,7 @@ SOURCES	=	./main.c \
 			./lexer/quotes.c \
 			./lexer/operator.c \
 			./lexer/space.c \
+			./lexer/delimiter.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 

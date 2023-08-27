@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:59:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 00:00:06 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:49:47 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_lexer	*ft_delimite(t_lexer *lexer)
 }
 
 /*
-	Ajoute un caractere dans le token en cours
+	Ajoute un caractere dans le operator en cours
 */
 int	ft_add_char(t_lexer *current, char c)
 {

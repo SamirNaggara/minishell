@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:24:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/25 00:13:14 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:49:47 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int	ft_handle_redirection(t_data *data, t_simple_cmd *cmd)
 	redirection = cmd->redirections;
 	while (redirection)
 	{
-		if (!ft_inf_token(cmd, redirection))
+		if (!ft_inf_operator(cmd, redirection))
 			return (0);
-		if (!ft_sup_token(cmd, redirection))
+		if (!ft_sup_operator(cmd, redirection))
 			return (0);
-		if (!ft_sup_sup_token(cmd, redirection))
+		if (!ft_sup_sup_operator(cmd, redirection))
 			return (0);
 		redirection = redirection->next;
 	}
@@ -62,9 +62,9 @@ int	ft_handle_redirection(t_data *data, t_simple_cmd *cmd)
 	dans la structure de redirection
 	Et le pas fermer le fichier tout de suite
 */
-int	ft_sup_token(t_simple_cmd *cmd, t_lexer *redirection)
+int	ft_sup_operator(t_simple_cmd *cmd, t_lexer *redirection)
 {
-	if (redirection->token != SUP)
+	if (redirection->operator != SUP)
 		return (1);
 	cmd->fd_out = open(redirection->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (cmd->fd_out == -1)
@@ -75,9 +75,9 @@ int	ft_sup_token(t_simple_cmd *cmd, t_lexer *redirection)
 	return (1);
 }
 
-int	ft_sup_sup_token(t_simple_cmd *cmd, t_lexer *redirection)
+int	ft_sup_sup_operator(t_simple_cmd *cmd, t_lexer *redirection)
 {
-	if (redirection->token != SUPSUP)
+	if (redirection->operator != SUPSUP)
 		return (1);
 	cmd->fd_out = open(redirection->word, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (cmd->fd_out == -1)
@@ -88,9 +88,9 @@ int	ft_sup_sup_token(t_simple_cmd *cmd, t_lexer *redirection)
 	return (1);
 }
 
-int	ft_inf_token(t_simple_cmd *cmd, t_lexer *redirection)
+int	ft_inf_operator(t_simple_cmd *cmd, t_lexer *redirection)
 {
-	if (redirection->token != INF)
+	if (redirection->operator != INF)
 		return (1);
 	cmd->fd_in = open(redirection->word, O_RDONLY, 0644);
 	if (cmd->fd_in == -1)

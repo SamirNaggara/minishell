@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:54:24 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/26 23:56:38 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:49:47 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	ft_delimite_op(t_data *data, t_lexer **current, int *i)
 /*
 	On regarde si ce caractere, en s'alliant avec le precedent,
 	peut former un operateur.
-	Si c'est le cas, on l'ajoute au token precedent,
-	Puis on delimite le token
+	Si c'est le cas, on l'ajoute au operator precedent,
+	Puis on delimite le operator
 	et on arrete la boucle
 */
 int	ft_is_second_part_op(t_data *data, t_lexer **current, int *i)

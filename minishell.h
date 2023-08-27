@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/26 23:52:12 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:54:29 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum
 	EXIT
 } t_builtin;
 
-/* Un enum des différents tokens*/
+/* Un enum des différents operators*/
 typedef enum
 {
 	NONE,
@@ -50,9 +50,9 @@ typedef enum
 	INF,
 	INFINF,
 	PIPE
-} t_token;
+} t_operator;
 
-/* Un enum du type de chaine de caractere d'un token*/
+/* Un enum du type de chaine de caractere d'un operator*/
 typedef enum
 {
 	NO_QUOTE,
@@ -63,7 +63,7 @@ typedef enum
 typedef struct s_lexer
 {
 	char 			*word;
-	t_token			token;
+	t_operator			operator;
 	int				index;
 	t_str_type		str_type;
 	struct s_lexer	*next;
@@ -121,8 +121,8 @@ int		ft_test_cmd_and_redirections(t_data *data, t_simple_cmd *cmd);
 int		ft_first_child(t_data *data, t_simple_cmd *cmd, int i);
 int		ft_middle_child(t_data *data, t_simple_cmd *cmd, int i);
 int		ft_last_child(t_data *data, t_simple_cmd *cmd, int i);
-int		ft_inf_token(t_simple_cmd *cmd, t_lexer *redirection);
-int		ft_sup_token(t_simple_cmd *cmd, t_lexer *redirection);
+int		ft_inf_operator(t_simple_cmd *cmd, t_lexer *redirection);
+int		ft_sup_operator(t_simple_cmd *cmd, t_lexer *redirection);
 int		ft_redirect_fdin(t_simple_cmd *cmd);
 int		ft_redirect_fdout(t_simple_cmd *cmd);
 void	ft_close_redir_fds(t_data *data);
@@ -131,9 +131,9 @@ void	ft_free_simple_cmd(t_data *data);
 void	ft_free_lexer(t_lexer *lexer);
 void	ft_free_for_next_command(t_data *data);
 void	ft_free_path(t_data *data);
-int		ft_sup_sup_token(t_simple_cmd *cmd, t_lexer *redirection);
+int		ft_sup_sup_operator(t_simple_cmd *cmd, t_lexer *redirection);
 int		ft_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection);
-int		ft_inf_inf_token(t_simple_cmd *cmd, t_lexer *redirection);
+int		ft_inf_inf_operator(t_simple_cmd *cmd, t_lexer *redirection);
 int		ft_is_same_str(char *str1, char *str2);
 void	ft_delete_here_doc_files(t_simple_cmd *cmd);
 int		ft_exec_one_cmd(t_data *data);
@@ -164,5 +164,7 @@ int	ft_start_double_quote(t_data *data, t_lexer **current, int *i);
 int	ft_start_begin_op(t_data *data, t_lexer **current, int *i);
 int	ft_space_separator(t_data *data, t_lexer **current, int *i);
 int	ft_lexer_in_loop(t_data *data, t_lexer **current, int *i);
+void	ft_fill_lexer_ope(t_data *data);
+void	ft_detect_operator(t_lexer *current);
 
 #endif
