@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 11:54:29 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 19:11:42 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,5 +166,6 @@ int	ft_space_separator(t_data *data, t_lexer **current, int *i);
 int	ft_lexer_in_loop(t_data *data, t_lexer **current, int *i);
 void	ft_fill_lexer_ope(t_data *data);
 void	ft_detect_operator(t_lexer *current);
-
+int	ft_space_to_ignore(t_data *data, int *i);
+void	ft_delete_last_lexer_if_empty(t_lexer *current);
 #endif

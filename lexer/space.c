@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:58:02 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 00:01:27 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 18:43:42 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_space_separator(t_data *data, t_lexer **current, int *i)
 		return (1);
 	if (!ft_is_space(data->input[*i]))
 		return (1);
+	if (ft_space_to_ignore(data, i))
+		return (1);
 	*current = ft_delimite(*current);
 	if (!*current)
 		return (0);
@@ -35,6 +37,20 @@ int	ft_space_separator(t_data *data, t_lexer **current, int *i)
 	return (1);
 }
 
+int	ft_space_to_ignore(t_data *data, int *i)
+{
+	if (*i == 0)
+	{
+		data->loop = 0;
+		return (1);
+	}
+	if (ft_is_space(data->input[*i - 1]))
+	{
+		data->loop = 0;
+		return (1);
+	}
+	return (0);
+}
 /*
 	Quelles sont les caracteres considérées comme un espacement
 */

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:54:24 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 11:49:47 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 19:04:46 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_delimite_op(t_data *data, t_lexer **current, int *i)
 {
 	if (!data->loop)
 		return (1);
-	if (i == 0)
+	if (*i == 0)
 		return (1);
 	if ((*current)->str_type != NO_QUOTE)
 		return (1);

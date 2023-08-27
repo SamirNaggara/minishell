@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 23:57:33 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 12:00:58 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 19:12:31 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,24 @@ int	ft_lexer(t_data *data)
 			ft_add_char(current, data->input[i]);
 		i++;
 	}
+	ft_delete_last_lexer_if_empty(current);
 	ft_fill_lexer_ope(data);
 	return (1);
+}
+
+/*
+	Parfois, il y a un lexer a la toute fin
+	mais qui ne contient aucun mot
+	Meme pas un caractere vide
+	Donc on peut le supprimer, il a pas d'info
+*/
+void	ft_delete_last_lexer_if_empty(t_lexer *current)
+{
+	if (current && current->word == NULL && current->prev)
+	{
+		current->prev->next = NULL;
+		free(current);
+	}
 }
 
 /*
@@ -93,7 +109,7 @@ void	ft_visualise_lexer(t_data *data)
 
 	browse = data->lexer;
 	printf("\nLe lexer : \n");
-	while (browse)
+	while (browse && browse->word)
 	{
 		printf("L'element %d : %s\n", browse->index, browse->word);
 		// if (browse->operator != NONE)

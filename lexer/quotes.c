@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:53:21 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/26 23:58:08 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/27 19:02:00 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	ft_end_double_quote(t_data *data, t_lexer **current, int *i)
 	*current = ft_delimite(*current);
 	if (!*current)
 		return (0);
+	(*current)->str_type = NO_QUOTE;
 	data->loop = 0;
 	return (1);
 }
