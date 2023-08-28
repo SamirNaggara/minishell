@@ -35,6 +35,11 @@ SOURCES	=	./main.c \
 			./lexer/delimiter.c \
 			./lexer/fill_operator.c \
 			./parser/parser.c \
+			./parser/redir_in_cmd.c \
+			./parser/redir_in_cmd2.c \
+			./parser/simple_cmd.c \
+			./parser/syntaxe_error.c \
+			./parser/utils.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 

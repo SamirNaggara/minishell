@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/28 19:43:32 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:50:25 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,4 +188,6 @@ int	ft_delete_end_of_lexer(t_lexer **lexer);
 void	ft_delete_and_relink(t_lexer **lexer);
 int	ft_add_cmd_if_pipe(t_simple_cmd **current_cmd, t_lexer *current_lexer);
 void	ft_redir_is_first(t_data *data, t_lexer **lexer);
+int	ft_is_space_lexer(t_lexer *lexer);
+
 #endif
