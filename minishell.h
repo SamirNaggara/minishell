@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 19:11:42 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:43:32 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@
 #define E_PIPE "error: Pipe error "
 #define E_CHILD "error: Fork went wrong "
 #define E_CMD_NOT_FOUND "command not found: "
+#define E_SYNTAXE "erreur de syntaxe près du symbole inattendu "
 #define TMP_FILE_NAME ".tmp_here_doc_name_"
+
 
 
 /* Un enum de la liste des builtin*/
@@ -168,4 +170,22 @@ void	ft_fill_lexer_ope(t_data *data);
 void	ft_detect_operator(t_lexer *current);
 int	ft_space_to_ignore(t_data *data, int *i);
 void	ft_delete_last_lexer_if_empty(t_lexer *current);
+
+/* PARSER */
+int	ft_parser(t_data *data);
+void	ft_visualise_cmd(t_data *data);
+int	ft_delete_redir_lexer(t_data *data, t_lexer **lexer);
+void	ft_free_lexer_node(t_lexer **lexer);
+int	ft_is_redir(t_operator op);
+int	ft_redir_in_simple_cmd(t_lexer *current_lexer, t_simple_cmd *current_cmd);
+int	ft_add_in_cmd_redir(t_simple_cmd *cmd, t_lexer *lexer);
+char	*ft_get_redirection_file_name(t_lexer *current_lexer);
+int	ft_syntax_redirection(t_lexer *current_lexer);
+void	ft_syntaxe_error(char const c);
+t_simple_cmd	*ft_add_one_simple_cmd(t_simple_cmd	*current);
+t_simple_cmd	*ft_create_one_simple_cmd();
+int	ft_delete_end_of_lexer(t_lexer **lexer);
+void	ft_delete_and_relink(t_lexer **lexer);
+int	ft_add_cmd_if_pipe(t_simple_cmd **current_cmd, t_lexer *current_lexer);
+void	ft_redir_is_first(t_data *data, t_lexer **lexer);
 #endif

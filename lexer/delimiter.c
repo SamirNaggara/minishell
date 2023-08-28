@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:59:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 18:57:24 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:09:21 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	ft_add_char(t_lexer *current, char c)
 	if (!new_word)
 		return (0);
 	ft_strlcpy(new_word, current->word, size + 1);
+	free(current->word);
+	current->word = new_word;
 	current->word[size] = c;
 	current->word[size + 1] = '\0';
 	return (1);
