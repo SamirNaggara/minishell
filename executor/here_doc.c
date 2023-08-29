@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:37:03 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 11:49:47 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:07:39 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,18 @@ int	ft_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection)
 	char	*stdin_line;
 	char	*file_name;
 
-	file_name = ft_create_here_doc_filename(cmd);
+	file_name = (char *)malloc(sizeof(char) * 30);
 	if (!file_name)
 		return (0);
-	if (!ft_open_here_doc_file(cmd, file_name))
-		return (0);
+	ft_strlcpy(file_name, TMP_FILE_NAME, 30);
+	ft_strlcat(file_name, ft_itoa(cmd->index), 30);
+
+	cmd->fd_in = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0655);
+	if (!cmd->fd_in)
+	{
+		perror("Here doc not created properly");
+		return (free(file_name),0);
+	}
 	stdin_line = get_next_line(STDIN_FILENO);
 	while (!stdin_line || !ft_is_same_str(stdin_line, redirection->word))
 	{
@@ -65,17 +72,44 @@ int	ft_open_here_doc_file(t_simple_cmd *cmd, char *file_name)
 	return (1);
 }
 
-void	ft_delete_here_doc_files(t_simple_cmd *cmd)
+void	ft_delete_here_doc_files(t_data *data)
 {
 	t_lexer			*redirection;
+	t_simple_cmd	*cmd;
 
+	cmd = data->first_cmd;
 	redirection = cmd->redirections;
-	while (redirection)
+	while (cmd)
 	{
-		if (!ft_strncmp(TMP_FILE_NAME, redirection->word, 19))
-			unlink(redirection->word);
-		redirection = redirection->next;
+		redirection = cmd->redirections;
+		while (redirection)
+		{
+			if (!ft_strncmp(TMP_FILE_NAME, redirection->word, 19))
+				unlink(redirection->word);
+			redirection = redirection->next;
+		}
+		cmd = cmd->next;
 	}
+}
+
+int	ft_handle_here_docs(t_data *data)
+{
+	t_lexer			*redirection;
+	t_simple_cmd	*cmd;
+
+	cmd = data->first_cmd;
+	while (cmd)
+	{
+		redirection = cmd->redirections;
+		while (redirection)
+			{
+				if (!ft_inf_inf_operator(cmd, redirection))
+					return (0);
+				redirection = redirection->next;
+			}
+		cmd = cmd->next;
+	}
+	return (1);
 }
 
 int	ft_inf_inf_operator(t_simple_cmd *cmd, t_lexer *redirection)
