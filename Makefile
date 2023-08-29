@@ -54,7 +54,7 @@ $(NAME): $(OBJETS)
 
 %.o: %.c
 	@echo "Génération de $@"
-	@$(CC) -o $@ -c $<  -lreadline
+	@$(CC) -o $@ -c $< 
 
 lib	: 
 	@echo "Je déclenche le Makefile de Libft-plus\n"
