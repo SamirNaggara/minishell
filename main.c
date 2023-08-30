@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/29 15:12:35 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:34:07 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ void	ft_minishell_loop(t_data *data)
 			free(data->input);
 			continue ;
 		}
-		ft_visualise_lexer(data);
+		//ft_visualise_lexer(data);
+		//ft_visualise_cmd(data);
+		ft_fill_data(data);
 		add_history(data->input);
 		rl_redisplay();
-		//ft_fill_data(data);
-		//executor(data);
+		executor(data);
 		free(data->input);
 	}
 }

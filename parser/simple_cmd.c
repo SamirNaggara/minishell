@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:56:16 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/28 20:00:37 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:54:31 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_visualise_cmd(t_data *data)
 {
 	t_simple_cmd	*current_cmd;
 	t_lexer			*current_redirection;
+	int				i;
 
 	current_cmd = data->first_cmd;
 	while (current_cmd)
@@ -71,6 +72,12 @@ void	ft_visualise_cmd(t_data *data)
 		{
 			printf("	Redireciton file : %s\n", current_redirection->word);
 			current_redirection = current_redirection->next;
+		}
+		i = 0;
+		while (current_cmd->cmd_args && current_cmd->cmd_args[i])
+		{
+			printf("	Args %d : %s\n", i, current_cmd->cmd_args[i]);
+			i++;
 		}
 		current_cmd = current_cmd->next;
 	}

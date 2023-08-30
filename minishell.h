@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/29 15:20:47 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:12:10 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 typedef enum
 {
 	NO_BUILTIN,
+	ECHO,
 	CD,
 	PWD,
 	EXPORT,
@@ -77,6 +78,7 @@ typedef struct s_simple_cmd
 	char				**cmd_args;
 	t_builtin			builtin;
 	t_lexer				*redirections;
+	t_lexer				*lexer;
 	int					index;
 	int					fd_in;
 	int					fd_out;
@@ -174,6 +176,7 @@ void	ft_delete_last_lexer_if_empty(t_lexer *current);
 
 /* PARSER */
 int	ft_parser(t_data *data);
+int	ft_parse_pipe_and_redir(t_data *data);
 void	ft_visualise_cmd(t_data *data);
 int	ft_delete_redir_lexer(t_data *data, t_lexer **lexer);
 void	ft_free_lexer_node(t_lexer **lexer);
@@ -190,5 +193,13 @@ void	ft_delete_and_relink(t_lexer **lexer);
 int	ft_add_cmd_if_pipe(t_simple_cmd **current_cmd, t_lexer *current_lexer);
 void	ft_redir_is_first(t_data *data, t_lexer **lexer);
 int	ft_is_space_lexer(t_lexer *lexer);
+int	ft_parse_cmds_arg(t_data *data);
+int	ft_int_arg_tab(t_simple_cmd *cmd, t_lexer *lexer);
+int	ft_add_arg_to_cmd(t_simple_cmd *cmd, char *arg);
+int	ft_count_args(t_lexer *lexer);
+int	ft_parse_pipe_and_redir(t_data *data);
+int	ft_count_cmd(t_data *data);
+void	ft_fill_built_in(t_data *data);
+int	ft_is_same_word(char const *s1, char const *s2);
 
 #endif

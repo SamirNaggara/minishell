@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:10:45 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/29 15:07:19 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:13:33 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,17 @@
 
 int	executor(t_data *data)
 {
-	t_simple_cmd	simple_cmd1;
-	t_lexer			redirection1;
+	// t_simple_cmd	simple_cmd1;
+	// t_lexer			redirection1;
 
-	ft_fill_simple_cmd1(&simple_cmd1);
-	ft_fill_redirection1(&redirection1);
-	simple_cmd1.redirections = &redirection1;
-	data->nb_cmd = 1;
+	// ft_fill_simple_cmd1(&simple_cmd1);
+	// ft_fill_redirection1(&redirection1);
+	// simple_cmd1.redirections = &redirection1;
+	// data->nb_cmd = 1;
 
-	data->first_cmd = &simple_cmd1;
+	// data->first_cmd = &simple_cmd1;
 
 
-	if (!data->nb_cmd)
-		return (0);
 
 	data->pipe[0][0] = -1;
 	data->pipe[0][1] = -1;
