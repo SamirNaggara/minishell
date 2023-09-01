@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/30 16:12:10 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:22:15 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,5 +201,7 @@ int	ft_parse_pipe_and_redir(t_data *data);
 int	ft_count_cmd(t_data *data);
 void	ft_fill_built_in(t_data *data);
 int	ft_is_same_word(char const *s1, char const *s2);
+int	ft_check_valids_cmds(t_data *data);
+int	ft_check_valid_cmd(t_simple_cmd *current_cmd);
 
 #endif

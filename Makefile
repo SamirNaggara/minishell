@@ -40,6 +40,9 @@ SOURCES	=	./main.c \
 			./parser/simple_cmd.c \
 			./parser/syntaxe_error.c \
 			./parser/utils.c \
+			./parser/built_in.c \
+			./parser/parse_args.c \
+			./parser/parse_cmds.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 
