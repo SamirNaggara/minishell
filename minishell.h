@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 13:22:15 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:03:45 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ int		ft_discriminate_child(t_data *data, t_simple_cmd *cmd, int i);
 int		ft_open_here_doc_file(t_simple_cmd *cmd, char *file_name);
 char	*ft_create_here_doc_filename(t_simple_cmd *cmd);
 void	ft_free_path_before(char **path, int i);
+int		ft_exec_without_fork(t_simple_cmd *cmd);
+int		ft_exec_one_cmd_builtin(t_data *data);
 
 /* Lexer */
 void	ft_minishell_loop(t_data *data);
@@ -204,4 +206,7 @@ int	ft_is_same_word(char const *s1, char const *s2);
 int	ft_check_valids_cmds(t_data *data);
 int	ft_check_valid_cmd(t_simple_cmd *current_cmd);
 
+
+/* Builtin */
+void	ft_exit();
 #endif

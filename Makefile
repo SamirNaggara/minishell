@@ -43,6 +43,7 @@ SOURCES	=	./main.c \
 			./parser/built_in.c \
 			./parser/parse_args.c \
 			./parser/parse_cmds.c \
+			./built_in/exit.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 

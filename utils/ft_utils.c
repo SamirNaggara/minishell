@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 13:28:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 13:34:17 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:06:50 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_is_same_word(char const *s1, char const *s2)
 	{
 		if (s1[i] != s2[i])
 			return (0);
+		i++;
 	}
 	if (s1[i] || s2[i])
 		return (0);
