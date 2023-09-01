@@ -44,6 +44,7 @@ SOURCES	=	./main.c \
 			./parser/parse_args.c \
 			./parser/parse_cmds.c \
 			./built_in/exit.c \
+			./built_in/pwd.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 
@@ -57,7 +58,7 @@ $(NAME): $(OBJETS)
 	@$(CC) -o $@ $^ -lreadline $(PRINTF) $(LIBFT) $(GNL)
 
 %.o: %.c
-	@echo "Génération de $@"
+	@echo -n "Génération de $@                                           \r"
 	@$(CC) -o $@ -c $< 
 
 lib	: 

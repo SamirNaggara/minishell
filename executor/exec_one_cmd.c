@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 14:09:56 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:38:44 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int	ft_exec_without_fork(t_simple_cmd *cmd)
 int	ft_exec_one_cmd_builtin(t_data *data)
 {
 	if (data->first_cmd->builtin == EXIT)
-		ft_exit();
+		ft_exit(data);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:37:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 14:08:16 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:53:22 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	ft_fill_built_in(t_data *data)
 	{
 		if (ft_is_same_word("exit", current_cmd->cmd_args[0]))
 			current_cmd->builtin = EXIT;
+		else if (ft_is_same_word("pwd", current_cmd->cmd_args[0]))
+			current_cmd->builtin = PWD;
 		// else if (ft_is_same_word("cd", current_cmd->cmd_args[0]))
 		// 	current_cmd->builtin = CD;
-		// else if (ft_is_same_word("pwd", current_cmd->cmd_args[0]))
-		// 	current_cmd->builtin = PWD;
 		// else if (ft_is_same_word("export", current_cmd->cmd_args[0]))
 		// 	current_cmd->builtin = EXPORT;
 		// else if (ft_is_same_word("unset", current_cmd->cmd_args[0]))
