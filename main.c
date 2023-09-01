@@ -6,13 +6,13 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 13:39:18 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:56:40 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
+/*C'est mooooooooooooooooooche*/
 int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
