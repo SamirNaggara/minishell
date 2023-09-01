@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 14:51:28 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:29:27 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <dirent.h>
 #include "libft-plus/libft/libft.h"
 #include "libft-plus/printf/ft_printf.h"
 #include "libft-plus/get-next-line/get_next_line.h"
@@ -210,4 +211,5 @@ int	ft_check_valid_cmd(t_simple_cmd *current_cmd);
 /* Builtin */
 void	ft_exit(t_data *data);
 void	ft_pwd(void);
+int		ft_cd(t_data *data);
 #endif
