@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/03 21:08:20 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/04 00:16:37 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,5 +220,12 @@ char	*ft_get_pwd_from_envp(char **envp);
 int	ft_test_dir(char *path);
 int	ft_update_oldpwd_envp(t_data *data);
 void	ft_env(t_data *data);
+int		ft_export(t_data *data,t_simple_cmd *cmd);
+void	ft_print_all_export(t_data *data);
+void	ft_print_one_export(char *line);
+char	*ft_get_key(char *str);
+int	ft_add_one_export(t_data *data, char *key, char *str);
+int	ft_add_to_env(t_data *data, t_simple_cmd *cmd);
+int	ft_add_one_envp(t_data *data, char *str);
 
 #endif

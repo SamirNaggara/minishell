@@ -48,6 +48,7 @@ SOURCES	=	./main.c \
 			./built_in/cd.c \
 			./built_in/env.c \
 			./built_in/envp.c \
+			./built_in/export.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 
