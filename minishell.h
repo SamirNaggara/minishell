@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/03 20:22:26 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/03 21:08:20 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,4 +219,6 @@ char	*ft_create_new_pwd(t_data *data);
 char	*ft_get_pwd_from_envp(char **envp);
 int	ft_test_dir(char *path);
 int	ft_update_oldpwd_envp(t_data *data);
+void	ft_env(t_data *data);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:26:37 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/03 20:11:58 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/03 21:14:41 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ void	ft_finish_child(t_data *data, t_simple_cmd *cmd)
 	ft_close_redir_fds(data);
 	if (cmd->builtin == PWD)
 		ft_pwd();
-	ft_exec_cmd(data, cmd);
+	else if (cmd->builtin == ENV)
+		ft_env(data);
+	else
+		ft_exec_cmd(data, cmd);
 }
 
 
