@@ -45,6 +45,8 @@ SOURCES	=	./main.c \
 			./parser/parse_cmds.c \
 			./built_in/exit.c \
 			./built_in/pwd.c \
+			./built_in/cd.c \
+			./built_in/envp.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 

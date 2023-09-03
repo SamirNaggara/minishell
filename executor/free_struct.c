@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 22:25:16 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/30 12:55:54 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/03 17:34:24 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	ft_free_path(t_data *data)
 
 void	ft_free_for_next_command(t_data *data)
 {
+	if (data->child)
+		free(data->child);
 	ft_free_simple_cmd(data);
-	free(data->child);
 	ft_close_redir_fds(data);
 }

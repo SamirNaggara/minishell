@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 15:40:01 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/03 20:37:12 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,14 @@ int	ft_exec_one_cmd_builtin(t_data *data)
 {
 	if (data->first_cmd->builtin == EXIT)
 		ft_exit(data);
-	if (data->first_cmd->builtin == CD)
+	else if (data->first_cmd->builtin == CD)
 		ft_cd(data);
 	return (1);
 }
 
-int	ft_cd(t_data *data)
-{
-	DIR *dir;
-	char cwd[1024];
 
-    if (!getcwd(cwd, sizeof(cwd))) {
-        perror("Erreur lors de l'obtention du répertoire de travail actuel");
-		exit(0) ;
-	}
-	ft_strlcat(cwd, data->first_cmd->cmd_args[1], 1024);
-    dir = opendir(cwd);
-    if (!dir) {
-        perror("Erreur lors de l'ouverture du répertoire");
-        exit(0);
-    }
-	exit(0);
-}
+
+
+
+
+
