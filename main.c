@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/03 19:03:30 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:01:53 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	ft_fill_secret_envp(t_data *data)
 			return (0);
 		i++;
 	}
+	data->secret_envp[i] = NULL;
 	return (1);
 }
 /*
