@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/04 00:16:37 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/05 14:19:29 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,5 +227,7 @@ char	*ft_get_key(char *str);
 int	ft_add_one_export(t_data *data, char *key, char *str);
 int	ft_add_to_env(t_data *data, t_simple_cmd *cmd);
 int	ft_add_one_envp(t_data *data, char *str);
-
+int	ft_same_key(char *str, char *key);
+int	ft_unset(t_data *data, t_simple_cmd *cmd);
+int	ft_update_secret_env_without(t_data *data, int skip);
 #endif
