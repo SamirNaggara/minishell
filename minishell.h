@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/05 14:19:29 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:50:16 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,4 +230,8 @@ int	ft_add_one_envp(t_data *data, char *str);
 int	ft_same_key(char *str, char *key);
 int	ft_unset(t_data *data, t_simple_cmd *cmd);
 int	ft_update_secret_env_without(t_data *data, int skip);
+int	ft_echo(t_simple_cmd *cmd);
+t_lexer	*ft_found_begin_echo(t_lexer *lexer);
+int	ft_is_flag_n(char *str);
+void	ft_visualise_lexer2(t_lexer *lexer);
 #endif
