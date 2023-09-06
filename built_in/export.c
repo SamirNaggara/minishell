@@ -6,12 +6,15 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:55:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/05 10:37:04 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:01:27 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+	Le builin export
+*/
 int	ft_export(t_data *data, t_simple_cmd *cmd)
 {
 
@@ -26,6 +29,9 @@ int	ft_export(t_data *data, t_simple_cmd *cmd)
 	return (1);
 }
 
+/*
+	Parmet d'ajouter une ligne dans les variables d'environnement
+*/
 int	ft_add_to_env(t_data *data, t_simple_cmd *cmd)
 {
 	char	*equal;
@@ -46,7 +52,11 @@ int	ft_add_to_env(t_data *data, t_simple_cmd *cmd)
 	return (1);
 }
 
-
+/*
+	Pour obtenir juste la clef d'une chaine de caractere
+	DOnc ce qui est devant le caractere =
+	Ou toute la chaine si y'a pas d'egal
+*/
 char	*ft_get_key(char *str)
 {
 	char	*to_return;
@@ -64,6 +74,12 @@ char	*ft_get_key(char *str)
 		
 }
 
+/*
+	Permet d'ajouter un element dans le secret_env
+	En fonction de la clef et de la chaine entiere
+	Pour le mettre a la bonne place
+	Ou a la toute fin si la clef n'existe pas encore
+*/
 int	ft_add_one_export(t_data *data, char *key, char *str)
 {
 	int	i;
@@ -99,57 +115,4 @@ int	ft_same_key(char *str, char *key)
 	if (str[size_key] == '=')
 		return (1);
 	return (0);
-}
-
-int	ft_add_one_envp(t_data *data, char *str)
-{
-	int		size;
-	char 	**new_envp;
-	int		i;
-
-	size = ft_size_tab(data->secret_envp);
-	new_envp = (char **)malloc(sizeof(char *) * (size + 2));
-	if (!new_envp)
-		return (0);
-	i = 0;
-	while (data->secret_envp[i])
-	{
-		new_envp[i] = data->secret_envp[i];
-		i++;
-	}
-	new_envp[i++] = str;
-	new_envp[i] = NULL;
-	free(data->secret_envp);
-	data->secret_envp = new_envp;
-	return (1);
-}
-
-void	ft_print_all_export(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->secret_envp[i])
-		ft_print_one_export(data->secret_envp[i++]);
-}
-
-void	ft_print_one_export(char *line)
-{
-	int	i;
-
-	i = 0;
-	write(1, "export ", 7);
-	while (line[i] && line[i] != '=')
-		write(1, line + i++, 1);
-	if (!line[i])
-	{
-		write(1, "\n", 1);
-		return ;
-	}
-	write(1, line + i++, 1);
-	write(1, "\"", 1);
-	while (line[i])
-		write(1, line + i++, 1);
-	write(1, "\"", 1);
-	write(1, "\n", 1);
 }

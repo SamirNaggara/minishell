@@ -49,6 +49,7 @@ SOURCES	=	./main.c \
 			./built_in/env.c \
 			./built_in/envp.c \
 			./built_in/export.c \
+			./built_in/export2.c \
 			./built_in/unset.c \
 			./built_in/echo.c \
 

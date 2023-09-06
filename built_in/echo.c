@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:44:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/05 15:59:02 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:49:32 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ int	ft_echo(t_simple_cmd *cmd)
 	return (1);
 }
 
+/*
+	Permet seulement de visualiser un lexer en fonction du lexer
+	Juste a des fins de deboggage
+*/
 void	ft_visualise_lexer2(t_lexer *lexer)
 {
 
@@ -47,6 +51,12 @@ void	ft_visualise_lexer2(t_lexer *lexer)
 	}
 }
 
+/*
+	Trouve le lexer qui definit le debut du echo
+	Genre on avance de 2 pour ne pas tenir compte
+	du echo et du " "
+	Puis si c'est un "-n" on l'ignore
+*/
 t_lexer	*ft_found_begin_echo(t_lexer *lexer)
 {
 	lexer = lexer->next->next;
@@ -58,10 +68,8 @@ t_lexer	*ft_found_begin_echo(t_lexer *lexer)
 	
 }
 
-
-
 /*
-	Verifie que le flag est -n exactement
+	Verifie que le flag est "-n" exactement
 */
 int	ft_is_flag_n(char *str)
 {

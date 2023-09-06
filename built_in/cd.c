@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 20:34:54 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/03 20:37:15 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:51:01 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	ft_cd(t_data *data)
 	//printf("%s\n", next_pwd);
 	if (!ft_change_directory(data))
 		return (0);
-
 	if (!ft_update_oldpwd_envp(data))
 		return (0);
 	if (!ft_update_pwd_envp(data, next_pwd))
@@ -37,6 +36,9 @@ int	ft_cd(t_data *data)
 	return (1);
 }
 
+/*
+	Test si un dossier existe ou non
+*/
 int	ft_test_dir(char *path)
 {
 	DIR *dir;
@@ -46,9 +48,15 @@ int	ft_test_dir(char *path)
         fd_printf(STDERR_FILENO, E_CD, path);
 		return (0);
     }
+	closedir(dir);
 	return (1);
 }
 
+/*
+	Permet de changer directement le directory avec chdir
+	Normalement on a deja testé le dossier
+	donc ça ne devrait pas echouer
+*/
 int	ft_change_directory(t_data *data)
 {
 	if (chdir(data->first_cmd->cmd_args[1]) != 0) {
@@ -58,6 +66,9 @@ int	ft_change_directory(t_data *data)
 	return (1);
 }
 
+/*
+	Retourne le chemin absolue du nouveau dossier
+*/
 char	*ft_create_new_pwd(t_data *data)
 {
 	char	pwd[1024];

@@ -6,12 +6,16 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:06:08 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/05 14:23:11 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:03:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+	Le builtin unset
+	Supprime un element de secret_env
+*/
 int	ft_unset(t_data *data, t_simple_cmd *cmd)
 {
 	int	i;
@@ -27,6 +31,11 @@ int	ft_unset(t_data *data, t_simple_cmd *cmd)
 	return (1);
 }
 
+/*
+	Cette fonction recréé un secret env
+	Mais sans en recopier un, le skip
+	Ainsi, on a dans les fait supprimer un element
+*/
 int	ft_update_secret_env_without(t_data *data, int skip)
 {
 	char	**new_env;

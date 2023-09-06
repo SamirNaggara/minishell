@@ -6,12 +6,15 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 20:35:09 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/03 20:36:59 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:54:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+	Permet de mettre a jour PWD dans le secret_env
+*/
 int	ft_update_pwd_envp(t_data *data, char *next_pwd)
 {
 	int		i;
@@ -34,6 +37,9 @@ int	ft_update_pwd_envp(t_data *data, char *next_pwd)
 	return (1);
 }
 
+/*
+	Permet de mettre a jour OLDPWD dans le secret_env
+*/
 int	ft_update_oldpwd_envp(t_data *data)
 {
 	int		i;
@@ -59,6 +65,9 @@ int	ft_update_oldpwd_envp(t_data *data)
 	return (1);
 }
 
+/*
+	Pour obternir la ligne PWD depuis le envp choisi
+*/
 char	*ft_get_pwd_from_envp(char **envp)
 {
 	int		i;
