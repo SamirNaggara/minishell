@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:11:19 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/06 15:53:37 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/07 15:55:26 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,48 +25,16 @@ int	ft_expander(t_data *data)
 	current_lexer = data->lexer;
 	while (current_lexer)
 	{
-		if (ft_should_replace(current_lexer))
+		if (!ft_should_replace(current_lexer))
 		{
 			current_lexer = current_lexer->next;
 			continue ;
 		}
-		if (!ft_replace_dollar(current_lexer->word))
+		if (!ft_replace_dollar(data, &current_lexer->word))
 			return (0);
 		current_lexer = current_lexer->next;
 	}
 	return (1);
-}
-
-int	ft_replace_dollar(char *str)
-{
-	char	*dollar;
-	char	*word;
-	char	*replace_str;
-
-	dollar = ft_strchr(str, '$');
-	while (dollar)
-	{
-		word = ft_extract_word(dollar);
-		replace_str = ft_found_replace_value(word);
-		if (!ft_replace(str, dollar, replace_str))
-			return (0);
-		dollar = ft_strchr(str, '$');
-	}
-	return (1);
-}
-
-char	*ft_extract_word(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[0] != '$')
-		return (NULL);
-	while (str[i] && str[i] != ' ' && str[i] != '$')
-		i++;
-	// Ici Samir tu dois extraire le mot
-	// Donc faire une autre fonction qui va copier le mot
-	// Et le renvoyer (avec malloc)
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/05 15:50:16 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:00:19 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,4 +234,13 @@ int	ft_echo(t_simple_cmd *cmd);
 t_lexer	*ft_found_begin_echo(t_lexer *lexer);
 int	ft_is_flag_n(char *str);
 void	ft_visualise_lexer2(t_lexer *lexer);
+int	ft_expander(t_data *data);
+int	ft_replace_dollar(t_data *data, char **str);
+char	*ft_replace(char *str, char *dollar, char *replace_str);
+char	*ft_found_replace_value(t_data *data, char *word);
+char	*ft_extract_word(char *str);
+int		ft_should_replace(t_lexer *lexer);
+char	*ft_malloc_replace_char(char *str, char *replace_str);
+
+
 #endif

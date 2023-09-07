@@ -52,6 +52,8 @@ SOURCES	=	./main.c \
 			./built_in/export2.c \
 			./built_in/unset.c \
 			./built_in/echo.c \
+			./expander/expander.c \
+			./expander/replace.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 
