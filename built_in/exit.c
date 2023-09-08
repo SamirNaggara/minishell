@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 14:11:54 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 10:06:05 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@
 void	ft_exit(t_data *data)
 {
     (void)data;
-	exit(0);
+	exit(data->exit_status);
 }
