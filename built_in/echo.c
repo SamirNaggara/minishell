@@ -6,13 +6,13 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:44:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/06 14:49:32 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:31:07 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_echo(t_simple_cmd *cmd)
+int	ft_echo(t_data *data, t_simple_cmd *cmd)
 {
 	t_lexer	*begin_lexer;
 
@@ -23,7 +23,7 @@ int	ft_echo(t_simple_cmd *cmd)
 	}
 	begin_lexer = ft_found_begin_echo(cmd->lexer);
 	if (!begin_lexer)
-		return (0);
+		return (data->exit_status = 1, 0);
 	while (begin_lexer && begin_lexer->operator != PIPE)
 	{
 		write(1, begin_lexer->word, ft_strlen(begin_lexer->word));
@@ -31,6 +31,8 @@ int	ft_echo(t_simple_cmd *cmd)
 	}
 	if (!ft_is_flag_n(cmd->cmd_args[1]))
 		write(1, "\n", 1);
+	data->exit_status = 0;
+	exit(data->exit_status);
 	return (1);
 }
 

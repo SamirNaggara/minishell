@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/03 22:18:18 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:43:14 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_child_one_cmd(t_data *data)
 	if (!ft_test_cmd_and_redirections(data, cmd))
 	{
 		ft_close_redir_fds(data);
-		exit(1);
+		exit(data->exit_status);
 	}
 	if (cmd->fd_in != -1)
 	{

@@ -6,48 +6,54 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 20:34:54 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/06 14:51:01 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:29:59 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_cd(t_data *data)
+int ft_cd(t_data *data)
 {
-	char	*next_pwd;
+	char *next_pwd;
+	char *dest_file;
 
-	if (!data->first_cmd->cmd_args[1])
+	if (ft_size_tab(data->first_cmd->cmd_args) >= 3)
+	{
+		fd_printf(STDERR_FILENO, E_CD_ARG);
+		return (data->exit_status = 1, 0);
+	}
+	if (data->first_cmd->cmd_args[1])
+		dest_file = data->first_cmd->cmd_args[1];
+	else
+		dest_file = ft_found_replace_value(data, "HOME");
+	if (!ft_test_dir(data, dest_file))
 		return (0);
-	if (!ft_test_dir(data->first_cmd->cmd_args[1]))
-		return (0);
-	next_pwd = ft_create_new_pwd(data);
+	next_pwd = ft_create_new_pwd(data, dest_file);
 	if (!next_pwd)
 		return (0);
-	// Changer le répertoire courant
-	//printf("%s\n", pwd);
-	//printf("%s\n", next_pwd);
-	if (!ft_change_directory(data))
+	if (!ft_change_directory(data, dest_file))
 		return (0);
 	if (!ft_update_oldpwd_envp(data))
 		return (0);
 	if (!ft_update_pwd_envp(data, next_pwd))
 		return (0);
 	free(next_pwd);
-	return (1);
+	return (data->exit_status = 0, 1);
 }
 
 /*
 	Test si un dossier existe ou non
 */
-int	ft_test_dir(char *path)
+int ft_test_dir(t_data *data, char *path)
 {
 	DIR *dir;
 
- 	dir = opendir(path);
-    if (!dir) {
-        fd_printf(STDERR_FILENO, E_CD, path);
-		return (0);
-    }
+	dir = opendir(path);
+	if (!dir)
+	{
+		fd_printf(STDERR_FILENO, E_CD, path);
+		return (data->exit_status = 1, 0);
+	}
 	closedir(dir);
 	return (1);
 }
@@ -57,32 +63,33 @@ int	ft_test_dir(char *path)
 	Normalement on a deja testé le dossier
 	donc ça ne devrait pas echouer
 */
-int	ft_change_directory(t_data *data)
+int ft_change_directory(t_data *data, char *dest_file)
 {
-	if (chdir(data->first_cmd->cmd_args[1]) != 0) {
-        perror("Chdir error : ");
-        return (0);
-    }
+	if (chdir(dest_file) != 0)
+	{
+		perror("Chdir error : ");
+		return (data->exit_status = 1, 0);
+	}
 	return (1);
 }
 
 /*
 	Retourne le chemin absolue du nouveau dossier
 */
-char	*ft_create_new_pwd(t_data *data)
+char *ft_create_new_pwd(t_data *data, char *dest_file)
 {
-	char	pwd[1024];
-	char	*next_pwd;
-	int	size;
+	char pwd[1024];
+	char *next_pwd;
+	int size;
 
 	getcwd(pwd, 1024);
-	size = ft_strlen(data->first_cmd->cmd_args[1]) + ft_strlen(pwd) + 1;
+	size = ft_strlen(dest_file) + ft_strlen(pwd) + 1;
 	next_pwd = (char *)malloc(sizeof(char) * size);
 	if (!next_pwd)
-		return (NULL);
+		return (data->exit_status = 1, NULL);
 	ft_bzero(next_pwd, size);
 	ft_strlcpy(next_pwd, pwd, size);
 	ft_strlcat(next_pwd, "/", size);
-	ft_strlcat(next_pwd, data->first_cmd->cmd_args[1], size);
+	ft_strlcat(next_pwd, dest_file, size);
 	return (next_pwd);
 }

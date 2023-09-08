@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 10:06:05 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:47:56 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 */
 void	ft_exit(t_data *data)
 {
-    (void)data;
-	exit(data->exit_status);
+	ft_printf("A la fin : %d", data->exit_status);
+	if (data->exit_status >= 256)
+		exit(data->exit_status / 256);
+	else
+		exit(data->exit_status);
 }

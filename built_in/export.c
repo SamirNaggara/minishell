@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:55:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/07 14:06:19 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:33:00 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ int	ft_export(t_data *data, t_simple_cmd *cmd)
 	if (!cmd->cmd_args[1])
 	{
 		ft_print_all_export(data);
-		return (1);
+		return (data->exit_status = 0, 1);
 	}
 	if (data->nb_cmd != 1)
-		return (1); 
-	ft_add_to_env(data, cmd);
-	return (1);
+		return (data->exit_status = 0, 1); 
+	if (!ft_add_to_env(data, cmd))
+		return (data->exit_status = 1, 0); 
+	return (data->exit_status = 0, 1);
 }
 
 /*
@@ -46,7 +47,8 @@ int	ft_add_to_env(t_data *data, t_simple_cmd *cmd)
 			key = ft_get_key(cmd->cmd_args[i]);
 		else
 			key = cmd->cmd_args[i];
-		ft_add_one_export(data, key, cmd->cmd_args[i]);	
+		if (!ft_add_one_export(data, key, cmd->cmd_args[i]))
+			return (0);
 		i++;
 	}
 	return (1);
