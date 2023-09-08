@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:53:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 10:15:18 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:41:51 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,12 @@ char	*ft_found_replace_value(t_data *data, char *word)
 	char	*to_return;
 
 	if (word[0] == '?')
-		return (ft_itoa(data->exit_status));
+	{
+		if (data->exit_status > 256)
+			return (ft_itoa(data->exit_status / 256));
+		else
+			return (ft_itoa(data->exit_status));
+	}
 	i = 0;
 	while (data->secret_envp[i] && !ft_same_key(data->secret_envp[i], word))
 		i++;

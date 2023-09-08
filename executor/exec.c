@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:30:11 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 15:35:46 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:47:52 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int	ft_cmd_valid(t_data *data, t_simple_cmd *cmd)
 	if (access(cmd->cmd_args[0], X_OK) != -1)
 		return (1);
 	fd_printf(STDERR_FILENO, "%s%s\n", E_CMD_NOT_FOUND, cmd->cmd_args[0]);
+	data->exit_status = 127;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 10:02:39 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:27:17 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #define E_SYNTAXE "erreur de syntaxe près du symbole inattendu "
 #define TMP_FILE_NAME ".tmp_here_doc_name_"
 #define E_CD "cd: %s: Aucun fichier ou dossier de ce type\n"
-
+#define E_CD_ARG "cd: trop d'arguments\n"
 /* Un enum de la liste des builtin*/
 typedef enum
 {
@@ -215,10 +215,10 @@ int ft_cd(t_data *data);
 int	ft_fill_secret_envp(t_data *data);
 int	ft_size_tab(char **tab);
 int	ft_update_pwd_envp(t_data *data, char *next_pwd);
-int	ft_change_directory(t_data *data);
-char	*ft_create_new_pwd(t_data *data);
+int	ft_change_directory(t_data *data, char *dest_file);
+char	*ft_create_new_pwd(t_data *data, char *dest_file);
 char	*ft_get_pwd_from_envp(char **envp);
-int	ft_test_dir(char *path);
+int	ft_test_dir(t_data *data, char *path);
 int	ft_update_oldpwd_envp(t_data *data);
 void	ft_env(t_data *data);
 int		ft_export(t_data *data,t_simple_cmd *cmd);
@@ -231,7 +231,7 @@ int	ft_add_one_envp(t_data *data, char *str);
 int	ft_same_key(char *str, char *key);
 int	ft_unset(t_data *data, t_simple_cmd *cmd);
 int	ft_update_secret_env_without(t_data *data, int skip);
-int	ft_echo(t_simple_cmd *cmd);
+int	ft_echo(t_data *data, t_simple_cmd *cmd);
 t_lexer	*ft_found_begin_echo(t_lexer *lexer);
 int	ft_is_flag_n(char *str);
 void	ft_visualise_lexer2(t_lexer *lexer);

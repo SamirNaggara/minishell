@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:03:47 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/06 15:03:59 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:19:01 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ void	ft_env(t_data *data)
 	i = 0;
 	while (data->secret_envp[i] && ft_strchr(data->secret_envp[i], '='))
 		printf("%s\n", data->secret_envp[i++]);
+	data->exit_status = 1;
+	exit(data->exit_status);
 }

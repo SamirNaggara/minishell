@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 10:26:30 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:35:11 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **envp)
 	
 	ft_minishell_loop(&data);
 
-	return (0);
+	return (data.exit_status);
 	
 }
 
@@ -156,7 +156,7 @@ int	ft_fill_path(t_data *data)
 {
 	char	*tmp_path;
 
-	tmp_path = ft_add_slash(getenv("PATH"));
+	tmp_path = ft_add_slash(ft_found_replace_value(data, "PATH"));
 	if (!tmp_path)
 		return (0);
 	data->paths = ft_split(tmp_path, ':');
