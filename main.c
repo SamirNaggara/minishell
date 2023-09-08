@@ -64,6 +64,7 @@ int	ft_size_tab(char **tab)
 	return (i);
 }
 
+
 //On utilise la fonction getcwd pour obtenir le chemin absolu du répertoire de travail actuel 
 char	*read_input(void)
 {
@@ -75,6 +76,7 @@ char	*read_input(void)
 	ret = readline(cwd);
 	return (ret);
 }
+
 
 void	ft_minishell_loop(t_data *data)
 {
@@ -96,6 +98,13 @@ void	ft_minishell_loop(t_data *data)
 			free(user_input); 
 			continue ;
 		}
+		//ft_visualise_lexer(data);
+		if (!ft_expander(data))
+		{
+			free(data->input);
+			continue;
+		}
+		//ft_visualise_lexer(data);
 
 		if (strcmp(data->input, user_input))
 		{
@@ -109,7 +118,6 @@ void	ft_minishell_loop(t_data *data)
 			free(data->input);
 			continue ;
 		}
-		//ft_visualise_lexer(data);
 		//ft_visualise_cmd(data);
 		ft_fill_path(data);
 		data->child = NULL;

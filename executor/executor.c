@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:10:45 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 14:10:02 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/03 21:13:41 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	executor(t_data *data)
 		else
 		{
 			if (!ft_exec_one_cmd(data))
-			return (0);
+				return (0);
 		}
 	}
 	else if (data->nb_cmd > 1)

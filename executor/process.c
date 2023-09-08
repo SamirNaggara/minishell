@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/25 00:12:15 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/03 17:30:39 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,18 @@ int	ft_create_all_process(t_data *data)
 	return (1);
 }
 
+/*
+	Attends tout les processus pour terminer avec un seul programme
+	Si on est dans le cas ou on a pas fait de fork
+	Alors on ne fait pas de wait
+*/
 void	ft_wait_children(t_data *data)
 {
 	int	i;
 
 	i = 0;
+	if (data->nb_cmd == 1 && ft_exec_without_fork(data->first_cmd))
+		return ;
 	while (i < data->nb_cmd)
 		waitpid(data->child[i++], NULL, 0);
 }

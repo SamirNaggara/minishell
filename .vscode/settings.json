@@ -5,6 +5,8 @@
 		"get_next_line.h": "c",
 		"stdlib.h": "c",
 		"minishell.h": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"*.tcc": "c",
+		"string": "c"
 	}
 }
