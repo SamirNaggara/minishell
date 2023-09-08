@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 09:26:07 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/08 10:26:30 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	data.envp = envp;
+	data.exit_status = 0;
 	ft_fill_secret_envp(&data);
 	
 	ft_minishell_loop(&data);
@@ -141,6 +142,16 @@ void	ft_minishell_loop(t_data *data)
 // 	return (0);
 // }
 
+/*
+	Samir, il faut que tu remplaces le getenv de Path
+	Par ce qui te parmer de shopper l'info dans le
+	secretenv
+	Sinon, c'est tres bien de le reconstuire a chaque fois finalement
+	Puis que le secret env peut etre mis a jour
+	Apres, il faut
+		-regler le probleme du exit qui ne marche pas tjr
+		-Le exis status, voir comment l'adapter pour les builtins
+*/
 int	ft_fill_path(t_data *data)
 {
 	char	*tmp_path;
