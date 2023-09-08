@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/07 19:46:42 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/08 09:26:07 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*read_input(void)
 	char	cwd[256];
 
 	getcwd(cwd, sizeof(cwd));
-	ft_strcat(cwd, " : ");
+	ft_strlcat(cwd, " : ", 256);
 	ret = readline(cwd);
 	return (ret);
 }
