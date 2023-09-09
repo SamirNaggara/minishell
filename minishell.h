@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 12:27:17 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/09 11:30:23 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <dirent.h>
+#include <signal.h>
 #include "libft-plus/libft/libft.h"
 #include "libft-plus/printf/ft_printf.h"
 #include "libft-plus/get-next-line/get_next_line.h"
@@ -99,6 +100,7 @@ typedef struct s_data
 	int loop;
 	char *input;
 } t_data;
+
 
 /* Executor Part*/
 int executor(t_data *data);
@@ -243,5 +245,9 @@ char	*ft_extract_word(char *str);
 int		ft_should_replace(t_lexer *lexer);
 char	*ft_malloc_replace_char(char *str, char *replace_str);
 
+// Signaux
+int	ft_signal(void);
+void handler(int signum);
+static int state;
 
 #endif
