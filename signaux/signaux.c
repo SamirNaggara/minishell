@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   signaux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/09 11:17:43 by snaggara         ###   ########.fr       */
+/*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
+/*   Updated: 2023/09/09 11:28:00 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-    C'est la fonction appele lorsque l'utilisateur rentre la commande exit
-    Attention, la commande doit tout free, ce qui n'est pas le cas la
-*/
-void	ft_exit(t_data *data)
+void handler(int signum) {
+    printf("Signal SIGINT reçu. Mais on continue ! %d\n", signum);
+}
+
+int	ft_signal(void)
 {
-	exit(data->exit_status);
+	struct sigaction sa;
+    sigemptyset(&sa.sa_mask);
+	
+    sa.sa_handler = handler;
+    sa.sa_flags = 0;
+
+    if (sigaction(SIGINT, &sa, NULL) == -1) {
+        perror("sigaction");
+        return (1);
+    }
+	return (1);
 }

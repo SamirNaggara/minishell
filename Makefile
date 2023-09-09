@@ -54,6 +54,7 @@ SOURCES	=	./main.c \
 			./built_in/echo.c \
 			./expander/expander.c \
 			./expander/replace.c \
+			./signaux/signaux.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 
