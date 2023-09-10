@@ -28,6 +28,7 @@ SOURCES	=	./main.c \
 			./executor/dup2.c \
 			./utils/add_slash.c \
 			./utils/ft_utils.c \
+			./utils/fill_path.c \
 			./lexer/lexer.c \
 			./lexer/quotes.c \
 			./lexer/operator.c \
@@ -52,6 +53,7 @@ SOURCES	=	./main.c \
 			./built_in/export2.c \
 			./built_in/unset.c \
 			./built_in/echo.c \
+			./built_in/fill_secret_envp.c \
 			./expander/expander.c \
 			./expander/replace.c \
 			./signaux/signaux.c \

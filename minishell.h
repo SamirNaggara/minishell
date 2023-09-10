@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/09 11:30:23 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/10 19:34:05 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_data
 	char	**paths;
 	char	**envp;
 	char	**secret_envp;
+	char	*full_cmd;
 	int		exit_status;
 	int nb_cmd;
 	t_simple_cmd *first_cmd;
@@ -156,7 +157,7 @@ int ft_exec_without_fork(t_simple_cmd *cmd);
 int ft_exec_one_cmd_builtin(t_data *data);
 
 /* Lexer */
-void ft_minishell_loop(t_data *data);
+int ft_minishell_loop(t_data *data);
 int ft_lexer(t_data *data);
 int ft_is_space(char c);
 t_lexer *ft_delimite(t_lexer *lexer);
@@ -179,6 +180,8 @@ void ft_fill_lexer_ope(t_data *data);
 void ft_detect_operator(t_lexer *current);
 int ft_space_to_ignore(t_data *data, int *i);
 void ft_delete_last_lexer_if_empty(t_lexer *current);
+int	ft_lex_ex_parse(t_data *data);
+char	*ft_strdup_plus_n(const char *s);
 
 /* PARSER */
 int ft_parser(t_data *data);
@@ -248,6 +251,7 @@ char	*ft_malloc_replace_char(char *str, char *replace_str);
 // Signaux
 int	ft_signal(void);
 void handler(int signum);
-static int state;
+
+
 
 #endif
