@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signaux.c                                          :+:      :+:    :+:   */
+/*   fill_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/10 18:24:07 by snaggara         ###   ########.fr       */
+/*   Created: 2023/09/10 18:27:33 by snaggara          #+#    #+#             */
+/*   Updated: 2023/09/10 18:27:56 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void handler(int signum) {
-    fd_printf(STDERR_FILENO, "COntrole c %d\n", signum);
-}
-
-int	ft_signal(void)
+int	ft_fill_path(t_data *data)
 {
-	struct sigaction sa;
-    sigemptyset(&sa.sa_mask);
-	
-    sa.sa_handler = handler;
-    sa.sa_flags = 0;
+	char	*tmp_path;
 
-    if (sigaction(SIGINT, &sa, NULL) == -1) {
-        perror("sigaction");
-        return (1);
-    }
+	tmp_path = ft_add_slash(ft_found_replace_value(data, "PATH"));
+	if (!tmp_path)
+		return (0);
+	data->paths = ft_split(tmp_path, ':');
+	if (!data->paths)
+		return (free(tmp_path), 0);
+	free(tmp_path);
 	return (1);
 }
