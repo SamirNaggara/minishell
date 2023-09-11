@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:53:21 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 19:02:00 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/10 19:53:37 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,24 @@ int	ft_end_double_quote(t_data *data, t_lexer **current, int *i)
 */
 int	ft_quote_not_over(t_data *data, int *i)
 {
+	char	*tmp;
+
 	if (!data->input[*i])
 	{
 		*i = -1;
 		data->loop = 0;
+		tmp = ft_strdup_plus_n(data->full_cmd);
+		if (!tmp)
+			return (0);
+		free(data->full_cmd);
 		free(data->input);
 		data->input = readline("	->");
 		if (!data->input)
 			return (0);
+		data->full_cmd = ft_strjoin(tmp, data->input);
+		if (!data->full_cmd)
+			return (0);
+		free(tmp);
 	}
 	return (1);
 }
