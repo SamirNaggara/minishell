@@ -30,11 +30,17 @@ int	main(int ac, char **av, char **envp)
 char	*read_input(void)
 {
 	char	*ret;
-	char	cwd[256];
+	char	cwd[1024];
+	char	*text;
 
+	ft_bzero(cwd, 1024);
 	getcwd(cwd, sizeof(cwd));
-	ft_strlcat(cwd, " : ", 256);
-	ret = readline(cwd);
+	ft_strlcat(cwd, "\x1b[31m \u2665 \x1b[0m", 1024);
+	text = ft_strjoin("\x1b[92m", cwd);
+	if (!text)
+		return (0);
+	ret = readline(text);
+	free(text);
 	return (ret);
 }
 
