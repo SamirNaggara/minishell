@@ -46,9 +46,14 @@ int	ft_add_to_env(t_data *data, t_simple_cmd *cmd)
 		if (equal)
 			key = ft_get_key(cmd->cmd_args[i]);
 		else
-			key = cmd->cmd_args[i];
+		{
+			key = ft_strdup(cmd->cmd_args[i]);
+			if (!key)
+				return (0);
+		}
 		if (!ft_add_one_export(data, key, cmd->cmd_args[i]))
 			return (0);
+		free(key);
 		i++;
 	}
 	return (1);
@@ -96,7 +101,12 @@ int	ft_add_one_export(t_data *data, char *key, char *str)
 		return (1);
 	}
 	if (ft_strchr(str, '='))
-		data->secret_envp[i] = str;
+	{
+		free(data->secret_envp);
+		data->secret_envp[i] = ft_strdup(str);
+		if (!data->secret_envp[i])
+			return (0);
+	}
 	return (1);
 }
 
@@ -109,6 +119,7 @@ int	ft_same_key(char *str, char *key)
 {
 	int	size_key;
 
+	//fd_printf(STDERR_FILENO, "str : %s - key : %s\n", str, key);
 	size_key = ft_strlen(key);
 	if (ft_strncmp(str, key, size_key) != 0)
 		return (0);

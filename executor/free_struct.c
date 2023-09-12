@@ -15,47 +15,57 @@
 void	ft_free_simple_cmd(t_data *data)
 {
 	t_simple_cmd	*browse;
+	t_simple_cmd	*tmp;
 
 	browse = data->first_cmd;
+	tmp = data->first_cmd;
 	while (browse)
 	{
 		free(browse->cmd_args);
-		ft_free_lexer(browse->redirections);
+		ft_clean_lexer(browse->redirections);
 		browse = browse->next;
+		free(tmp);
+		tmp = browse;
 	}
 }
 
 void	ft_free_lexer(t_lexer *lexer)
 {
 	t_lexer	*browse;
+	t_lexer	*tmp;
 
 	browse = lexer;
+	tmp = lexer;
 	while (browse)
 	{
 		free(browse->word);
 		browse = browse->next;
+		free(tmp);
+		tmp = browse;
 	}
 }
 
 void	ft_free_double_tab(char **tab)
 {
-	while (*tab)
-	{
-		free(*tab);
-		tab++;
-	}
+	int	i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
 }
 
 void	ft_free_path(t_data *data)
 {
 	ft_free_double_tab(data->paths);
-	free(data->paths);
 }
 
 void	ft_free_for_next_command(t_data *data)
 {
 	if (data->child)
 		free(data->child);
-	ft_free_simple_cmd(data);
 	ft_close_redir_fds(data);
+	ft_free_simple_cmd(data);
 }

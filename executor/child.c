@@ -62,8 +62,6 @@ void	ft_finish_child(t_data *data, t_simple_cmd *cmd)
 		ft_env(data);
 	else if (cmd->builtin == EXPORT)
 		ft_export(data, cmd);
-	else if (cmd->builtin == UNSET)
-		ft_unset(data, cmd);
 	else if (cmd->builtin == ECHO)
 		ft_echo(data, cmd);
 	else

@@ -56,6 +56,8 @@ int	ft_exec_without_fork(t_simple_cmd *cmd)
 		return (1);
 	else if (cmd->builtin == EXPORT)
 		return (1);
+	else if (cmd->builtin == UNSET)
+		return (1);
 	return (0);
 }
 
@@ -67,6 +69,8 @@ int	ft_exec_one_cmd_builtin(t_data *data)
 		ft_cd(data);
 	else if (data->first_cmd->builtin == EXPORT)
 		ft_export(data, data->first_cmd);
+	else if (data->first_cmd->builtin == UNSET)
+		ft_unset(data, data->first_cmd);
 	return (1);
 }
 

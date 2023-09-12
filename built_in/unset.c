@@ -26,6 +26,8 @@ int	ft_unset(t_data *data, t_simple_cmd *cmd)
 	while (data->secret_envp[i] &&
 		!ft_same_key(data->secret_envp[i], cmd->cmd_args[1]))
 		i++;
+	if (!data->secret_envp[i])
+		return (data->exit_status = 0, 1);
 	if (!ft_update_secret_env_without(data, i))
 		return (data->exit_status = 1, 0);
 	return (data->exit_status = 0, 1);
@@ -40,17 +42,26 @@ int	ft_update_secret_env_without(t_data *data, int skip)
 {
 	char	**new_env;
 	int		i;
+	int		j;
 
 	i = 0;
-	new_env = (char **)malloc(sizeof(char *) * ft_size_tab(data->secret_envp));
+	j = 0;
+	new_env = (char **)malloc(sizeof(char *) * (ft_size_tab(data->secret_envp) + 1));
 	if (!new_env)
 		return (0);
-	while (data->secret_envp[i] && i != skip)
+	while (data->secret_envp[i])
 	{
-		new_env[i] = data->secret_envp[i];
+		if (i == skip)
+		{
+			i++;
+			continue ;
+		}
+		new_env[j] = data->secret_envp[i];
 		i++;
+		j++;
 	}
-	new_env[i] = NULL;
+	new_env[j] = NULL;
+	free(data->secret_envp[skip]);
 	free(data->secret_envp);
 	data->secret_envp = new_env;
 	return (1);

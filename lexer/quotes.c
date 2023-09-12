@@ -94,12 +94,12 @@ int	ft_quote_not_over(t_data *data, int *i)
 	{
 		*i = -1;
 		data->loop = 0;
-		tmp = ft_strdup_plus_n(data->full_cmd);
+		tmp = ft_strdup(data->full_cmd);
 		if (!tmp)
 			return (0);
 		free(data->full_cmd);
 		free(data->input);
-		data->input = readline("	->");
+		data->input = readline(" -> ");
 		if (!data->input)
 			return (0);
 		data->full_cmd = ft_strjoin(tmp, data->input);

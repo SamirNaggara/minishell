@@ -81,6 +81,6 @@ char	*ft_strdup_plus_n(const char *s)
 		result[i] = s[i];
 		i++;
 	}
-	result[i] = '\n';
+	result[i] = '\0';
 	return (result);
 }

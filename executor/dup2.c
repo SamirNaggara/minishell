@@ -32,11 +32,13 @@ void	ft_close_redir_fds(t_data *data)
 {
 	t_simple_cmd	*browse;
 
+	if (!data->first_cmd)
+		return ;
 	browse = data->first_cmd;
 	while (browse)
 	{
 		if (browse->fd_in != -1)
-			close (browse->fd_in);
+			close(browse->fd_in);
 		if (browse->fd_out != -1)
 			close(browse->fd_out);
 		browse = browse->next;
