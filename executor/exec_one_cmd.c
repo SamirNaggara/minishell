@@ -14,6 +14,7 @@
 
 int	ft_exec_one_cmd(t_data *data)
 {
+	
 	if (!ft_malloc_child_pid(data))
 		return (0);
 	data->child[0] = fork();

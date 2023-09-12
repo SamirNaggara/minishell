@@ -60,6 +60,7 @@ int	ft_minishell_loop(t_data *data)
 		data->child = NULL;
 		if (!executor(data))
 			return (0);
+		//ft_visualise_lexer(data);
 		free(data->full_cmd);
 		ft_clean_lexer(data->lexer);
 		free(data->input);
@@ -73,10 +74,10 @@ int	ft_lex_ex_parse(t_data *data)
 		return (free(data->input), 0);
 	if (!ft_expander(data))
 		return (free(data->input), 0);
-	ft_visualise_lexer(data);
+	//ft_visualise_lexer(data);
 	if (!ft_parser(data))
 		return (free(data->input), 0);
-	ft_visualise_lexer(data);
-
+	//ft_visualise_lexer(data);
+	//ft_visualise_cmd(data);
 	return (1);
 }
