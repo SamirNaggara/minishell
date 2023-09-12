@@ -67,7 +67,7 @@ int	ft_is_second_part_op(t_data *data, t_lexer **current, int *i)
 {
 	if (!data->loop)
 		return (1);
-	if (i == 0)
+	if (*i == 0)
 		return (1);
 	if (!(*current)->word)
 		return (1);
@@ -104,7 +104,7 @@ int	ft_is_ope(char c1, char c2)
 {
 	if (c1 == '<' && c2 == '<')
 		return (1);
-	if (c1 == '<' && c2 == '<')
+	if (c1 == '>' && c2 == '>')
 		return (1);
 	return (0);
 }

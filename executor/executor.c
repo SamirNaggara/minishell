@@ -24,8 +24,12 @@ int	executor(t_data *data)
 	data->pipe[1][1] = -1;
 	if (!ft_handle_here_docs(data))
 		return (0);
-
-	if (data->nb_cmd == 1)
+	if (data->nb_cmd > 1)
+	{
+		if (!ft_create_all_process(data))
+			return (0);
+	}
+	else
 	{
 		if (ft_exec_without_fork(data->first_cmd))
 		{
@@ -37,11 +41,6 @@ int	executor(t_data *data)
 			if (!ft_exec_one_cmd(data))
 				return (0);
 		}
-	}
-	else if (data->nb_cmd > 1)
-	{
-		if (!ft_create_all_process(data))
-			return (0);
 	}
 	ft_wait_children(data);
 	ft_delete_here_doc_files(data);

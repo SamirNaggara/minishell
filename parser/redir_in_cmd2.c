@@ -39,21 +39,22 @@ void	ft_redir_is_first(t_data *data, t_lexer **lexer)
 
 	if (!ft_is_space_lexer((*lexer)->next))
 			new_begin = (*lexer)->next->next;
-		else
-		{
-			new_begin = (*lexer)->next->next->next;
-			ft_free_lexer_node(&(*lexer)->next->next);
-		}
-		ft_free_lexer_node(&(*lexer)->next);
-		ft_free_lexer_node(lexer);
-		if (new_begin && ft_is_space_lexer(new_begin) && new_begin->next)
-		{
-			*lexer = new_begin->next;
-			free(new_begin);
-			new_begin = *lexer;
-		}
-		*lexer = new_begin;
-		data->lexer = new_begin;
+	else
+	{
+		new_begin = (*lexer)->next->next->next;
+		ft_free_lexer_node(&(*lexer)->next->next);
+	}
+	ft_free_lexer_node(&(*lexer)->next);
+	ft_free_lexer_node(lexer);
+	if (new_begin && ft_is_space_lexer(new_begin) && new_begin->next)
+	{
+		*lexer = new_begin->next;
+		ft_free_lexer_node(&new_begin);
+		new_begin = *lexer;
+	}
+
+	*lexer = new_begin;
+	data->lexer = new_begin;
 }
 
 /*
@@ -82,7 +83,7 @@ void	ft_delete_and_relink(t_lexer **lexer)
 		before->next = after->next;
 		if (after->next)
 			after->next->prev = before;
-		free(after);
+		ft_free_lexer_node(&after);
 	}
 	*lexer = before;
 }
