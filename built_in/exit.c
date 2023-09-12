@@ -18,5 +18,24 @@
 */
 void	ft_exit(t_data *data)
 {
+    ft_clean_lexer(data->lexer);
+    ft_free_simple_cmd(data);
+    ft_free_double_tab(data->secret_envp);
+    ft_free_double_tab(data->paths);
+    free(data->input);
 	exit(data->exit_status);
+}
+
+void    ft_clean_lexer(t_lexer *lexer)
+{
+    t_lexer *tmp;
+
+    tmp = lexer;
+    while (lexer)
+    {
+        free(lexer->word);
+        lexer = lexer->next;
+        free(tmp);
+        tmp = lexer;
+    }
 }

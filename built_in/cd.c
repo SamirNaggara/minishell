@@ -12,41 +12,39 @@
 
 #include "../minishell.h"
 
-int ft_cd(t_data *data)
+int	ft_cd(t_data *data)
 {
-	char *next_pwd;
-	char *dest_file;
+	char	*next_pwd;
+	char	*dest_file;
 
 	if (ft_size_tab(data->first_cmd->cmd_args) >= 3)
-	{
-		fd_printf(STDERR_FILENO, E_CD_ARG);
-		return (data->exit_status = 1, 0);
-	}
+		return (fd_printf(STDERR_FILENO, E_CD_ARG), data->exit_status = 1, 0);
 	if (data->first_cmd->cmd_args[1])
-		dest_file = data->first_cmd->cmd_args[1];
+		dest_file = ft_strdup(data->first_cmd->cmd_args[1]);
 	else
 		dest_file = ft_found_replace_value(data, "HOME");
-	if (!ft_test_dir(data, dest_file))
+	if (!dest_file)
 		return (0);
+	if (!ft_test_dir(data, dest_file))
+		return (free(dest_file), 0);
 	next_pwd = ft_create_new_pwd(data, dest_file);
 	if (!next_pwd)
-		return (0);
+		return (free(dest_file), 0);
 	if (!ft_change_directory(data, dest_file))
-		return (0);
+		return (free(dest_file), free(next_pwd), 0);
 	if (!ft_update_oldpwd_envp(data))
-		return (0);
+		return (free(dest_file), free(next_pwd), 0);
 	if (!ft_update_pwd_envp(data, next_pwd))
-		return (0);
-	free(next_pwd);
-	return (data->exit_status = 0, 1);
+		return (free(dest_file), free(next_pwd), 0);
+	return (free(next_pwd), free(dest_file), data->exit_status = 0, 1);
 }
 
 /*
 	Test si un dossier existe ou non
 */
-int ft_test_dir(t_data *data, char *path)
+int	ft_test_dir(t_data *data, char *path)
 {
-	DIR *dir;
+	DIR	*dir;
 
 	dir = opendir(path);
 	if (!dir)
@@ -63,7 +61,7 @@ int ft_test_dir(t_data *data, char *path)
 	Normalement on a deja testé le dossier
 	donc ça ne devrait pas echouer
 */
-int ft_change_directory(t_data *data, char *dest_file)
+int	ft_change_directory(t_data *data, char *dest_file)
 {
 	if (chdir(dest_file) != 0)
 	{
@@ -76,11 +74,11 @@ int ft_change_directory(t_data *data, char *dest_file)
 /*
 	Retourne le chemin absolue du nouveau dossier
 */
-char *ft_create_new_pwd(t_data *data, char *dest_file)
+char	*ft_create_new_pwd(t_data *data, char *dest_file)
 {
-	char pwd[1024];
-	char *next_pwd;
-	int size;
+	char	pwd[1024];
+	char	*next_pwd;
+	int		size;
 
 	getcwd(pwd, 1024);
 	size = ft_strlen(dest_file) + ft_strlen(pwd) + 1;

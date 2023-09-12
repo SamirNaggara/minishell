@@ -158,6 +158,7 @@ int ft_exec_one_cmd_builtin(t_data *data);
 
 /* Lexer */
 int ft_minishell_loop(t_data *data);
+char	*read_input();
 int ft_lexer(t_data *data);
 int ft_is_space(char c);
 t_lexer *ft_delimite(t_lexer *lexer);
@@ -182,6 +183,7 @@ int ft_space_to_ignore(t_data *data, int *i);
 void ft_delete_last_lexer_if_empty(t_lexer *current);
 int	ft_lex_ex_parse(t_data *data);
 char	*ft_strdup_plus_n(const char *s);
+void    ft_clean_lexer(t_lexer *lexer);
 
 /* PARSER */
 int ft_parser(t_data *data);

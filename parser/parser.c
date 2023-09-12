@@ -14,11 +14,11 @@
 
 int	ft_parser(t_data *data)
 {
+	if (!ft_check_valids_cmds(data))
+		return (ft_syntaxe_error('\n'), 0);
 	if (!ft_parse_pipe_and_redir(data))
 		return (0);
 	if (!ft_parse_cmds_arg(data))
-		return (0);
-	if (!ft_check_valids_cmds(data))
 		return (0);
 	ft_fill_built_in(data);
 	data->nb_cmd = ft_count_cmd(data);

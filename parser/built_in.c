@@ -23,6 +23,11 @@ void	ft_fill_built_in(t_data *data)
 	current_cmd = data->first_cmd;
 	while (current_cmd)
 	{
+		if (!current_cmd->cmd_args[0])
+		{
+			current_cmd = current_cmd->next;
+			continue ;
+		}
 		if (ft_is_same_word("exit", current_cmd->cmd_args[0]))
 			current_cmd->builtin = EXIT;
 		else if (ft_is_same_word("pwd", current_cmd->cmd_args[0]))
@@ -39,5 +44,4 @@ void	ft_fill_built_in(t_data *data)
 			current_cmd->builtin = ECHO;
 		current_cmd = current_cmd->next;
 	}
-
 }

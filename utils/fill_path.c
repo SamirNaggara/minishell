@@ -15,10 +15,15 @@
 int	ft_fill_path(t_data *data)
 {
 	char	*tmp_path;
+	char	*value_path;
 
-	tmp_path = ft_add_slash(ft_found_replace_value(data, "PATH"));
-	if (!tmp_path)
+	value_path = ft_found_replace_value(data, "PATH");
+	if (!value_path)
 		return (0);
+	tmp_path = ft_add_slash(value_path);
+	if (!tmp_path)
+		return (free(value_path), 0);
+	free(value_path);
 	data->paths = ft_split(tmp_path, ':');
 	if (!data->paths)
 		return (free(tmp_path), 0);

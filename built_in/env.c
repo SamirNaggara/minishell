@@ -22,8 +22,12 @@ void	ft_env(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->secret_envp[i] && ft_strchr(data->secret_envp[i], '='))
-		printf("%s\n", data->secret_envp[i++]);
+	while (data->secret_envp[i])
+	{
+		if (ft_strchr(data->secret_envp[i], '='))
+			printf("%s\n", data->secret_envp[i]);
+		i++;
+	}
 	data->exit_status = 1;
 	exit(data->exit_status);
 }

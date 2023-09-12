@@ -21,26 +21,22 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	data.envp = envp;
 	data.exit_status = 0;
+	data.full_cmd = NULL;
 	ft_fill_secret_envp(&data);
 	ft_minishell_loop(&data);
 	return (data.exit_status);
 }
 
 //On utilise la fonction getcwd pour obtenir le chemin absolu du répertoire de travail actuel 
-char	*read_input(void)
+char	*read_input()
 {
 	char	*ret;
 	char	cwd[1024];
-	char	*text;
 
 	ft_bzero(cwd, 1024);
 	getcwd(cwd, sizeof(cwd));
-	ft_strlcat(cwd, "\x1b[31m \u2665 \x1b[0m", 1024);
-	text = ft_strjoin("\x1b[92m", cwd);
-	if (!text)
-		return (0);
-	ret = readline(text);
-	free(text);
+	ft_strlcat(cwd, "  ", 1024);
+	ret = readline(cwd);
 	return (ret);
 }
 
@@ -57,13 +53,15 @@ int	ft_minishell_loop(t_data *data)
 		data->full_cmd = ft_strdup(data->input);
 		if (!data->full_cmd)
 			return (0);
+		add_history(data->full_cmd);
 		if (!ft_lex_ex_parse(data))
 			continue ;
-		add_history(data->full_cmd);
-		rl_redisplay();
+
 		data->child = NULL;
 		if (!executor(data))
 			return (0);
+		free(data->full_cmd);
+		ft_clean_lexer(data->lexer);
 		free(data->input);
 	}
 	return (1);
@@ -75,7 +73,10 @@ int	ft_lex_ex_parse(t_data *data)
 		return (free(data->input), 0);
 	if (!ft_expander(data))
 		return (free(data->input), 0);
+	ft_visualise_lexer(data);
 	if (!ft_parser(data))
 		return (free(data->input), 0);
+	ft_visualise_lexer(data);
+
 	return (1);
 }

@@ -33,8 +33,10 @@ int	ft_add_one_envp(t_data *data, char *str)
 		new_envp[i] = data->secret_envp[i];
 		i++;
 	}
-	new_envp[i++] = str;
-	new_envp[i] = NULL;
+	new_envp[i] = ft_strdup(str);
+	if (!new_envp[i])
+		return (0);
+	new_envp[i + 1] = NULL;
 	free(data->secret_envp);
 	data->secret_envp = new_envp;
 	return (1);

@@ -71,18 +71,23 @@ int	ft_count_cmd(t_data *data)
 */
 int	ft_check_valids_cmds(t_data *data)
 {
-	t_simple_cmd	*current_cmd;
+	t_lexer	*current_lexer;
 
-	current_cmd = data->first_cmd;
-	while (current_cmd)
-	{
-		if (!ft_check_valid_cmd(current_cmd))
-		{
-			ft_syntaxe_error('\n');
-			return (0);
-		}
-		current_cmd = current_cmd->next;
-	}
+	current_lexer = data->lexer;
+	if (!current_lexer)
+		return (1);
+	while (current_lexer->next)
+		current_lexer = current_lexer->next;
+	if (!current_lexer)
+		return (1);
+	if (current_lexer->operator == PIPE)
+		return (0);
+	if (!ft_is_space_lexer(current_lexer))
+		return (1);
+	if (!current_lexer->prev)
+		return (1);
+	if (current_lexer->prev->operator == PIPE)
+		return (0);
 	return (1);
 }
 
