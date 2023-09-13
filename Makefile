@@ -19,6 +19,7 @@ SOURCES	=	./main.c \
 			./executor/pipe.c \
 			./executor/exec.c \
 			./executor/redirections.c \
+			./executor/redirections2.c \
 			./executor/child.c \
 			./executor/child2.c \
 			./executor/free_struct.c \

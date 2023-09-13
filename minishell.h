@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/10 19:34:05 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 09:44:38 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 #define TMP_FILE_NAME ".tmp_here_doc_name_"
 #define E_CD "cd: %s: Aucun fichier ou dossier de ce type\n"
 #define E_CD_ARG "cd: trop d'arguments\n"
+#define E_HERE_DOC "Here doc not created properly\n"
 /* Un enum de la liste des builtin*/
 typedef enum
 {
@@ -155,6 +156,7 @@ char *ft_create_here_doc_filename(t_simple_cmd *cmd);
 void ft_free_path_before(char **path, int i);
 int ft_exec_without_fork(t_simple_cmd *cmd);
 int ft_exec_one_cmd_builtin(t_data *data);
+char	*ft_create_here_doc_filename(t_simple_cmd *cmd);
 
 /* Lexer */
 int ft_minishell_loop(t_data *data);
