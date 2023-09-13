@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:55:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 12:33:00 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:50:48 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_add_one_export(t_data *data, char *key, char *str)
 	}
 	if (ft_strchr(str, '='))
 	{
-		free(data->secret_envp);
+		free(data->secret_envp[i]);
 		data->secret_envp[i] = ft_strdup(str);
 		if (!data->secret_envp[i])
 			return (0);

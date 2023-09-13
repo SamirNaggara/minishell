@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 09:44:38 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:43:19 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,8 +254,8 @@ char	*ft_malloc_replace_char(char *str, char *replace_str);
 
 // Signaux
 int	ft_signal(void);
-void handler(int signum);
+void handler_c(int signum);
 
-
+extern int global_state;
 
 #endif

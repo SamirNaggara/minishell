@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/09 10:39:46 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:01:03 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,16 @@ void	ft_wait_children(t_data *data)
 	int	status;
 
 	i = 0;
+	status = 0;
 	if (data->nb_cmd == 1 && ft_exec_without_fork(data->first_cmd))
 		return ;
 	while (i < data->nb_cmd)
 	{
 		waitpid(data->child[i++], &status, 0);
-		data->exit_status = WEXITSTATUS(status);
+		if (WIFEXITED(status))
+			data->exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			data->exit_status = WTERMSIG(status);
 	}
 }
 

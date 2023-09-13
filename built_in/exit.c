@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/09 11:17:43 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:27:44 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,26 @@
 */
 void	ft_exit(t_data *data)
 {
-    ft_clean_lexer(data->lexer);
-    ft_free_simple_cmd(data);
-    ft_free_double_tab(data->secret_envp);
-    ft_free_double_tab(data->paths);
-    free(data->input);
+	ft_clean_lexer(data->lexer);
+	ft_free_simple_cmd(data);
+	if (data->secret_envp)
+		ft_free_double_tab(data->secret_envp);
+	if (data->paths)
+		ft_free_double_tab(data->paths);
+	free(data->input);
 	exit(data->exit_status);
 }
 
 void    ft_clean_lexer(t_lexer *lexer)
 {
-    t_lexer *tmp;
+	t_lexer *tmp;
 
-    tmp = lexer;
-    while (lexer)
-    {
-        free(lexer->word);
-        lexer = lexer->next;
-        free(tmp);
-        tmp = lexer;
-    }
+	tmp = lexer;
+	while (lexer)
+	{
+		free(lexer->word);
+		lexer = lexer->next;
+		free(tmp);
+		tmp = lexer;
+	}
 }

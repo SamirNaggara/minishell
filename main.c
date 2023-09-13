@@ -6,11 +6,13 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/10 19:58:34 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:36:17 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	global_state = 0;
 
 int	main(int ac, char **av, char **envp)
 {
@@ -37,7 +39,7 @@ char	*read_input()
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, "  ", 1024);
 	ret = readline(cwd);
-	return (ret);
+	return (global_state = 0, ret);
 }
 
 
@@ -45,6 +47,7 @@ int	ft_minishell_loop(t_data *data)
 {
 	while (1)
 	{
+		global_state = 0;
 		data->input = read_input();
 		if (!data->input)
 			break ;
@@ -56,11 +59,11 @@ int	ft_minishell_loop(t_data *data)
 		add_history(data->full_cmd);
 		if (!ft_lex_ex_parse(data))
 			continue ;
+		ft_visualise_lexer(data);
 
 		data->child = NULL;
-		if (!executor(data))
-			return (0);
-		//ft_visualise_lexer(data);
+		global_state = 1;
+		executor(data);
 		free(data->full_cmd);
 		ft_clean_lexer(data->lexer);
 		free(data->input);

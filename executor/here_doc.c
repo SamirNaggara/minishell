@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:37:03 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 09:46:16 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:17:15 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	ft_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection)
 	stdin_line = get_next_line(STDIN_FILENO);
 	while (!stdin_line || !ft_is_same_str(stdin_line, redirection->word))
 	{
+		if (global_state == 3)
+			break;
 		write(cmd->fd_in, stdin_line, ft_strlen(stdin_line));
 		free(stdin_line);
 		stdin_line = get_next_line(STDIN_FILENO);
@@ -40,6 +42,8 @@ int	ft_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection)
 	free(redirection->word);
 	redirection->word = file_name;
 	close(cmd->fd_in);
+	if (global_state == 3)
+			return (0);
 	return (1);
 }
 
@@ -110,5 +114,3 @@ int	ft_handle_here_docs(t_data *data)
 	}
 	return (1);
 }
-
-
