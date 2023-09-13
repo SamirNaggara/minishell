@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:30:11 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 16:47:52 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:54:50 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_exec_cmd(t_data *data, t_simple_cmd *cmd)
 		free(full_cmd);
 		i++;
 	}
-	execve(cmd->cmd_args[0], cmd->cmd_args, NULL);
+	execve(cmd->cmd_args[0], cmd->cmd_args, data->envp);
 	perror("Command not found");
 	return (1);
 }
