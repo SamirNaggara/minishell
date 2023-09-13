@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 13:43:19 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:35:29 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <readline/history.h>
 #include <dirent.h>
 #include <signal.h>
+#include <termios.h>
 #include "libft-plus/libft/libft.h"
 #include "libft-plus/printf/ft_printf.h"
 #include "libft-plus/get-next-line/get_next_line.h"
@@ -37,7 +38,7 @@
 typedef enum
 {
 	NO_BUILTIN,
-	ECHO,
+	ECHOO,
 	CD,
 	PWD,
 	EXPORT,
@@ -255,6 +256,7 @@ char	*ft_malloc_replace_char(char *str, char *replace_str);
 // Signaux
 int	ft_signal(void);
 void handler_c(int signum);
+int	ft_signal_origin(void);
 
 extern int global_state;
 

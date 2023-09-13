@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 15:27:02 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:52:13 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@
 	Etat 3 : Le here doc est stoppe
 	Etat 4 : Il faut arrete tout les processus enfant
 */
-void handler_c(int signum) {
-	if (global_state == 1)
-		return ;
+void handler_c(int signum)
+{
+	//fd_printf(STDERR_FILENO, "Le signal %d avec le global state %d\n", signum, global_state);
 	if (signum == SIGINT)
 	{
+		if (global_state == 1)
+			return ;
 		if (global_state == 0)
 		{
 			ft_printf("\n");
@@ -46,9 +48,28 @@ int	ft_signal(void)
     sa.sa_flags = 0;
 
     if (sigaction(SIGINT, &sa, NULL) == -1) {
-        perror("sigaction");
+        perror("sigaction failed");
         return (1);
     }
 	return (1);
 }
 
+int	ft_signal_origin(void)
+{
+	struct sigaction sa;
+	sigemptyset(&sa.sa_mask);
+
+	sa.sa_handler = SIG_IGN;
+	sa.sa_flags = 0;
+
+	if (sigaction(SIGINT, &sa, NULL) == -1) {
+        perror("sigaction failed");
+        exit(EXIT_FAILURE);
+    }
+	return (1);
+}
+
+
+	// Set the handler to the default action.
+	// Clear the sa_mask to not block any signals during the execution of the signal handler.
+	// Set flags to 0.

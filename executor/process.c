@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 15:01:03 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:11:45 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_wait_children(t_data *data)
 	while (i < data->nb_cmd)
 	{
 		waitpid(data->child[i++], &status, 0);
+		fd_printf(STDERR_FILENO,"exit status : %d\n", WEXITSTATUS(status));
 		if (WIFEXITED(status))
 			data->exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
