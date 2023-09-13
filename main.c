@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 23:48:59 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 00:01:37 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int ac, char **av, char **envp)
 	data.terminal.c_cc[VINTR] = 0x03;
 	data.terminal.c_lflag &= ~ICANON;
 	tcsetattr(STDIN_FILENO, TCSANOW, &data.terminal);
-
+	ft_free_double_tab(data.secret_envp);
 	return (data.exit_status);
 }
 
