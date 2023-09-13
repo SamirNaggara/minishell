@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 19:11:45 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:47:07 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	ft_wait_children(t_data *data)
 			data->exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
 			data->exit_status = WTERMSIG(status);
+		if (ft_is_same_word(data->first_cmd->cmd_args[0], "./minishell"))
+			ft_signal();
 	}
 }
 

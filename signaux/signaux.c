@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 19:52:13 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:49:53 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ int	ft_signal_origin(void)
 	return (1);
 }
 
-
-	// Set the handler to the default action.
-	// Clear the sa_mask to not block any signals during the execution of the signal handler.
-	// Set flags to 0.
+void	ft_set_terminal_settings(t_data *data)
+{
+	tcgetattr(STDIN_FILENO, &data->terminal);
+	data->terminal.c_lflag |= ICANON;
+	tcsetattr(STDIN_FILENO, TCSANOW, &data->terminal);
+}

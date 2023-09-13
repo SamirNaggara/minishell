@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 19:35:29 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 22:41:53 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_data
 	int pipe[2][2];
 	int loop;
 	char *input;
+	struct termios terminal;
 } t_data;
 
 
@@ -257,6 +258,8 @@ char	*ft_malloc_replace_char(char *str, char *replace_str);
 int	ft_signal(void);
 void handler_c(int signum);
 int	ft_signal_origin(void);
+void	ft_set_terminal_settings(t_data *data);
+int	ft_read_by_char(void);
 
 extern int global_state;
 

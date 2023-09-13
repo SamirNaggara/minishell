@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 20:08:02 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:48:59 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,40 @@
 
 int	global_state = 0;
 
+
+
+int	ft_read_by_char(void)
+{
+	int		i;
+	char	c;
+	char	command[1024];
+
+	i = 0;
+	ft_bzero(command, 1024);
+	while (1) {
+		c = getchar();
+        if (c == '\n') {
+            ft_printf(STDIN_FILENO, "%s", command);
+            ft_bzero(command, 1024);
+            i = 0;
+			break ;
+        } 
+		else
+            command[i++] = c;
+	}
+	return (1);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 	
-	struct termios term;
-
-	tcgetattr(STDIN_FILENO, &term);  // Récupérer les attributs actuels du terminal
-
-	term.c_cc[VINTR] = _POSIX_VDISABLE;  // Désactiver le caractère pour VINTR
-
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);  // Appliquer les nouveaux attributs
-
+	ft_set_terminal_settings(&data);
 
     // Your program logic here.
 
     // Restore the old attributes before exiting.
+
 
 	ft_signal();
 	(void)ac;
@@ -39,6 +57,11 @@ int	main(int ac, char **av, char **envp)
 	data.full_cmd = NULL;
 	ft_fill_secret_envp(&data);
 	ft_minishell_loop(&data);
+
+	data.terminal.c_cc[VINTR] = 0x03;
+	data.terminal.c_lflag &= ~ICANON;
+	tcsetattr(STDIN_FILENO, TCSANOW, &data.terminal);
+
 	return (data.exit_status);
 }
 

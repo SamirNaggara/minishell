@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 19:52:12 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:42:37 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int	ft_exec_one_cmd(t_data *data)
 		return (perror(E_CHILD), 0);
 	if (data->child[0] == 0)
 		ft_child_one_cmd(data);
+	if (data->child[0] > 1)
+	{
+		if (ft_is_same_word(data->first_cmd->cmd_args[0], "./minishell"))
+			ft_signal_origin();
+	}
 	return (1);
 }
 
@@ -29,7 +34,6 @@ int	ft_child_one_cmd(t_data *data)
 {
 	t_simple_cmd	*cmd;
 
-	ft_signal_origin();
 	//fd_printf(STDERR_FILENO, "Je pass la %d\n", global_state);
 
 	cmd = data->first_cmd;
