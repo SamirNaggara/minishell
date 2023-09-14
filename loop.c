@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 14:20:58 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:22:55 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	ft_minishell_loop(t_data *data)
 		if (!data->input)
 			break ;
 		if (!*data->input)
+		{
+			free(data->input);
 			continue ;
+		}
 		data->full_cmd = ft_strdup(data->input);
 		if (!data->full_cmd)
 			return (0);
