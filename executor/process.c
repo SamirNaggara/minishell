@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 23:47:07 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 11:28:35 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,16 @@ void	ft_wait_children(t_data *data)
 	while (i < data->nb_cmd)
 	{
 		waitpid(data->child[i++], &status, 0);
-		fd_printf(STDERR_FILENO,"exit status : %d\n", WEXITSTATUS(status));
 		if (WIFEXITED(status))
 			data->exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
 			data->exit_status = WTERMSIG(status);
-		if (ft_is_same_word(data->first_cmd->cmd_args[0], "./minishell"))
+		if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
 			ft_signal();
+		ft_signal_slash_ignore();
 	}
 }
+
 
 int	ft_malloc_child_pid(t_data *data)
 {
@@ -74,6 +75,11 @@ void	ft_create_process(t_data *data, t_simple_cmd *browse, int i)
 		return (perror(E_CHILD));
 	if (data->child[i] == 0)
 		ft_child(data, browse, i);
+	if (data->child[0] > 1)
+	{
+		if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
+			ft_signal_ignore();
+	}
 	if (i != 0)
 		ft_close_pipe(data->pipe[(i - 1) % 2]);
 }

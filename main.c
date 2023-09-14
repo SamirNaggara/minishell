@@ -6,50 +6,22 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 00:01:37 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:32:55 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	global_state = 0;
-
-
-
-int	ft_read_by_char(void)
-{
-	int		i;
-	char	c;
-	char	command[1024];
-
-	i = 0;
-	ft_bzero(command, 1024);
-	while (1) {
-		c = getchar();
-        if (c == '\n') {
-            ft_printf(STDIN_FILENO, "%s", command);
-            ft_bzero(command, 1024);
-            i = 0;
-			break ;
-        } 
-		else
-            command[i++] = c;
-	}
-	return (1);
-}
+int	g_global_state = 0;
 
 int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 	
+	ft_memset(&data, 0, sizeof(data));
 	ft_set_terminal_settings(&data);
-
-    // Your program logic here.
-
-    // Restore the old attributes before exiting.
-
-
 	ft_signal();
+	ft_signal_slash_ignore();
 	(void)ac;
 	(void)av;
 	data.envp = envp;
@@ -60,6 +32,8 @@ int	main(int ac, char **av, char **envp)
 
 	data.terminal.c_cc[VINTR] = 0x03;
 	data.terminal.c_lflag &= ~ICANON;
+	data.terminal.c_lflag |= ECHOCTL;
+
 	tcsetattr(STDIN_FILENO, TCSANOW, &data.terminal);
 	ft_free_double_tab(data.secret_envp);
 	return (data.exit_status);
@@ -75,7 +49,7 @@ char	*read_input()
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, "  ", 1024);
 	ret = readline(cwd);
-	return (global_state = 0, ret);
+	return (g_global_state = 0, ret);
 }
 
 
@@ -83,7 +57,7 @@ int	ft_minishell_loop(t_data *data)
 {
 	while (1)
 	{
-		global_state = 0;
+		g_global_state = 0;
 		data->input = read_input();
 		if (!data->input)
 			break ;
@@ -98,7 +72,7 @@ int	ft_minishell_loop(t_data *data)
 		//ft_visualise_lexer(data);
 
 		data->child = NULL;
-		global_state = 1;
+		g_global_state = 1;
 		executor(data);
 		free(data->full_cmd);
 		ft_clean_lexer(data->lexer);

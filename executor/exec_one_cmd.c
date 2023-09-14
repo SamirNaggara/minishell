@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 23:42:37 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:27:20 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_exec_one_cmd(t_data *data)
 {
-	
+	ft_signal_slash();
 	if (!ft_malloc_child_pid(data))
 		return (0);
 	data->child[0] = fork();
@@ -24,8 +24,8 @@ int	ft_exec_one_cmd(t_data *data)
 		ft_child_one_cmd(data);
 	if (data->child[0] > 1)
 	{
-		if (ft_is_same_word(data->first_cmd->cmd_args[0], "./minishell"))
-			ft_signal_origin();
+		if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
+			ft_signal_ignore();
 	}
 	return (1);
 }
@@ -34,8 +34,7 @@ int	ft_child_one_cmd(t_data *data)
 {
 	t_simple_cmd	*cmd;
 
-	//fd_printf(STDERR_FILENO, "Je pass la %d\n", global_state);
-
+	//fd_printf(STDERR_FILENO, "Je pass la %d\n", g_global_state);
 	cmd = data->first_cmd;
 	if (!ft_test_cmd_and_redirections(data, cmd))
 	{

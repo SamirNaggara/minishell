@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 22:23:20 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:00:46 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	ft_exit(t_data *data)
 	free(data->input);
 	data->terminal.c_cc[VINTR] = 0x03;
 	data->terminal.c_lflag &= ~ICANON;
+	data->terminal.c_lflag |= ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &data->terminal);
-	
 	exit(data->exit_status);
 }
 
