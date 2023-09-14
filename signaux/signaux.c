@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 11:31:20 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:00:08 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	ft_set_terminal_settings(t_data *data)
 {
 	tcgetattr(STDIN_FILENO, &data->terminal);
 	data->terminal.c_lflag |= ICANON;
+	data->terminal.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &data->terminal);
 }
 

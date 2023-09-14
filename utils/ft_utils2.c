@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 10:55:34 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 11:06:23 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:03:10 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int	ft_is_end_of_str(char *str, char *needle)
 	char	*reverse_str;
 	char	*reverse_needle;
 
+	if (!str || !*str)
+		return (0);
+	if (!needle || !*needle)
+		return (0);
 	reverse_str = ft_reverse_str(str);
 	if (!reverse_str)
 		return (0);
