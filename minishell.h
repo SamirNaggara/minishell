@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 22:41:53 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 11:46:14 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 #define E_CD "cd: %s: Aucun fichier ou dossier de ce type\n"
 #define E_CD_ARG "cd: trop d'arguments\n"
 #define E_HERE_DOC "Here doc not created properly\n"
+#define E_SIG_HEREDOC "warning: here-document at line delimited by end-of-file\n"
+
 /* Un enum de la liste des builtin*/
 typedef enum
 {
@@ -257,9 +259,14 @@ char	*ft_malloc_replace_char(char *str, char *replace_str);
 // Signaux
 int	ft_signal(void);
 void handler_c(int signum);
-int	ft_signal_origin(void);
+int	ft_signal_ignore(void);
 void	ft_set_terminal_settings(t_data *data);
 int	ft_read_by_char(void);
+int	ft_is_end_of_str(char *str, char *needle);
+char	*ft_reverse_str(char *str);
+void handler_slash(int signum);
+int	ft_signal_slash(void);
+int	ft_signal_slash_ignore(void);
 
 extern int global_state;
 

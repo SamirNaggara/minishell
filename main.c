@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 00:01:37 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 11:36:30 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	main(int ac, char **av, char **envp)
 
 
 	ft_signal();
+	ft_signal_slash_ignore();
+
 	(void)ac;
 	(void)av;
 	data.envp = envp;

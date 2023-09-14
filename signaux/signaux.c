@@ -6,12 +6,11 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 23:49:53 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 11:31:20 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 /*
 	Etat 0 : Minishell est en attente d'une commande
@@ -39,13 +38,25 @@ void handler_c(int signum)
 	}
 }
 
+void handler_slash(int signum)
+{
+	//fd_printf(STDERR_FILENO, "Le signal %d avec le global state %d\n", signum, global_state);
+	if (signum == SIGQUIT)
+	{
+		fd_printf(STDERR_FILENO, "Quit (core dumped)\n");
+		exit(1);
+	}
+}
+
 int	ft_signal(void)
 {
 	struct sigaction sa;
     sigemptyset(&sa.sa_mask);
 	
+	
     sa.sa_handler = handler_c;
     sa.sa_flags = 0;
+
 
     if (sigaction(SIGINT, &sa, NULL) == -1) {
         perror("sigaction failed");
@@ -54,7 +65,35 @@ int	ft_signal(void)
 	return (1);
 }
 
-int	ft_signal_origin(void)
+int	ft_signal_slash(void)
+{
+	struct sigaction sa2;
+	
+    sigemptyset(&sa2.sa_mask);
+	sa2.sa_handler = handler_slash;
+    sa2.sa_flags = 0;
+	if (sigaction(SIGQUIT, &sa2, NULL) == -1) {
+        perror("sigaction failed");
+        return (1);
+    }
+	return (1);
+}
+
+int	ft_signal_slash_ignore(void)
+{
+	struct sigaction sa2;
+	
+    sigemptyset(&sa2.sa_mask);
+	sa2.sa_handler = SIG_IGN;
+    sa2.sa_flags = 0;
+	if (sigaction(SIGQUIT, &sa2, NULL) == -1) {
+        perror("sigaction failed");
+        return (1);
+    }
+	return (1);
+}
+
+int	ft_signal_ignore(void)
 {
 	struct sigaction sa;
 	sigemptyset(&sa.sa_mask);
@@ -75,3 +114,19 @@ void	ft_set_terminal_settings(t_data *data)
 	data->terminal.c_lflag |= ICANON;
 	tcsetattr(STDIN_FILENO, TCSANOW, &data->terminal);
 }
+
+// int	ft_signal_slash_restore(void)
+// {
+// 	struct sigaction sa;
+// 	sigemptyset(&sa.sa_mask);
+
+// 	sa.sa_handler = SIG_DFL;
+// 	sa.sa_flags = 0;
+// 	if (sigaction(SIGQUIT, &sa, NULL) == -1) {
+//         perror("sigaction failed");
+//         exit(EXIT_FAILURE);
+//     }
+// 	return (1);
+// }
+
+

@@ -29,6 +29,7 @@ SOURCES	=	./main.c \
 			./executor/dup2.c \
 			./utils/add_slash.c \
 			./utils/ft_utils.c \
+			./utils/ft_utils2.c \
 			./utils/fill_path.c \
 			./lexer/lexer.c \
 			./lexer/quotes.c \
