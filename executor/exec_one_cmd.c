@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 11:28:23 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:27:20 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_child_one_cmd(t_data *data)
 {
 	t_simple_cmd	*cmd;
 
-	//fd_printf(STDERR_FILENO, "Je pass la %d\n", global_state);
+	//fd_printf(STDERR_FILENO, "Je pass la %d\n", g_global_state);
 	cmd = data->first_cmd;
 	if (!ft_test_cmd_and_redirections(data, cmd))
 	{

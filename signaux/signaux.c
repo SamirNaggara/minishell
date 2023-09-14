@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 12:00:08 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:27:20 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,26 @@
 */
 void handler_c(int signum)
 {
-	//fd_printf(STDERR_FILENO, "Le signal %d avec le global state %d\n", signum, global_state);
+	//fd_printf(STDERR_FILENO, "Le signal %d avec le global state %d\n", signum, g_global_state);
 	if (signum == SIGINT)
 	{
-		if (global_state == 1)
+		if (g_global_state == 1)
 			return ;
-		if (global_state == 0)
+		if (g_global_state == 0)
 		{
 			ft_printf("\n");
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay(); 
 		}
-		else if (global_state == 2)
-			global_state = 3;
+		else if (g_global_state == 2)
+			g_global_state = 3;
 	}
 }
 
 void handler_slash(int signum)
 {
-	//fd_printf(STDERR_FILENO, "Le signal %d avec le global state %d\n", signum, global_state);
+	//fd_printf(STDERR_FILENO, "Le signal %d avec le global state %d\n", signum, g_global_state);
 	if (signum == SIGQUIT)
 	{
 		fd_printf(STDERR_FILENO, "Quit (core dumped)\n");
