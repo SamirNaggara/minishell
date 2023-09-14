@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 14:57:40 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:38:50 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	ft_exec_one_cmd(t_data *data)
 	if (data->child[0] > 1)
 	{
 		if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
+		{
 			ft_signal_ignore();
+			ft_signal_slash_ignore();
+		}
 	}
 	return (1);
 }
