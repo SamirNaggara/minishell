@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:36:51 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 15:06:54 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:03:15 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	ft_parse_cmds_arg(t_data *data)
 {
 	t_lexer			*current_lexer;
 	t_simple_cmd	*current_cmd;
+	int				new_arg;
 
+	new_arg = 1;
 	current_cmd = data->first_cmd;
 	current_lexer = data->lexer;
 	current_cmd->lexer = current_lexer;
@@ -36,9 +38,35 @@ int	ft_parse_cmds_arg(t_data *data)
 				return (0);
 		}
 		else if (!ft_is_space_lexer(current_lexer))
-			ft_add_arg_to_cmd(current_cmd, current_lexer->word);
+		{
+			if (new_arg)
+			{
+				ft_add_arg_to_cmd(current_cmd, current_lexer->word);
+				new_arg = 0;
+			}
+			else
+				ft_add_to_last_arg(current_cmd, current_lexer->word);
+		}
+		else if (ft_is_space_lexer(current_lexer))
+			new_arg = 1;
 		current_lexer = current_lexer->next;
 	}
+	return (1);
+}
+
+int	ft_add_to_last_arg(t_simple_cmd *cmd, char *word)
+{
+	int		i;
+	char	*new_arg;
+	i = 0;
+	while (cmd->cmd_args[i])
+		i++;
+	i--;
+	new_arg = ft_strjoin(cmd->cmd_args[i], word);
+	if (!new_arg)
+		return (0);
+	free(cmd->cmd_args[i]);
+	cmd->cmd_args[i] = new_arg;
 	return (1);
 }
 
@@ -64,7 +92,9 @@ int	ft_add_arg_to_cmd(t_simple_cmd *cmd, char *arg)
 	i = 0;
 	while (cmd->cmd_args[i])
 		i++;
-	cmd->cmd_args[i] = arg;
+	cmd->cmd_args[i] = ft_strdup(arg);
+	if (cmd->cmd_args[i])
+		return (0);
 	return (1);
 }
 
