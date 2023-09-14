@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:24:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 16:48:36 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:02:51 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_sup_operator(t_simple_cmd *cmd, t_lexer *redirection)
 	cmd->fd_out = open(redirection->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (cmd->fd_out == -1)
 	{
-		perror("File fdout not open properly");
+		fd_printf(STDERR_FILENO, "%s: Permission denied\n", redirection->word);
 		return (0);
 	}
 	return (1);
@@ -82,7 +82,7 @@ int	ft_sup_sup_operator(t_simple_cmd *cmd, t_lexer *redirection)
 	cmd->fd_out = open(redirection->word, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (cmd->fd_out == -1)
 	{
-		perror("File fdout not open properly");
+		fd_printf(STDERR_FILENO, "%s: Permission denied\n", redirection->word);
 		return (0);
 	}
 	return (1);
@@ -95,7 +95,7 @@ int	ft_inf_operator(t_simple_cmd *cmd, t_lexer *redirection)
 	cmd->fd_in = open(redirection->word, O_RDONLY, 0644);
 	if (cmd->fd_in == -1)
 	{
-		perror("File fdin not open properly");
+		fd_printf(STDERR_FILENO, "%s: Permission denied\n", redirection->word);
 		return (0);
 	}
 	return (1);
