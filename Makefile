@@ -13,6 +13,7 @@ RM	=	rm -f
 
 
 SOURCES	=	./main.c \
+			./loop.c \
 			./executor/executor.c \
 			./executor/fill_cmd.c \
 			./executor/process.c \
@@ -24,6 +25,7 @@ SOURCES	=	./main.c \
 			./executor/child2.c \
 			./executor/free_struct.c \
 			./executor/here_doc.c \
+			./executor/here_doc2.c \
 			./executor/exec_one_cmd.c \
 			./executor/fill_redirection.c \
 			./executor/dup2.c \
@@ -59,6 +61,8 @@ SOURCES	=	./main.c \
 			./expander/expander.c \
 			./expander/replace.c \
 			./signaux/signaux.c \
+			./signaux/terminal.c \
+			./signaux/slash.c \
 
 OBJETS	=	$(SOURCES:.c=.o)			
 
@@ -72,7 +76,7 @@ $(NAME): $(OBJETS)
 	@$(CC) -o $@ $^ -lreadline $(PRINTF) $(LIBFT) $(GNL)
 
 %.o: %.c
-	@echo -n "Génération de $@                                           \r"
+	@echo -n "Génération de $@                                \r"
 	@$(CC) -o $@ -c $< 
 
 lib	: 

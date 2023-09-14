@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:44:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 15:45:16 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:21:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@ int	ft_echo(t_data *data, t_simple_cmd *cmd)
 */
 void	ft_visualise_lexer2(t_lexer *lexer)
 {
-
 	printf("\nLe lexer : \n");
 	while (lexer && lexer->word)
 	{
 		printf("L'element %d : %s\n", lexer->index, lexer->word);
-		// if (lexer->operator != NONE)
-		// 	printf("Operator : %d\n", lexer->operator);
+		if (lexer->operator != NONE)
+			printf("Operator : %d\n", lexer->operator);
 		lexer = lexer->next;
 	}
 }
@@ -69,7 +68,6 @@ t_lexer	*ft_found_begin_echo(t_lexer *lexer)
 	if (ft_is_space_lexer(lexer))
 		lexer = lexer->next;
 	return (lexer);
-	
 }
 
 /*

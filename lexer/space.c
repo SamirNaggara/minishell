@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:58:02 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 18:43:42 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:00:46 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	ft_space_to_ignore(t_data *data, int *i)
 	}
 	return (0);
 }
+
 /*
 	Quelles sont les caracteres considérées comme un espacement
 */

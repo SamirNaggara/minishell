@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:31:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/06/10 21:09:38 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:03:18 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 char	*p_replace(char *str, t_flag_list *flag, va_list *args, t_infos *infos)
 {
-	char	*to_return;
+	char		*to_return;
 	long long	nbr;
-	char	*char_nbr;
-	char	*char_to_display;
+	char		*char_nbr;
+	char		*char_to_display;
 
 	nbr = (long long)va_arg(*args, void *);
 	if (!nbr)

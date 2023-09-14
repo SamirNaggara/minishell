@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 20:00:59 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/28 20:02:34 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:08:25 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	ft_redir_is_first(t_data *data, t_lexer **lexer)
 		ft_free_lexer_node(&new_begin);
 		new_begin = *lexer;
 	}
-
 	*lexer = new_begin;
 	data->lexer = new_begin;
 }
@@ -65,7 +64,7 @@ void	ft_delete_and_relink(t_lexer **lexer)
 {
 	t_lexer	*before;
 	t_lexer	*after;
-	
+
 	before = (*lexer)->prev;
 	if (!ft_is_space_lexer((*lexer)->next))
 		after = (*lexer)->next->next;
@@ -96,7 +95,7 @@ void	ft_delete_and_relink(t_lexer **lexer)
 int	ft_delete_end_of_lexer(t_lexer **lexer)
 {
 	t_lexer	*before;
-	
+
 	if (!(*lexer)->next->next)
 	{
 		(*lexer)->prev->next = NULL;

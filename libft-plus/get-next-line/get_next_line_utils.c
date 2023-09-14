@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 12:17:38 by snaggara          #+#    #+#             */
-/*   Updated: 2023/05/30 11:12:52 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:01:34 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ char	*ft_strjoin_custom(char *line, char *tmp)
 
 	if (!line)
 		return (tmp);
-	result = malloc(sizeof(char) * (ft_strlen_custom(line) + ft_strlen_custom(tmp)+ 1));
+	result = malloc(sizeof(char)
+			* (ft_strlen_custom(line) + ft_strlen_custom(tmp)+ 1));
 	if (!result)
 	{
 		free(tmp);

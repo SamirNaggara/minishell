@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:35:10 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 13:36:57 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:07:09 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_parse_pipe_and_redir(t_data *data)
 int	ft_count_cmd(t_data *data)
 {
 	t_simple_cmd	*current_cmd;
-	int	count;
+	int				count;
 
 	count = 0;
 	current_cmd = data->first_cmd;

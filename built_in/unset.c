@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:06:08 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 13:22:43 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:28:08 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	ft_unset(t_data *data, t_simple_cmd *cmd)
 	if (!cmd->cmd_args[1])
 		return (data->exit_status = 0, 1);
 	i = 0;
-	while (data->secret_envp[i] &&
-		!ft_same_key(data->secret_envp[i], cmd->cmd_args[1]))
+	while (data->secret_envp[i]
+		&& !ft_same_key(data->secret_envp[i], cmd->cmd_args[1]))
 		i++;
 	if (!data->secret_envp[i])
 		return (data->exit_status = 0, 1);
@@ -46,7 +46,8 @@ int	ft_update_secret_env_without(t_data *data, int skip)
 
 	i = 0;
 	j = 0;
-	new_env = (char **)malloc(sizeof(char *) * (ft_size_tab(data->secret_envp) + 1));
+	new_env = (char **)malloc(sizeof(char *)
+			* (ft_size_tab(data->secret_envp) + 1));
 	if (!new_env)
 		return (0);
 	while (data->secret_envp[i])
@@ -56,9 +57,7 @@ int	ft_update_secret_env_without(t_data *data, int skip)
 			i++;
 			continue ;
 		}
-		new_env[j] = data->secret_envp[i];
-		i++;
-		j++;
+		new_env[j++] = data->secret_envp[i++];
 	}
 	new_env[j] = NULL;
 	free(data->secret_envp[skip]);

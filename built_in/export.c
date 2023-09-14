@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:55:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 15:50:48 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:25:34 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@
 */
 int	ft_export(t_data *data, t_simple_cmd *cmd)
 {
-
 	if (!cmd->cmd_args[1])
 	{
 		ft_print_all_export(data);
 		return (data->exit_status = 0, 1);
 	}
 	if (data->nb_cmd != 1)
-		return (data->exit_status = 0, 1); 
+		return (data->exit_status = 0, 1);
 	if (!ft_add_to_env(data, cmd))
-		return (data->exit_status = 1, 0); 
+		return (data->exit_status = 1, 0);
 	return (data->exit_status = 0, 1);
 }
 
@@ -78,7 +77,6 @@ char	*ft_get_key(char *str)
 	}
 	to_return[i] = '\0';
 	return (to_return);
-		
 }
 
 /*
@@ -119,7 +117,6 @@ int	ft_same_key(char *str, char *key)
 {
 	int	size_key;
 
-	//fd_printf(STDERR_FILENO, "str : %s - key : %s\n", str, key);
 	size_key = ft_strlen(key);
 	if (ft_strncmp(str, key, size_key) != 0)
 		return (0);

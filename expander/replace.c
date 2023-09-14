@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:53:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/09 10:28:15 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:59:40 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ char	*ft_replace(char *str, char *dollar, char *replace_str)
 	while (str + ++i != dollar)
 		to_return[i] = str[i];
 	j = -1;
-	while(replace_str[++j])
+	while (replace_str[++j])
 		to_return[i + j] = replace_str[j];
 	k = i + j;
 	i++;
-	while(str[i] && str[i] != ' ' && str[i] != '$')
+	while (str[i] && str[i] != ' ' && str[i] != '$')
 		i++;
 	while (str[i])
 		to_return[k++] = str[i++];
@@ -59,7 +59,6 @@ char	*ft_replace(char *str, char *dollar, char *replace_str)
 	free(str);
 	return (to_return);
 }
-
 
 char	*ft_malloc_replace_char(char *str, char *replace_str)
 {
@@ -73,6 +72,7 @@ char	*ft_malloc_replace_char(char *str, char *replace_str)
 	ft_bzero(to_return, size);
 	return (to_return);
 }
+
 char	*ft_found_replace_value(t_data *data, char *word)
 {
 	int		i;
