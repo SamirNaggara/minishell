@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 12:00:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 18:29:25 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:00:13 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_fill_lexer_ope(t_data *data)
 		current = current->next;
 	}
 }
+
 /*
 	Detecte si un mot est exacement un operateur
 	SI c'est le cas, on met l'enum correspondant dans operator

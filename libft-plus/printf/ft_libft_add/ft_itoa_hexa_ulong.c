@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 01:42:27 by snaggara          #+#    #+#             */
-/*   Updated: 2023/06/10 21:09:38 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:02:48 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 char	*ft_itoa_hexa_ulong(long long n)
 {
-	char	*result;
+	char		*result;
 	long long	number;
 	long long	i;
 	long long	len;

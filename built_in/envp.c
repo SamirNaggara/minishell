@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 20:35:09 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/06 14:54:58 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:24:08 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	ft_update_pwd_envp(t_data *data, char *next_pwd)
 	ft_strlcpy(pwd_line, "PWD=", 5);
 	ft_strlcat(pwd_line, next_pwd, size);
 	i = 0;
-	while (data->secret_envp[i] && ft_strncmp(data->secret_envp[i], "PWD=", 4) != 0)
+	while (data->secret_envp[i]
+		&& ft_strncmp(data->secret_envp[i], "PWD=", 4) != 0)
 		i++;
 	if (!data->secret_envp[i])
 		return (0);
@@ -48,7 +49,6 @@ int	ft_update_oldpwd_envp(t_data *data)
 	char	pwd[1024];
 
 	getcwd(pwd, 1024);
-
 	size = ft_strlen(pwd) + 8;
 	pwd_line = (char *)malloc(sizeof(char *) * size);
 	if (!pwd_line)
@@ -56,7 +56,8 @@ int	ft_update_oldpwd_envp(t_data *data)
 	ft_strlcpy(pwd_line, "OLDPWD=", 8);
 	ft_strlcat(pwd_line, pwd, size);
 	i = 0;
-	while (data->secret_envp[i] && ft_strncmp(data->secret_envp[i], "OLDPWD=", 7) != 0)
+	while (data->secret_envp[i]
+		&& ft_strncmp(data->secret_envp[i], "OLDPWD=", 7) != 0)
 		i++;
 	if (!data->secret_envp[i])
 		return (0);
@@ -77,5 +78,5 @@ char	*ft_get_pwd_from_envp(char **envp)
 		i++;
 	if (!envp[i])
 		return (NULL);
-	return ft_strdup(envp[i] + 4);
+	return (ft_strdup(envp[i] + 4));
 }

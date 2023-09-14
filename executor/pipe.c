@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:14:22 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/25 00:11:56 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:55:50 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,12 @@ void	ft_close_pipes(t_data *data)
 		close(data->pipe[1][0]);
 	if (data->pipe[1][1] != -1)
 		close(data->pipe[1][1]);
+}
+
+void	ft_init_pipe(t_data *data)
+{
+	data->pipe[0][0] = -1;
+	data->pipe[0][1] = -1;
+	data->pipe[1][0] = -1;
+	data->pipe[1][1] = -1;
 }

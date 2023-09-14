@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 11:28:35 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:58:09 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	ft_wait_children(t_data *data)
 		ft_signal_slash_ignore();
 	}
 }
-
 
 int	ft_malloc_child_pid(t_data *data)
 {

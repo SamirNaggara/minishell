@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:00:56 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/06 15:01:32 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:25:48 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 int	ft_add_one_envp(t_data *data, char *str)
 {
 	int		size;
-	char 	**new_envp;
+	char	**new_envp;
 	int		i;
 
 	size = ft_size_tab(data->secret_envp);

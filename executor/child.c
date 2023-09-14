@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:26:37 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/13 19:24:43 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:29:01 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,3 @@ void	ft_finish_child(t_data *data, t_simple_cmd *cmd)
 	else
 		ft_exec_cmd(data, cmd);
 }
-
-

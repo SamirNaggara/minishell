@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:36:51 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/01 13:37:03 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:06:54 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	ft_parse_cmds_arg(t_data *data)
 	current_cmd->lexer = current_lexer;
 	if (!ft_int_arg_tab(current_cmd, current_lexer))
 		return (0);
-	
 	while (current_lexer)
 	{
 		if (current_lexer->operator == PIPE)
@@ -34,7 +33,7 @@ int	ft_parse_cmds_arg(t_data *data)
 			current_cmd = current_cmd->next;
 			current_cmd->lexer = current_lexer->next;
 			if (!ft_int_arg_tab(current_cmd, current_lexer->next))
-					return (0);
+				return (0);
 		}
 		else if (!ft_is_space_lexer(current_lexer))
 			ft_add_arg_to_cmd(current_cmd, current_lexer->word);
@@ -92,5 +91,4 @@ int	ft_count_args(t_lexer *lexer)
 		current_lexer = current_lexer->next;
 	}
 	return (count);
-	
 }

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 12:29:02 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:05:50 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,10 @@ void			ft_free_path_before(char **path, int i);
 int				ft_exec_without_fork(t_simple_cmd *cmd);
 int				ft_exec_one_cmd_builtin(t_data *data);
 char			*ft_create_here_doc_filename(t_simple_cmd *cmd);
+int				ft_end_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection,
+					char *stdin_line, char *file_name);
+int				ft_how_to_exec(t_data *data);
+void			ft_init_pipe(t_data *data);
 /* Lexer */
 int				ft_minishell_loop(t_data *data);
 char			*read_input(void);
@@ -219,6 +223,7 @@ void			ft_fill_built_in(t_data *data);
 int				ft_is_same_word(char const *s1, char const *s2);
 int				ft_check_valids_cmds(t_data *data);
 int				ft_check_valid_cmd(t_simple_cmd *current_cmd);
+void			ft_fill_each_built_in(t_simple_cmd *current_cmd);
 /* Builtin */
 void			ft_exit(t_data *data);
 void			ft_pwd(void);
@@ -263,6 +268,7 @@ char			*ft_reverse_str(char *str);
 void			handler_slash(int signum);
 int				ft_signal_slash(void);
 int				ft_signal_slash_ignore(void);
+void			ft_restore_terminal(t_data *data);
 extern int		g_global_state;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:56:16 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/30 12:54:31 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:08:44 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_simple_cmd	*ft_add_one_simple_cmd(t_simple_cmd	*current)
 	return (new);
 }
 
-t_simple_cmd	*ft_create_one_simple_cmd()
+t_simple_cmd	*ft_create_one_simple_cmd(void)
 {
 	t_simple_cmd	*new;
 
@@ -67,7 +67,6 @@ void	ft_visualise_cmd(t_data *data)
 	{
 		printf("Voila une simple cmd : %d\n", current_cmd->index);
 		current_redirection = current_cmd->redirections;
-
 		while (current_redirection)
 		{
 			printf("	Redireciton file : %s\n", current_redirection->word);

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:58:01 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/28 19:58:27 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:07:47 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_is_redir(t_operator op)
 		return (1);
 	return (0);
 }
+
 /*
 	Si on a un operateur de redirection
 	Alors on regarde si celui d'apres est valide (pas un operateur)
@@ -25,7 +26,6 @@ int	ft_is_redir(t_operator op)
 	Puis on met ce lexer dans la simple_cmd
 	Puis on supprime la redirection du lexer
 */
-
 int	ft_redir_in_simple_cmd(t_lexer *current_lexer, t_simple_cmd *current_cmd)
 {
 	if (current_lexer->operator == NONE || current_lexer->operator == PIPE)
@@ -56,7 +56,6 @@ int	ft_add_in_cmd_redir(t_simple_cmd *cmd, t_lexer *lexer)
 		return (0);
 	new->operator = lexer->operator;
 	new->str_type = lexer->str_type;
-
 	if (!cmd->redirections)
 		cmd->redirections = new;
 	else

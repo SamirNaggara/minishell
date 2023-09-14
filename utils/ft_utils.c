@@ -6,13 +6,11 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 10:59:01 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 10:59:04 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:13:01 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../minishell.h"
-
 
 /*
 	Si s1 et s2 sont 2 mots strictement identique
@@ -58,7 +56,7 @@ int	ft_size_tab(char **tab)
 	int	i;
 
 	i = 0;
-	while(tab[i])
+	while (tab[i])
 		i++;
 	return (i);
 }
