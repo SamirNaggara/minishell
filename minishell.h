@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 18:43:31 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:47:26 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ int				ft_test_dir(t_data *data, char *path);
 int				ft_update_oldpwd_envp(t_data *data);
 void			ft_env(t_data *data);
 int				ft_export(t_data *data, t_simple_cmd *cmd);
-void			ft_print_all_export(t_data *data);
+int				ft_print_all_export(t_data *data);
 void			ft_print_one_export(char *line);
 char			*ft_get_key(char *str);
 int				ft_add_one_export(t_data *data, char *key, char *str);
@@ -259,6 +259,9 @@ char			*ft_found_replace_value(t_data *data, char *word);
 char			*ft_extract_word(char *str);
 int				ft_should_replace(t_lexer *lexer);
 char			*ft_malloc_replace_char(char *str, char *replace_str);
+char			**ft_order_tab(char **tab);
+char			*ft_found_smaller(char **tab, char *smaller);
+int	ft_is_before(const char *s1, const char *s2);
 // Signaux
 int				ft_signal(void);
 void			handler_c(int signum);

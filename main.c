@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 18:22:48 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 22:28:28 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int	g_global_state = 0;
 
 /*
-"l""s" doit marcher.
-Peut etre que tu passes par la chaine d'abord et si tu vois 2 guillemets vides, tu les supprimes
+
 
 Trier export ou env par ordre alpha
 shell level eventuellement
