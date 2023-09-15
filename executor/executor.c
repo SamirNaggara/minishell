@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:10:45 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 14:57:19 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:55:23 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	executor(t_data *data)
 {
-	if (!ft_fill_path(data))
-		return (0);
+	ft_fill_path(data);
 	ft_init_pipe(data);
 	g_global_state = 2;
 	if (!ft_handle_here_docs(data))

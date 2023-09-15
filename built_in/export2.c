@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:00:56 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 14:25:48 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:41:04 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,19 @@ int	ft_add_one_envp(t_data *data, char *str)
 	Si on fait export tout seul
 	Alors on doit tout imprimer
 */
-void	ft_print_all_export(t_data *data)
+int	ft_print_all_export(t_data *data)
 {
-	int	i;
+	int		i;
+	//char	**sorted;
 
+	// sorted = ft_order_tab(data->secret_envp);
+	// if (!sorted)
+	// 	return(0);
 	i = 0;
 	while (data->secret_envp[i])
 		ft_print_one_export(data->secret_envp[i++]);
+	//free(sorted);
+	return (1);
 }
 
 /*
@@ -77,4 +83,76 @@ void	ft_print_one_export(char *line)
 		write(1, line + i++, 1);
 	write(1, "\"", 1);
 	write(1, "\n", 1);
+}
+
+char	**ft_order_tab(char **tab)
+{
+	char	**tab_sorted;
+	int		size;
+	int		i;
+	char	*smaller;
+
+	size = ft_size_tab(tab);
+	if (!tab || !*tab)
+		return (NULL);
+	tab_sorted = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!tab_sorted)
+		return (NULL);
+	smaller = NULL;
+	i = 0;
+	while (i < size)
+	{
+		smaller = ft_found_smaller(tab, smaller);
+		tab_sorted[i++] = smaller;
+	}
+	tab_sorted[i] = NULL;
+	return (tab_sorted);
+}
+
+char	*ft_found_smaller(char **tab, char *smaller)
+{
+	int		i;
+	char	*smallest;
+
+	i = 0;
+	smallest = NULL;
+	while (tab[i])
+	{
+		//ft_printf("%s - %s - %s\n", tab[i], smaller, smallest);
+		if (!ft_is_before(tab[i], smaller))
+		{
+			i++;
+			continue ;
+		}
+		if (ft_is_before(tab[i], smallest))
+			smallest = tab[i];
+		i++;
+	}
+	return (smallest);
+}
+
+/*
+	Si c'est negatif, s1 est avant s2
+	Si c'est positif, s2 est avant s1
+*/
+int	ft_is_before(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s2)
+		return (1);
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] < s2[i])
+			return (1);
+		i++;
+	}
+	if (s1[i] && s2[i])
+		return (0);
+	if (!s1[i])
+		return (1);
+	if (!s2[i])
+		return (0);
+	return (0);
 }
