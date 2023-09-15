@@ -6,7 +6,7 @@
 /*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:55:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/15 16:32:10 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:40:33 by sgoigoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_add_to_env(t_data *data, t_simple_cmd *cmd)
         // vérification pour voir si le nom de la variable respecte les règles (d'après mes recherche ça doit commencer par une lettre ou par _)
         if (!ft_isalpha(key[0]) && key[0] != '_')
         {
-            ft_printf("Erreur : export: %s not a valid identifier\n", key);
+            ft_printf("Erreur : export: '%s' not a valid identifier\n", ft_strcat(key, equal));
             free(key);
             return (0);
         }
