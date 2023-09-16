@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 10:55:34 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 15:13:11 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/16 11:09:17 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,26 @@ char	*ft_reverse_str(char *str)
 	}
 	reverse[j] = '\0';
 	return (reverse);
+}
+
+size_t	ft_strcat(char *dest, const char *src)
+{
+	size_t	dest_len;
+	size_t	src_len;
+	size_t	i;
+
+	if ((!dest || !src))
+		return (0);
+	dest_len = ft_strlen(dest);
+	src_len = ft_strlen(src);
+	if (!src)
+		return (src_len);
+	i = 0;
+	while (src[i])
+	{
+		dest[dest_len + i] = src[i];
+		i++;
+	}
+	dest[dest_len + i] = '\0';
+	return (dest_len + src_len);
 }

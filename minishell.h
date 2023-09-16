@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 23:47:26 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/16 11:11:16 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ int				ft_test_dir(t_data *data, char *path);
 int				ft_update_oldpwd_envp(t_data *data);
 void			ft_env(t_data *data);
 int				ft_export(t_data *data, t_simple_cmd *cmd);
-int				ft_print_all_export(t_data *data);
+void			ft_print_all_export(t_data *data);
 void			ft_print_one_export(char *line);
 char			*ft_get_key(char *str);
 int				ft_add_one_export(t_data *data, char *key, char *str);
@@ -273,6 +273,7 @@ void			handler_slash(int signum);
 int				ft_signal_slash(void);
 int				ft_signal_slash_ignore(void);
 void			ft_restore_terminal(t_data *data);
+size_t			ft_strcat(char *dest, const char *src);
 extern int		g_global_state;
 
 #endif
