@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:55:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 12:25:03 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/16 14:59:10 by sgoigoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,16 @@ int	ft_add_to_env(t_data *data, t_simple_cmd *cmd)
         // vérification pour voir si le nom de la variable respecte les règles (d'après mes recherche ça doit commencer par une lettre ou par _)
         if (!ft_isalpha(key[0]) && key[0] != '_')
         {
-            ft_printf("Erreur : export: '%s' not a valid identifier\n", ft_strcat(key, equal));
+            ft_printf("Erreur : export: '%s' not a valid identifier\n", cmd->cmd_args[i]);
             free(key);
             return (0);
         }
 
         if (!ft_add_one_export(data, key, cmd->cmd_args[i]))
+        {
+            free(key);
             return (0);
+        }
 
         free(key);
         i++;
@@ -68,6 +71,7 @@ int	ft_add_to_env(t_data *data, t_simple_cmd *cmd)
 
     return (1);
 }
+
 
 
 /*
