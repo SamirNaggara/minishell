@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:53:21 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/10 19:53:37 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:40:57 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	ft_start_double_quote(t_data *data, t_lexer **current, int *i)
 		return (1);
 	if (data->input[*i] != '"')
 		return (1);
+	*current = ft_delimite(*current);
+	if (!*current)
+		return (0);
 	(*current)->str_type = DOUBLE_QUOTE;
 	data->loop = 0;
 	return (1);
@@ -39,6 +42,9 @@ int	ft_start_single_quote(t_data *data, t_lexer **current, int *i)
 		return (1);
 	if (data->input[*i] != '\'')
 		return (1);
+	*current = ft_delimite(*current);
+	if (!*current)
+		return (0);
 	(*current)->str_type = SINGLE_QUOTE;
 	data->loop = 0;
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 18:25:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 14:15:26 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:24:23 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,68 @@ int	ft_fill_secret_envp(t_data *data)
 	data->secret_envp[i] = NULL;
 	if (!ft_increment_shell_level(data))
 		return (ft_free_double_tab(data->secret_envp), 0);
+	if (!ft_add_pwd(data))
+		return (ft_free_double_tab(data->secret_envp), 0);
+	if (!ft_add_old_pwd(data))
+		return (ft_free_double_tab(data->secret_envp), 0);
+	return (1);
+}
+
+int	ft_add_old_pwd(t_data *data)
+{
+	if (ft_exist_in_secret_env(data, "OLDPWD"))
+		return (1);
+	if (!ft_add_one_envp(data, "OLDPWD"))
+	{
+		perror("getcwd failed");
+		return (0);
+	}
+	return (1);
+}
+
+int	ft_exist_in_secret_env(t_data *data, char *key)
+{
+	int		i;
+	char	*existing_key;
+
+	i = 0;
+	while (data->secret_envp && data->secret_envp[i])
+	{
+		existing_key = ft_get_key(data->secret_envp[i]);
+		if (ft_is_same_word(existing_key, key))
+			return (free(existing_key), 1);
+		free(existing_key);
+		i++;
+	}
+	return (0);
+}
+
+
+int	ft_add_pwd(t_data *data)
+{
+	char	*pwd;
+	char	*full_line;
+	
+	pwd = getcwd(NULL, 0);
+	if (!pwd) {
+		perror("getcwd failed");
+		return (0);
+	}
+	full_line = ft_strjoin("PWD=", pwd);
+	if (!full_line)
+	{
+		free(pwd);
+		perror("getcwd failed");
+		return (0);
+	}
+	free(pwd);
+	if (!ft_add_one_export(data, "PWD", full_line))
+	{
+		free(full_line);
+		perror("getcwd failed");
+		return (0);
+	}
+	free(full_line);
 	return (1);
 }
 

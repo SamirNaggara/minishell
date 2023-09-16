@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 12:24:49 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:17:39 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void			ft_fill_each_built_in(t_simple_cmd *current_cmd);
 int				ft_add_to_last_arg(t_simple_cmd *cmd, char *word);
 /* Builtin */
 void			ft_exit(t_data *data);
-void			ft_pwd(void);
+void			ft_pwd();
 int				ft_cd(t_data *data);
 int				ft_fill_secret_envp(t_data *data);
 int				ft_size_tab(char **tab);
@@ -275,6 +275,9 @@ int				ft_signal_slash_ignore(void);
 void			ft_restore_terminal(t_data *data);
 size_t			ft_strcat(char *dest, const char *src);
 int				ft_increment_shell_level(t_data *data);
+int				ft_add_pwd(t_data *data);
+int				ft_add_old_pwd(t_data *data);
+int				ft_exist_in_secret_env(t_data *data, char *key);
 extern int		g_global_state;
 
 #endif

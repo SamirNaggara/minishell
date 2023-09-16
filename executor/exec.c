@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:30:11 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 14:12:08 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:05:41 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_exec_cmd(t_data *data, t_simple_cmd *cmd)
 	char	*full_cmd;
 
 	i = 0;
-	while (data->paths[i])
+	while (data->paths && data->paths[i])
 	{
 		full_cmd = ft_strjoin(data->paths[i], cmd->cmd_args[0]);
 		if (!full_cmd)
@@ -49,7 +49,7 @@ int	ft_cmd_valid(t_data *data, t_simple_cmd *cmd)
 	i = 0;
 	if (cmd->builtin != NO_BUILTIN)
 		return (1);
-	while (data->paths[i])
+	while (data->paths && data->paths[i])
 	{
 		full_cmd = ft_strjoin(data->paths[i++], cmd->cmd_args[0]);
 		if (!full_cmd)
