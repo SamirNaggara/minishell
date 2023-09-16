@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 16:37:02 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/16 17:37:23 by sgoigoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,39 @@ int	ft_minishell_loop(t_data *data)
 	return (1);
 }
 
+//vérifie si le répertoire actuel est accessible
+int is_current_directory_accessible() 
+{
+    struct stat st;
+    if (stat(".", &st) == 0) {
+        return 1; 
+    }
+    return 0; 
+}
+
 /*
 	On utilise la fonction getcwd pour obtenir le chemin absolu
 	du répertoire de travail actuel 
-*/
-char	*read_input(void)
-{
-	char	*ret;
-	char	cwd[1024];
 
-	ft_bzero(cwd, 1024);
-	getcwd(cwd, sizeof(cwd));
-	ft_strlcat(cwd, "  ", 1024);
-	ret = readline(cwd);
-	return (g_global_state = 0, ret);
+	Si le répertoire n'est pas accessible (effacé quand on y était par exemple)
+	alors on retourne au précédent
+	/!\ Attention ! Pas tout à fait opérationnel pour l'instant /!\
+*/
+char *read_input(void) 
+{
+    char *ret;
+    char cwd[1024];
+
+    ft_bzero(cwd, 1024);
+    getcwd(cwd, sizeof(cwd));
+    ft_strlcat(cwd, "  ", 1024);
+    ret = readline(cwd);
+    if (!is_current_directory_accessible()) 
+	{
+        // Répertoire courant inaccessible, on retourne au répertoir précédent.
+        chdir("..");
+    }
+    return (g_global_state = 0, ret);
 }
 
 /*
