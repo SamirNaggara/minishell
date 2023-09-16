@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 18:27:33 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 21:54:57 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/16 15:31:53 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_fill_path(t_data *data)
 
 	value_path = ft_found_replace_value(data, "PATH");
 	if (!value_path || !*value_path)
-		return (data->paths = NULL, 0);
+		return (data->paths = NULL, free(value_path), 0);
 	tmp_path = ft_add_slash(value_path);
 	if (!tmp_path)
 		return (free(value_path), 0);
