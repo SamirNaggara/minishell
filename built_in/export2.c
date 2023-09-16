@@ -6,7 +6,7 @@
 /*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:00:56 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/15 16:05:19 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/16 15:43:49 by sgoigoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,29 +63,34 @@ void ft_print_all_export(t_data *data)
     int i;
     int j;
     int count;
-	
-	i = 1;
-	count = 0;
+
+    i = 1;
+    count = 0;
     while (data->secret_envp[count])
         count++;
+
     while (i < count)
     {
         char *current = data->secret_envp[i];
         j = i - 1;
-        
+
         while (j >= 0 && ft_strcmp(data->secret_envp[j], current) > 0)
         {
             data->secret_envp[j + 1] = data->secret_envp[j];
             j--;
         }
         data->secret_envp[j + 1] = current;
-		i++;
+        i++;
     }
+
     i = 0;
     while (data->secret_envp[i])
-        ft_print_one_export(data->secret_envp[i++]);
+    {
+        if (ft_strnstr(data->secret_envp[i], "=/usr/bin/env", 14) != data->secret_envp[i])
+            ft_print_one_export(data->secret_envp[i]);
+        i++;
+    }
 }
-
 
 /*
 	On imprime une ligne avec le format export
