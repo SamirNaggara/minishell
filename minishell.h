@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 11:11:16 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/16 12:24:49 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,10 +242,10 @@ int				ft_export(t_data *data, t_simple_cmd *cmd);
 void			ft_print_all_export(t_data *data);
 void			ft_print_one_export(char *line);
 char			*ft_get_key(char *str);
-int				ft_add_one_export(t_data *data, char *key, char *str);
+int				ft_add_one_export(t_data *data, char const *key, char *str);
 int				ft_add_to_env(t_data *data, t_simple_cmd *cmd);
 int				ft_add_one_envp(t_data *data, char *str);
-int				ft_same_key(char *str, char *key);
+int				ft_same_key(char *str, char const *key);
 int				ft_unset(t_data *data, t_simple_cmd *cmd);
 int				ft_update_secret_env_without(t_data *data, int skip);
 int				ft_echo(t_data *data, t_simple_cmd *cmd);
@@ -274,6 +274,7 @@ int				ft_signal_slash(void);
 int				ft_signal_slash_ignore(void);
 void			ft_restore_terminal(t_data *data);
 size_t			ft_strcat(char *dest, const char *src);
+int				ft_increment_shell_level(t_data *data);
 extern int		g_global_state;
 
 #endif

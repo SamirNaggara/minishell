@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:55:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/15 16:40:33 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/16 12:25:03 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*ft_get_key(char *str)
 	Pour le mettre a la bonne place
 	Ou a la toute fin si la clef n'existe pas encore
 */
-int	ft_add_one_export(t_data *data, char *key, char *str)
+int	ft_add_one_export(t_data *data, char const *key, char *str)
 {
 	int	i;
 
@@ -125,7 +125,7 @@ int	ft_add_one_export(t_data *data, char *key, char *str)
 	Cette fonction renvoie 1 si la clef est strictement identique
 */
 
-int	ft_same_key(char *str, char *key)
+int	ft_same_key(char *str, char const *key)
 {
 	int	size_key;
 
