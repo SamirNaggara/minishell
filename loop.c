@@ -6,7 +6,7 @@
 /*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 17:37:23 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:56:08 by sgoigoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,22 @@ int is_current_directory_accessible()
 
 	Si le répertoire n'est pas accessible (effacé quand on y était par exemple)
 	alors on retourne au précédent
-	/!\ Attention ! Pas tout à fait opérationnel pour l'instant /!\
 */
 char *read_input(void) 
 {
     char *ret;
     char cwd[1024];
 
-    ft_bzero(cwd, 1024);
-    getcwd(cwd, sizeof(cwd));
-    ft_strlcat(cwd, "  ", 1024);
-    ret = readline(cwd);
-    if (!is_current_directory_accessible()) 
+	if (!is_current_directory_accessible()) 
 	{
         // Répertoire courant inaccessible, on retourne au répertoir précédent.
         chdir("..");
     }
+    ft_bzero(cwd, 1024);
+    getcwd(cwd, sizeof(cwd));
+    ft_strlcat(cwd, "  ", 1024);
+    ret = readline(cwd);
+    
     return (g_global_state = 0, ret);
 }
 
