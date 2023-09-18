@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:44:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 14:21:58 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:47:09 by sgoigoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,21 @@ t_lexer	*ft_found_begin_echo(t_lexer *lexer)
 */
 int	ft_is_flag_n(char *str)
 {
+	int i;
+
+	i = 1;
 	if (!str)
 		return (0);
 	if (!str[0] || !str[1])
 		return (0);
-	if (str[0] == '-' && str[1] == 'n' && !str[2])
-		return (1);
+	if (str[0] == '-')
+	{
+		while(str[i] == 'n')
+			i++;
+		if(!str[i])
+			return(1);
+		else
+			return(0);
+	}
 	return (0);
 }
