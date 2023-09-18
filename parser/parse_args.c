@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:36:51 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 19:03:15 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:28:14 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ int	ft_add_to_last_arg(t_simple_cmd *cmd, char *word)
 {
 	int		i;
 	char	*new_arg;
+
+	if (!cmd->cmd_args[0])
+	{
+		cmd->cmd_args[0] = ft_strdup(word);
+		if (!cmd->cmd_args[0])
+			return (0);
+		return (1);
+	}
 	i = 0;
 	while (cmd->cmd_args[i])
 		i++;

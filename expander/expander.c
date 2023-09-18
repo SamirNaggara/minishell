@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:11:19 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 10:12:24 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:13:19 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,22 @@ int	ft_should_replace(t_lexer *lexer)
 		return (0);
 	if (!dollar[1] || dollar[1] == ' ')
 		return (0);
+	if (ft_is_here_doc_file(lexer))
+		return (0);
 	return (1);
+}
+
+int	ft_is_here_doc_file(t_lexer *lexer)
+{
+	if (!lexer)
+		return (0);
+	if (!lexer->prev)
+		return (0);
+	if (lexer->prev->operator == INFINF)
+		return (1);
+	if (!lexer->prev->prev)
+		return (0);
+	if (lexer->prev->prev->operator == INFINF)
+		return (1);
+	return (0);
 }
