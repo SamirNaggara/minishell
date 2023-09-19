@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 20:35:09 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 14:24:08 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:45:48 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,19 @@
 /*
 	Permet de mettre a jour PWD dans le secret_env
 */
-int	ft_update_pwd_envp(t_data *data, char *next_pwd)
+int	ft_update_pwd_envp(t_data *data)
 {
-	int		i;
 	char	*pwd_line;
-	int		size;
+	char	pwd[1024];
 
-	size = ft_strlen(next_pwd) + 5;
-	pwd_line = (char *)malloc(sizeof(char *) * size);
+	if (!getcwd(pwd, 1024))
+		return (perror("getcwd failed\n"), 0);
+	pwd_line = ft_strjoin("PWD=", pwd);
 	if (!pwd_line)
 		return (0);
-	ft_strlcpy(pwd_line, "PWD=", 5);
-	ft_strlcat(pwd_line, next_pwd, size);
-	i = 0;
-	while (data->secret_envp[i]
-		&& ft_strncmp(data->secret_envp[i], "PWD=", 4) != 0)
-		i++;
-	if (!data->secret_envp[i])
-		return (0);
-	free(data->secret_envp[i]);
-	data->secret_envp[i] = pwd_line;
-	return (1);
+	if (!ft_add_one_export(data, "PWD", pwd_line))
+		return (free(pwd_line), 0);
+	return (free(pwd_line), 1);
 }
 
 /*
@@ -43,27 +35,18 @@ int	ft_update_pwd_envp(t_data *data, char *next_pwd)
 */
 int	ft_update_oldpwd_envp(t_data *data)
 {
-	int		i;
-	char	*pwd_line;
-	int		size;
-	char	pwd[1024];
+	char	*oldpwd_value;
+	char	*oldpwd_line;
 
-	getcwd(pwd, 1024);
-	size = ft_strlen(pwd) + 8;
-	pwd_line = (char *)malloc(sizeof(char *) * size);
-	if (!pwd_line)
+	oldpwd_value = ft_found_replace_value(data, "PWD");
+	if (!oldpwd_value)
 		return (0);
-	ft_strlcpy(pwd_line, "OLDPWD=", 8);
-	ft_strlcat(pwd_line, pwd, size);
-	i = 0;
-	while (data->secret_envp[i]
-		&& ft_strncmp(data->secret_envp[i], "OLDPWD=", 7) != 0)
-		i++;
-	if (!data->secret_envp[i])
-		return (0);
-	free(data->secret_envp[i]);
-	data->secret_envp[i] = pwd_line;
-	return (1);
+	oldpwd_line = ft_strjoin("OLDPWD=", oldpwd_value);
+	if (!oldpwd_line)
+		return (free(oldpwd_value), 0);
+	if (!ft_add_one_export(data, "OLDPWD", oldpwd_line))
+		return (free(oldpwd_line), free(oldpwd_value), 0);
+	return (free(oldpwd_line), free(oldpwd_value), 1);
 }
 
 /*

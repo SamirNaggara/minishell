@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 20:34:54 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/08 12:29:59 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:26:09 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_cd(t_data *data)
 {
-	char	*next_pwd;
 	char	*dest_file;
 
 	if (ft_size_tab(data->first_cmd->cmd_args) >= 3)
@@ -27,16 +26,13 @@ int	ft_cd(t_data *data)
 		return (0);
 	if (!ft_test_dir(data, dest_file))
 		return (free(dest_file), 0);
-	next_pwd = ft_create_new_pwd(data, dest_file);
-	if (!next_pwd)
-		return (free(dest_file), 0);
 	if (!ft_change_directory(data, dest_file))
-		return (free(dest_file), free(next_pwd), 0);
+		return (free(dest_file), 0);
 	if (!ft_update_oldpwd_envp(data))
-		return (free(dest_file), free(next_pwd), 0);
-	if (!ft_update_pwd_envp(data, next_pwd))
-		return (free(dest_file), free(next_pwd), 0);
-	return (free(next_pwd), free(dest_file), data->exit_status = 0, 1);
+		return (free(dest_file), 0);
+	if (!ft_update_pwd_envp(data))
+		return (free(dest_file), 0);
+	return (free(dest_file), data->exit_status = 0, 1);
 }
 
 /*
