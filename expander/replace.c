@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:53:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 14:59:40 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:05:31 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ char	*ft_replace(char *str, char *dollar, char *replace_str)
 		to_return[i + j] = replace_str[j];
 	k = i + j;
 	i++;
-	while (str[i] && str[i] != ' ' && str[i] != '$')
+	while (str[i] && (str[i] != ' ' && str[i] != '$' && str[i] != '?'))
+		i++;
+	if (str[i] == '?')
 		i++;
 	while (str[i])
 		to_return[k++] = str[i++];
@@ -108,7 +110,7 @@ char	*ft_extract_word(char *str)
 	j = 0;
 	if (str[0] != '$')
 		return (NULL);
-	while (str[i] && str[i] != ' ' && str[i] != '$')
+	while (str[i] && (str[i] != ' ' && str[i] != '$'))
 		i++;
 	word = (char *)malloc(sizeof(char) * (i + 1));
 	if (!word)

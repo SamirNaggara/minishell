@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:44:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/18 15:47:09 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:39:13 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_echo(t_data *data, t_simple_cmd *cmd)
 	if (!cmd->cmd_args[1])
 	{
 		write(1, "\n", 1);
-		exit(1);
+		exit(0);
 	}
 	begin_lexer = ft_found_begin_echo(cmd->lexer);
 	if (!begin_lexer)
