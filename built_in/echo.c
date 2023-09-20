@@ -75,7 +75,7 @@ t_lexer	*ft_found_begin_echo(t_lexer *lexer)
 */
 int	ft_is_flag_n(char *str)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (!str)
@@ -84,12 +84,12 @@ int	ft_is_flag_n(char *str)
 		return (0);
 	if (str[0] == '-')
 	{
-		while(str[i] == 'n')
+		while (str[i] == 'n')
 			i++;
-		if(!str[i])
-			return(1);
+		if (!str[i])
+			return (1);
 		else
-			return(0);
+			return (0);
 	}
 	return (0);
 }

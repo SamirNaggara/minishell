@@ -26,7 +26,7 @@ int	ft_unset(t_data *data, t_simple_cmd *cmd)
 		return (data->exit_status = 0, 1);
 	while (cmd->cmd_args[j])
 	{
-		i = 0;		
+		i = 0;
 		while (data->secret_envp[i]
 			&& !ft_same_key(data->secret_envp[i], cmd->cmd_args[j]))
 			i++;

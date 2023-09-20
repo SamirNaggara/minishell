@@ -47,49 +47,47 @@ int	ft_add_one_envp(t_data *data, char *str)
 	Alors on doit tout imprimer
 */
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-    while (*s1 && (*s1 == *s2))
-    {
-        s1++;
-        s2++;
-    }
-
-    return *(const unsigned char *)s1 - *(const unsigned char *)s2;
+	while (*s1 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return (*(const unsigned char *)s1 - *(const unsigned char *)s2);
 }
 
-void ft_print_all_export(t_data *data)
+void	ft_print_all_export(t_data *data)
 {
-    int i;
-    int j;
-    int count;
+	int		i;
+	int		j;
+	int		count;
+	char	*current;
 
-    i = 1;
-    count = 0;
-    while (data->secret_envp[count])
-        count++;
-
-    while (i < count)
-    {
-        char *current = data->secret_envp[i];
-        j = i - 1;
-
-        while (j >= 0 && ft_strcmp(data->secret_envp[j], current) > 0)
-        {
-            data->secret_envp[j + 1] = data->secret_envp[j];
-            j--;
-        }
-        data->secret_envp[j + 1] = current;
-        i++;
-    }
-
-    i = 0;
-    while (data->secret_envp[i])
-    {
-        if (ft_strnstr(data->secret_envp[i], "=/usr/bin/env", 14) != data->secret_envp[i])
-            ft_print_one_export(data->secret_envp[i]);
-        i++;
-    }
+	i = 1;
+	count = 0;
+	while (data->secret_envp[count])
+		count++;
+	while (i < count)
+	{
+		current = data->secret_envp[i];
+		j = i - 1;
+		while (j >= 0 && ft_strcmp(data->secret_envp[j], current) > 0)
+		{
+			data->secret_envp[j + 1] = data->secret_envp[j];
+			j--;
+		}
+		data->secret_envp[j + 1] = current;
+		i++;
+	}
+	i = 0;
+	while (data->secret_envp[i])
+	{
+		if (ft_strnstr(data->secret_envp[i], \
+		"=/usr/bin/env", 14) != data->secret_envp[i])
+			ft_print_one_export(data->secret_envp[i]);
+		i++;
+	}
 }
 
 /*

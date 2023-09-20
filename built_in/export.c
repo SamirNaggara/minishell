@@ -34,45 +34,39 @@ int	ft_export(t_data *data, t_simple_cmd *cmd)
 */
 int	ft_add_to_env(t_data *data, t_simple_cmd *cmd)
 {
-    char	*equal;
-    char	*key;
-    int		i;
+	char	*equal;
+	char	*key;
+	int		i;
 
-    i = 1;
-    while (cmd->cmd_args[i])
-    {
-        equal = ft_strchr(cmd->cmd_args[i], '=');
-        if (equal)
-            key = ft_get_key(cmd->cmd_args[i]);
-        else
-        {
-            key = ft_strdup(cmd->cmd_args[i]);
-            if (!key)
-                return (0);
-        }
-
-        // vérification pour voir si le nom de la variable respecte les règles (d'après mes recherche ça doit commencer par une lettre ou par _)
-        if (!ft_isalpha(key[0]) && key[0] != '_')
-        {
-            ft_printf("Erreur : export: '%s' not a valid identifier\n", cmd->cmd_args[i]);
-            free(key);
-            return (0);
-        }
-
-        if (!ft_add_one_export(data, key, cmd->cmd_args[i]))
-        {
-            free(key);
-            return (0);
-        }
-
-        free(key);
-        i++;
-    }
-
-    return (1);
+	i = 1;
+	while (cmd->cmd_args[i])
+	{
+		equal = ft_strchr(cmd->cmd_args[i], '=');
+		if (equal)
+			key = ft_get_key(cmd->cmd_args[i]);
+		else
+		{
+			key = ft_strdup(cmd->cmd_args[i]);
+			if (!key)
+				return (0);
+		}
+		if (!ft_isalpha(key[0]) && key[0] != '_')
+		{
+			ft_printf("Erreur : export: '%s' not a valid identifier\n", \
+			cmd->cmd_args[i]);
+			free(key);
+			return (0);
+		}
+		if (!ft_add_one_export(data, key, cmd->cmd_args[i]))
+		{
+			free(key);
+			return (0);
+		}
+		free(key);
+		i++;
+	}
+	return (1);
 }
-
-
 
 /*
 	Pour obtenir juste la clef d'une chaine de caractere

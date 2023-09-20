@@ -17,18 +17,18 @@
     Attention, la commande doit tout free, ce qui n'est pas le cas la
 */
 
-int		ft_any_number(char *str)
+int	ft_any_number(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if(str[i] >= '0' && str[i] <= '9')
+		if (str[i] >= '0' && str[i] <= '9')
 			return (1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
 
 void	ft_exit(t_data *data)
@@ -42,16 +42,17 @@ void	ft_exit(t_data *data)
 		lexer = lexer->next;
 		if (lexer->next == NULL)
 		{
-			if(ft_any_number(lexer->word))
+			if (ft_any_number(lexer->word))
 				data->exit_status = ft_atoi(lexer->word);
-			else if(lexer->index >= 4)
+			else if (lexer->index >= 4)
 				data->exit_status = 1;
 			else
 				data->exit_status = 2;
-			// /!\ Le if qui suit est à revoir 
-			if((ft_strncmp(lexer->prev->word, " ", ft_strlen(lexer->prev->word))))
+			// Le if qui suit est à revoir 
+			if ((ft_strncmp(lexer->prev->word, " ", \
+			ft_strlen(lexer->prev->word))))
 			{
-				if(lexer->prev->word[0] == '-')
+				if (lexer->prev->word[0] == '-')
 					data->exit_status += 56;
 			}
 		}
