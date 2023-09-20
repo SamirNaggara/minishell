@@ -74,7 +74,7 @@ void	ft_create_process(t_data *data, t_simple_cmd *browse, int i)
 		return (perror(E_CHILD));
 	if (data->child[i] == 0)
 		ft_child(data, browse, i);
-	if (data->child[0] > 1)
+	if (data->child[0] >= 1)
 	{
 		if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
 		{

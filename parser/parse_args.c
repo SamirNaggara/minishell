@@ -83,7 +83,7 @@ int	ft_add_to_last_arg(t_simple_cmd *cmd, char *word)
 	i--;
 	new_arg = ft_strjoin(cmd->cmd_args[i], word);
 	if (!new_arg)
-		return (0);
+		return (free(cmd->cmd_args[0]), 0);
 	free(cmd->cmd_args[i]);
 	cmd->cmd_args[i] = new_arg;
 	return (1);
@@ -112,7 +112,7 @@ int	ft_add_arg_to_cmd(t_simple_cmd *cmd, char *arg)
 	while (cmd->cmd_args[i])
 		i++;
 	cmd->cmd_args[i] = ft_strdup(arg);
-	if (cmd->cmd_args[i])
+	if (!cmd->cmd_args[i])
 		return (0);
 	return (1);
 }
