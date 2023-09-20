@@ -42,13 +42,15 @@ int	ft_minishell_loop(t_data *data)
 }
 
 //vérifie si le répertoire actuel est accessible
-int is_current_directory_accessible() 
+int	is_current_directory_accessible(void)
 {
-    struct stat st;
-    if (stat(".", &st) == 0) {
-        return 1; 
-    }
-    return 0; 
+	struct stat	st;
+
+	if (stat(".", &st) == 0)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 /*
@@ -58,22 +60,18 @@ int is_current_directory_accessible()
 	Si le répertoire n'est pas accessible (effacé quand on y était par exemple)
 	alors on retourne au précédent
 */
-char *read_input(void) 
+char	*read_input(void)
 {
-    char *ret;
-    char cwd[1024];
+	char	*ret;
+	char	cwd[1024];
 
-	if (!is_current_directory_accessible()) 
-	{
-        // Répertoire courant inaccessible, on retourne au répertoir précédent.
-        chdir("..");
-    }
-    ft_bzero(cwd, 1024);
-    getcwd(cwd, sizeof(cwd));
-    ft_strlcat(cwd, "  ", 1024);
-    ret = readline(cwd);
-    
-    return (g_global_state = 0, ret);
+	if (!is_current_directory_accessible())
+		chdir("..");
+	ft_bzero(cwd, 1024);
+	getcwd(cwd, sizeof(cwd));
+	ft_strlcat(cwd, "  ", 1024);
+	ret = readline(cwd);
+	return (g_global_state = 0, ret);
 }
 
 /*

@@ -39,17 +39,28 @@ int	ft_parse_cmds_arg(t_data *data)
 		}
 		else if (!ft_is_space_lexer(current_lexer))
 		{
-			if (new_arg)
-			{
-				ft_add_arg_to_cmd(current_cmd, current_lexer->word);
-				new_arg = 0;
-			}
-			else
-				ft_add_to_last_arg(current_cmd, current_lexer->word);
+			if (!ft_add_arg_to_cmd2(&new_arg, current_cmd, current_lexer))
+				return (0);
 		}
 		else if (ft_is_space_lexer(current_lexer))
 			new_arg = 1;
 		current_lexer = current_lexer->next;
+	}
+	return (1);
+}
+
+int	ft_add_arg_to_cmd2(int *new_arg, t_simple_cmd *cmd, t_lexer *lexer)
+{
+	if (*new_arg)
+	{
+		if (!ft_add_arg_to_cmd(cmd, lexer->word))
+			return (0);
+		*new_arg = 0;
+	}
+	else
+	{
+		if (!ft_add_to_last_arg(cmd, lexer->word))
+			return (0);
 	}
 	return (1);
 }

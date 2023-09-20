@@ -19,7 +19,7 @@ int	ft_fill_secret_envp(t_data *data)
 {
 	int	i;
 	int	size;
-	
+
 	size = ft_size_tab(data->envp);
 	i = 0;
 	data->secret_envp = (char **)malloc(sizeof(char *) * (size + 1));
@@ -71,14 +71,14 @@ int	ft_exist_in_secret_env(t_data *data, char *key)
 	return (0);
 }
 
-
 int	ft_add_pwd(t_data *data)
 {
 	char	*pwd;
 	char	*full_line;
-	
+
 	pwd = getcwd(NULL, 0);
-	if (!pwd) {
+	if (!pwd)
+	{
 		perror("getcwd failed");
 		return (0);
 	}

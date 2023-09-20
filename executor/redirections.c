@@ -46,11 +46,20 @@ int	ft_handle_redirection(t_data *data, t_simple_cmd *cmd)
 	while (redirection)
 	{
 		if (!ft_inf_operator(cmd, redirection))
+		{
+			data->exit_status = 1;
 			return (0);
+		}
 		if (!ft_sup_operator(cmd, redirection))
+		{
+			data->exit_status = 1;
 			return (0);
+		}
 		if (!ft_sup_sup_operator(cmd, redirection))
+		{
+			data->exit_status = 1;
 			return (0);
+		}
 		redirection = redirection->next;
 	}
 	return (1);
