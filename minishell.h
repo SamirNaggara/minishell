@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/19 15:14:11 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:32:15 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define E_HERE_DOC "Here doc not created properly\n"
 # define E_SIG_HEREDOC "warning: here-document at line delimited \
 by end-of-file\n"
+# define E_EXPORT_NVALID "Erreur : export: '%s' not a valid identifier\n"
 
 /* Un enum de la liste des builtin*/
 typedef enum s_builtin
@@ -226,7 +227,11 @@ int				ft_check_valids_cmds(t_data *data);
 int				ft_check_valid_cmd(t_simple_cmd *current_cmd);
 void			ft_fill_each_built_in(t_simple_cmd *current_cmd);
 int				ft_add_to_last_arg(t_simple_cmd *cmd, char *word);
-int				ft_add_arg_to_cmd2(int *new_arg, t_simple_cmd *cmd, t_lexer *lexer);
+int				ft_add_arg_to_cmd2(int *new_arg, t_simple_cmd *cmd,
+					t_lexer *lexer);
+int				ft_add_arg_from_lexer(int *new_arg, t_simple_cmd **cmd,
+					t_lexer **lexer);
+
 /* Builtin */
 void			ft_exit(t_data *data);
 void			ft_pwd(void);
@@ -265,6 +270,9 @@ char			*ft_malloc_replace_char(char *str, char *replace_str);
 char			**ft_order_tab(char **tab);
 char			*ft_found_smaller(char **tab, char *smaller);
 int				ft_is_before(const char *s1, const char *s2);
+int				ft_test_key_and_print(t_data *data);
+int				ft_check_error(t_data *data, t_lexer *lexer);
+char			*ft_key_from_arg(t_simple_cmd *cmd, int *i);
 // Signaux
 int				ft_signal(void);
 void			handler_c(int signum);

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 10:55:34 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 11:09:17 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:33:57 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,23 @@ size_t	ft_strcat(char *dest, const char *src)
 	}
 	dest[dest_len + i] = '\0';
 	return (dest_len + src_len);
+}
+
+/*
+	Dans la chaine str il y a une expression key=value
+	Cette fonction renvoie 1 si la clef est strictement identique
+*/
+
+int	ft_same_key(char *str, char const *key)
+{
+	int	size_key;
+
+	size_key = ft_strlen(key);
+	if (ft_strncmp(str, key, size_key) != 0)
+		return (0);
+	if (!str[size_key])
+		return (1);
+	if (str[size_key] == '=')
+		return (1);
+	return (0);
 }

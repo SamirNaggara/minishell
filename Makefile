@@ -47,6 +47,7 @@ SOURCES	=	./main.c \
 			./parser/utils.c \
 			./parser/built_in.c \
 			./parser/parse_args.c \
+			./parser/parse_args2.c \
 			./parser/parse_cmds.c \
 			./built_in/exit.c \
 			./built_in/pwd.c \
