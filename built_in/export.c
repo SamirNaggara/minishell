@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:55:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 14:59:10 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:32:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,38 +34,43 @@ int	ft_export(t_data *data, t_simple_cmd *cmd)
 */
 int	ft_add_to_env(t_data *data, t_simple_cmd *cmd)
 {
-	char	*equal;
 	char	*key;
 	int		i;
 
 	i = 1;
 	while (cmd->cmd_args[i])
 	{
-		equal = ft_strchr(cmd->cmd_args[i], '=');
-		if (equal)
-			key = ft_get_key(cmd->cmd_args[i]);
-		else
-		{
-			key = ft_strdup(cmd->cmd_args[i]);
-			if (!key)
-				return (0);
-		}
+		key = ft_key_from_arg(cmd, &i);
+		if (!key)
+			return (0);
 		if (!ft_isalpha(key[0]) && key[0] != '_')
 		{
-			ft_printf("Erreur : export: '%s' not a valid identifier\n", \
-			cmd->cmd_args[i]);
-			free(key);
-			return (0);
+			fd_printf(STDERR_FILENO, E_EXPORT_NVALID, cmd->cmd_args[i]);
+			return (free(key), 0);
 		}
 		if (!ft_add_one_export(data, key, cmd->cmd_args[i]))
-		{
-			free(key);
-			return (0);
-		}
+			return (free(key), 0);
 		free(key);
 		i++;
 	}
 	return (1);
+}
+
+char	*ft_key_from_arg(t_simple_cmd *cmd, int *i)
+{
+	char	*key;
+	char	*equal;
+
+	equal = ft_strchr(cmd->cmd_args[*i], '=');
+	if (equal)
+		key = ft_get_key(cmd->cmd_args[*i]);
+	else
+	{
+		key = ft_strdup(cmd->cmd_args[*i]);
+		if (!key)
+			return (NULL);
+	}
+	return (key);
 }
 
 /*
@@ -116,23 +121,4 @@ int	ft_add_one_export(t_data *data, char const *key, char *str)
 			return (0);
 	}
 	return (1);
-}
-
-/*
-	Dans la chaine str il y a une expression key=value
-	Cette fonction renvoie 1 si la clef est strictement identique
-*/
-
-int	ft_same_key(char *str, char const *key)
-{
-	int	size_key;
-
-	size_key = ft_strlen(key);
-	if (ft_strncmp(str, key, size_key) != 0)
-		return (0);
-	if (!str[size_key])
-		return (1);
-	if (str[size_key] == '=')
-		return (1);
-	return (0);
 }

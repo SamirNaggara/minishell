@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:00:56 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 15:43:49 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:17:40 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,26 @@ void	ft_print_all_export(t_data *data)
 		data->secret_envp[j + 1] = current;
 		i++;
 	}
+	ft_test_key_and_print(data);
+}
+
+int	ft_test_key_and_print(t_data *data)
+{
+	int		i;
+	char	*key;
+
 	i = 0;
 	while (data->secret_envp[i])
 	{
-		if (ft_strnstr(data->secret_envp[i], \
-		"=/usr/bin/env", 14) != data->secret_envp[i])
+		key = ft_get_key(data->secret_envp[i]);
+		if (!key)
+			return (0);
+		if (!ft_is_same_str("_", key))
 			ft_print_one_export(data->secret_envp[i]);
+		free(key);
 		i++;
 	}
+	return (1);
 }
 
 /*

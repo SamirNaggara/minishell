@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:24:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 14:02:51 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/20 20:31:30 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,11 @@ int	ft_handle_redirection(t_data *data, t_simple_cmd *cmd)
 	while (redirection)
 	{
 		if (!ft_inf_operator(cmd, redirection))
-		{
-			data->exit_status = 1;
-			return (0);
-		}
+			return (data->exit_status = 1, 0);
 		if (!ft_sup_operator(cmd, redirection))
-		{
-			data->exit_status = 1;
-			return (0);
-		}
+			return (data->exit_status = 1, 0);
 		if (!ft_sup_sup_operator(cmd, redirection))
-		{
-			data->exit_status = 1;
-			return (0);
-		}
+			return (data->exit_status = 1, 0);
 		redirection = redirection->next;
 	}
 	return (1);
@@ -78,7 +69,7 @@ int	ft_sup_operator(t_simple_cmd *cmd, t_lexer *redirection)
 	cmd->fd_out = open(redirection->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (cmd->fd_out == -1)
 	{
-		fd_printf(STDERR_FILENO, "%s: Permission denied\n", redirection->word);
+		perror("");
 		return (0);
 	}
 	return (1);
@@ -91,7 +82,7 @@ int	ft_sup_sup_operator(t_simple_cmd *cmd, t_lexer *redirection)
 	cmd->fd_out = open(redirection->word, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (cmd->fd_out == -1)
 	{
-		fd_printf(STDERR_FILENO, "%s: Permission denied\n", redirection->word);
+		perror("");
 		return (0);
 	}
 	return (1);
@@ -103,9 +94,6 @@ int	ft_inf_operator(t_simple_cmd *cmd, t_lexer *redirection)
 		return (1);
 	cmd->fd_in = open(redirection->word, O_RDONLY, 0644);
 	if (cmd->fd_in == -1)
-	{
-		fd_printf(STDERR_FILENO, "%s: Permission denied\n", redirection->word);
-		return (0);
-	}
+		return (perror(redirection->word), 0);
 	return (1);
 }

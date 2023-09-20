@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:37:03 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 19:22:28 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/20 20:32:56 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,6 @@ int	ft_open_here_doc_file(t_simple_cmd *cmd, char *file_name)
 {
 	cmd->fd_in = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0655);
 	if (!cmd->fd_in)
-	{
-		perror("Here doc not created properly");
-		return (free(file_name), 0);
-	}
+		return (perror(file_name), 0);
 	return (1);
 }
