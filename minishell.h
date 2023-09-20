@@ -226,6 +226,7 @@ int				ft_check_valids_cmds(t_data *data);
 int				ft_check_valid_cmd(t_simple_cmd *current_cmd);
 void			ft_fill_each_built_in(t_simple_cmd *current_cmd);
 int				ft_add_to_last_arg(t_simple_cmd *cmd, char *word);
+int				ft_add_arg_to_cmd2(int *new_arg, t_simple_cmd *cmd, t_lexer *lexer);
 /* Builtin */
 void			ft_exit(t_data *data);
 void			ft_pwd(void);

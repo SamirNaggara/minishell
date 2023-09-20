@@ -45,9 +45,15 @@ void	ft_exit(t_data *data)
 			if (ft_any_number(lexer->word))
 				data->exit_status = ft_atoi(lexer->word);
 			else if (lexer->index >= 4)
+			{
 				data->exit_status = 1;
+				perror("too many arguments");
+			}
 			else
+			{
 				data->exit_status = 2;
+				perror("numeric argument required");
+			}
 			// Le if qui suit est à revoir 
 			if ((ft_strncmp(lexer->prev->word, " ", \
 			ft_strlen(lexer->prev->word))))
