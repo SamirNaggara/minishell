@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:16:19 by snaggara          #+#    #+#             */
-/*   Updated: 2022/12/22 03:55:57 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:55:57 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ void	add_zero_string(char *chaine, char c, char *debut_chaine)
 	while (chaine < fin_chaine)
 	{
 		while (*chaine == c)
-				*(chaine++) = '\0';
+			*(chaine++) = '\0';
 		chaine = ft_strchr(chaine, c);
 		if (!chaine)
 			break ;
 		while (*chaine == c)
-				*(chaine++) = '\0';
+			*(chaine++) = '\0';
 	}
 	chaine = debut_chaine;
 }
@@ -127,7 +127,7 @@ int	nb_c_in_string(char const *string, char const c)
 	i = 0;
 	counter = 0;
 	while (string[i] == c)
-				i++;
+		i++;
 	while (string[i])
 	{
 		if (string[i] == c)

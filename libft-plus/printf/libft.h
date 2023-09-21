@@ -6,13 +6,13 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 15:45:36 by snaggara          #+#    #+#             */
-/*   Updated: 2022/12/26 05:41:22 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:56:46 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include<stddef.h>
+# include <stddef.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>

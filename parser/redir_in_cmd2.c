@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 20:00:59 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 15:08:25 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:51:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_redir_is_first(t_data *data, t_lexer **lexer)
 	t_lexer	*new_begin;
 
 	if (!ft_is_space_lexer((*lexer)->next))
-			new_begin = (*lexer)->next->next;
+		new_begin = (*lexer)->next->next;
 	else
 	{
 		new_begin = (*lexer)->next->next->next;
