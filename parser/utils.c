@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 20:01:48 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 15:09:35 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:20:46 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@
 */
 int	ft_is_space_lexer(t_lexer *lexer)
 {
+	if (!lexer)
+		return (0);
 	if (lexer->str_type != NO_QUOTE)
+		return (0);
+	if (!lexer->word)
 		return (0);
 	if (!ft_is_space(lexer->word[0]))
 		return (0);

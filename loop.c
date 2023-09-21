@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/18 14:56:08 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:46:45 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ int	is_current_directory_accessible(void)
 	struct stat	st;
 
 	if (stat(".", &st) == 0)
-	{
 		return (1);
-	}
 	return (0);
 }
 
@@ -80,10 +78,18 @@ char	*read_input(void)
 int	ft_lex_ex_parse(t_data *data)
 {
 	if (!ft_lexer(data))
-		return (free(data->input), 0);
+		return (free(data->full_cmd), free(data->input), 0);
 	if (!ft_expander(data))
+	{
+		free(data->full_cmd);
+		ft_free_lexer(data->lexer);
 		return (free(data->input), 0);
+	}
 	if (!ft_parser(data))
+	{
+		free(data->full_cmd);
+		ft_free_lexer(data->lexer);
 		return (free(data->input), 0);
+	}
 	return (1);
 }
