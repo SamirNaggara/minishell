@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 00:28:21 by snaggara          #+#    #+#             */
-/*   Updated: 2022/12/21 00:36:22 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:53:38 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
-	resultat = resultat * 10 + nptr[i++] - '0';
+		resultat = resultat * 10 + nptr[i++] - '0';
 	return (sign * resultat);
 }
 // int main(int ac, char **av)
