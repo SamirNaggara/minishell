@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/21 16:46:45 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:43:32 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	ft_lex_ex_parse(t_data *data)
 {
 	if (!ft_lexer(data))
 		return (free(data->full_cmd), free(data->input), 0);
+	ft_visualise_lexer(data);
 	if (!ft_expander(data))
 	{
 		free(data->full_cmd);

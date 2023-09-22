@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:53:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/19 17:05:31 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:08:48 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_replace_dollar(t_data *data, char **str)
 	while (dollar)
 	{
 		word = ft_extract_word(dollar);
+		fd_printf(STDERR_FILENO, "replace : %s\n", word);
+
 		replace_str = ft_found_replace_value(data, word);
 		*str = ft_replace(*str, dollar, replace_str);
 		if (!*str)
@@ -51,7 +53,7 @@ char	*ft_replace(char *str, char *dollar, char *replace_str)
 		to_return[i + j] = replace_str[j];
 	k = i + j;
 	i++;
-	while (str[i] && (str[i] != ' ' && str[i] != '$' && str[i] != '?'))
+	while (str[i] && !ft_char_is_stop_dollar(str[i]))
 		i++;
 	if (str[i] == '?')
 		i++;
@@ -60,6 +62,21 @@ char	*ft_replace(char *str, char *dollar, char *replace_str)
 	to_return[k] = '\0';
 	free(str);
 	return (to_return);
+}
+
+int	ft_char_is_stop_dollar(char c)
+{
+	if (c == ' ')
+		return (1);
+	else if (c == '$')
+		return (1);
+	else if (c == '?')
+		return (1);
+	else if (c == '\'')
+		return (1);
+	else if (c == '"')
+		return (1);
+	return (0);
 }
 
 char	*ft_malloc_replace_char(char *str, char *replace_str)
@@ -110,7 +127,7 @@ char	*ft_extract_word(char *str)
 	j = 0;
 	if (str[0] != '$')
 		return (NULL);
-	while (str[i] && (str[i] != ' ' && str[i] != '$'))
+	while (str[i] && (!ft_char_is_stop_dollar(str[i])))
 		i++;
 	word = (char *)malloc(sizeof(char) * (i + 1));
 	if (!word)
