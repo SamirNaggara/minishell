@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:00:22 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/21 16:27:41 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:13:52 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_add_arg_to_cmd(t_simple_cmd *cmd, char *arg)
 	int	i;
 
 	i = 0;
+	if (!arg)
+		return (1);
 	while (cmd->cmd_args[i])
 		i++;
 	cmd->cmd_args[i] = ft_strdup(arg);
