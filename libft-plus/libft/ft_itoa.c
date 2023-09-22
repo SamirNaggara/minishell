@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 00:46:32 by snaggara          #+#    #+#             */
-/*   Updated: 2022/12/23 15:13:55 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:53:22 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ size_t	ft_get_len(int n)
 
 	n_copy = (long)n;
 	if (n_copy < 0)
-	n_copy = -n_copy;
+		n_copy = -n_copy;
 	i = 1;
 	while (n_copy >= 10)
 	{
