@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/21 17:10:04 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:33:21 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,9 @@ int				ft_add_arg_to_cmd2(int *new_arg, t_simple_cmd *cmd,
 					t_lexer *lexer);
 int				ft_add_arg_from_lexer(int *new_arg, t_simple_cmd **cmd,
 					t_lexer **lexer);
-
+int				ft_char_is_stop_dollar(char c);
+char			*ft_join_char(char *str, char c);
+int				ft_is_just_dollar_char(char *str);
 /* Builtin */
 void			ft_exit(t_data *data);
 void			ft_pwd(void);
@@ -260,13 +262,10 @@ t_lexer			*ft_found_begin_echo(t_lexer *lexer);
 int				ft_is_flag_n(char *str);
 void			ft_visualise_lexer2(t_lexer *lexer);
 int				ft_expander(t_data *data);
-int				ft_replace_dollar(t_data *data, char **str);
-char			*ft_replace(char *str, char *dollar, char *replace_str);
+int				ft_replace_dollar(t_data *data, t_lexer *lexer);
 char			*ft_found_replace_value(t_data *data, char *word);
 char			*ft_extract_word(char *str);
-int				ft_should_replace(t_lexer *lexer);
-int				ft_is_here_doc_file(t_lexer *lexer);
-char			*ft_malloc_replace_char(char *str, char *replace_str);
+int				re_doc_file(t_lexer *lexer);
 char			**ft_order_tab(char **tab);
 char			*ft_found_smaller(char **tab, char *smaller);
 int				ft_is_before(const char *s1, const char *s2);
