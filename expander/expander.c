@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:11:19 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/22 18:57:43 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 22:22:42 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_replace_dollar(t_data *data, t_lexer *lexer)
 				if ((lexer->next && lexer->next->str_type != NO_QUOTE))
 					break ;
 			}
-			if (ft_is_just_dollar_char(lexer->word + i))
+			if (ft_is_just_dollar_char(lexer, lexer->word + i))
 			{
 				new_word = ft_join_char(new_word, lexer->word[i]);
 				if (!new_word)
@@ -107,8 +107,10 @@ int	ft_replace_dollar(t_data *data, t_lexer *lexer)
 	return (1);
 }
 
-int	ft_is_just_dollar_char(char *str)
+int	ft_is_just_dollar_char(t_lexer *lexer, char *str)
 {
+	if (lexer->next)
+		return (0);
 	if (!str[1])
 		return (1);
 	if (ft_char_is_stop_dollar(str[1]))

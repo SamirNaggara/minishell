@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:35:10 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 15:07:09 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:02:46 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_check_valids_cmds(t_data *data)
 	current_lexer = data->lexer;
 	if (!current_lexer)
 		return (1);
-	while (current_lexer->next)
+	if (current_lexer->next)
 		current_lexer = current_lexer->next;
 	if (!current_lexer)
 		return (1);

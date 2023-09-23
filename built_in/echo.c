@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:44:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/22 18:39:10 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 22:15:43 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	ft_echo(t_data *data, t_simple_cmd *cmd)
 	if (!cmd->cmd_args[1])
 	{
 		write(1, "\n", 1);
-		exit(0);
+		return (data->exit_status = 0, 1);
 	}
 	begin_lexer = ft_found_begin_echo(cmd->lexer);
 	if (!begin_lexer)
-		exit(data->exit_status);
+		return (data->exit_status = 1, 0);;
 	while (begin_lexer && begin_lexer->operator != PIPE)
 	{
 		if (!begin_lexer->word)
@@ -32,17 +32,15 @@ int	ft_echo(t_data *data, t_simple_cmd *cmd)
 			continue ;
 		}
 		if (ft_is_space_lexer(begin_lexer) && begin_lexer->next
-			&& begin_lexer->next->operator == PIPE)
+			&& (begin_lexer->next->operator == PIPE))
 			break ;
+		
 		write(1, begin_lexer->word, ft_strlen(begin_lexer->word));
 		begin_lexer = begin_lexer->next;
 	}
 	if (!ft_is_flag_n(cmd->cmd_args[1]))
-	{
 		write(1, "\n", 1);
-	}
-	exit(0);
-	return (1);
+	return (data->exit_status = 0, 1);
 }
 
 /*

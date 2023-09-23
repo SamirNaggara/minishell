@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/22 17:33:21 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 22:19:49 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ int				ft_add_arg_from_lexer(int *new_arg, t_simple_cmd **cmd,
 					t_lexer **lexer);
 int				ft_char_is_stop_dollar(char c);
 char			*ft_join_char(char *str, char c);
-int				ft_is_just_dollar_char(char *str);
+int				ft_is_just_dollar_char(t_lexer *lexer, char *str);
 /* Builtin */
 void			ft_exit(t_data *data);
 void			ft_pwd(void);

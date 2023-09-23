@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:10:45 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/16 15:27:02 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:31:49 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	executor(t_data *data)
 		return (ft_free_path(data), ft_free_for_next_command(data), 0);
 	ft_wait_children(data);
 	ft_delete_here_doc_files(data);
-	ft_free_for_next_command(data);
 	ft_free_path(data);
 	return (g_global_state = 0, 1);
 }

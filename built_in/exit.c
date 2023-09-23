@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/20 18:28:42 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:09:06 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	ft_exit(t_data *data)
 		lexer = lexer->next;
 		ft_check_error(data, lexer);
 	}
-	ft_clean_lexer(data->lexer);
 	ft_free_simple_cmd(data);
+	ft_clean_lexer(data->lexer);
 	if (data->secret_envp)
 		ft_free_double_tab(data->secret_envp);
 	if (data->paths)
