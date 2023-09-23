@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:30:11 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/21 17:49:27 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:39:20 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	ft_cmd_valid(t_data *data, t_simple_cmd *cmd)
 	int		i;
 	char	*full_cmd;
 
+	if (!cmd->cmd_args[0])
+		return (0);
 	i = 0;
 	if (cmd->builtin != NO_BUILTIN)
 		return (1);

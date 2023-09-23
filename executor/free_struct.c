@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 22:25:16 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 19:00:26 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:50:39 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	ft_free_simple_cmd(t_data *data)
 	tmp = data->first_cmd;
 	while (browse)
 	{
+		ft_free_lexer(browse->redirections);
 		ft_free_double_tab(browse->cmd_args);
-		ft_clean_lexer(browse->redirections);
 		browse = browse->next;
 		free(tmp);
 		tmp = browse;

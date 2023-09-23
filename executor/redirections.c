@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:24:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/22 18:05:29 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:22:46 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ int	ft_sup_operator(t_simple_cmd *cmd, t_lexer *redirection)
 {
 	if (redirection->operator != SUP)
 		return (1);
+	if (!redirection->word)
+		return (1);
+	if (!*redirection->word)
+		return (fd_printf(STDERR_FILENO, "redirection ambiguë\n"), 0);
 	cmd->fd_out = open(redirection->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (cmd->fd_out == -1)
 		return (perror(redirection->word), 0);
@@ -76,6 +80,10 @@ int	ft_sup_sup_operator(t_simple_cmd *cmd, t_lexer *redirection)
 {
 	if (redirection->operator != SUPSUP)
 		return (1);
+	if (!redirection->word)
+		return (1);
+	if (!*redirection->word)
+		return (fd_printf(STDERR_FILENO, "redirection ambiguë\n"), 0);
 	cmd->fd_out = open(redirection->word, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (cmd->fd_out == -1)
 		return (perror(redirection->word), 0);
@@ -86,6 +94,10 @@ int	ft_inf_operator(t_simple_cmd *cmd, t_lexer *redirection)
 {
 	if (redirection->operator != INF)
 		return (1);
+	if (!redirection->word)
+		return (1);
+	if (!*redirection->word)
+		return (fd_printf(STDERR_FILENO, "redirection ambiguë\n"), 0);
 	cmd->fd_in = open(redirection->word, O_RDONLY, 0644);
 	if (cmd->fd_in == -1)
 		return (perror(redirection->word), 0);

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:59:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/28 16:09:21 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:22:32 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_lexer	*ft_delimite(t_lexer *lexer)
 	t_lexer	*new;
 
 	if (lexer->word == NULL)
+		return (lexer);
+	if (!*(lexer->word))
 		return (lexer);
 	new = ft_begin_lexer();
 	if (!new)

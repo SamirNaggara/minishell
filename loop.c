@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/22 18:53:50 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 22:25:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	ft_minishell_loop(t_data *data)
 		executor(data);
 		free(data->full_cmd);
 		ft_clean_lexer(data->lexer);
+		ft_free_for_next_command(data);
 		free(data->input);
 	}
 	return (1);
