@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/23 22:19:49 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 23:23:04 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ int				ft_how_to_exec(t_data *data);
 void			ft_init_pipe(t_data *data);
 /* Lexer */
 int				ft_minishell_loop(t_data *data);
-char			*read_input(void);
+char			*read_input();
 int				ft_lexer(t_data *data);
 int				ft_is_space(char c);
 t_lexer			*ft_delimite(t_lexer *lexer);

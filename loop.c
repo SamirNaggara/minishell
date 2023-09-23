@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/23 22:25:58 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 23:21:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ int	ft_minishell_loop(t_data *data)
 //vérifie si le répertoire actuel est accessible
 int	is_current_directory_accessible(void)
 {
-	struct stat	st;
+	char	cwd[1024];
 
-	if (stat(".", &st) == 0)
-		return (1);
-	return (0);
+	ft_bzero(cwd, sizeof(cwd));
+	getcwd(cwd, 1024);
+	if (!*cwd)
+		return (0);
+	return (1);
 }
 
 /*
@@ -59,12 +61,12 @@ int	is_current_directory_accessible(void)
 	Si le répertoire n'est pas accessible (effacé quand on y était par exemple)
 	alors on retourne au précédent
 */
-char	*read_input(void)
+char	*read_input()
 {
 	char	*ret;
 	char	cwd[1024];
 
-	if (!is_current_directory_accessible())
+	while (!is_current_directory_accessible())
 		chdir("..");
 	ft_bzero(cwd, 1024);
 	getcwd(cwd, sizeof(cwd));
