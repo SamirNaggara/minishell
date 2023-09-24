@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:11:19 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/23 22:22:42 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:00:09 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,15 @@ int	ft_replace_dollar(t_data *data, t_lexer *lexer)
 				state = 0;
 				continue ;
 			}
+			i++;
+		}
+		else if (state == 0 && lexer->word[i] == '$' &&
+			lexer->word[i + 1] && lexer->word[i + 1] == '?')
+		{
+			new_word = ft_strjoin_custom(new_word, ft_itoa(data->exit_status));
+			if (!new_word)
+				return (free(value), 0);
+			state = 1;
 			i++;
 		}
 		else if (state == 0 && lexer->word[i] == '$')
