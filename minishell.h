@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 14:14:08 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 15:28:07 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define E_SIG_HEREDOC "warning: here-document at line delimited \
 by end-of-file\n"
 # define E_EXPORT_NVALID "Erreur : export: '%s' not a valid identifier\n"
+# define E_IS_DIR "%s: Is a directory\n"
+# define E_NO_FILE "%s: No such file or directory\n"
 
 /* Un enum de la liste des builtin*/
 typedef enum s_builtin
@@ -166,6 +168,8 @@ int				ft_end_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection,
 					char *stdin_line, char *file_name);
 int				ft_how_to_exec(t_data *data);
 void			ft_init_pipe(t_data *data);
+int				ft_is_directory(char *path);
+int				ft_is_path_looking(char *path);
 /* Lexer */
 int				ft_minishell_loop(t_data *data);
 char			*read_input();

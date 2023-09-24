@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:30:11 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/23 16:39:20 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 15:27:43 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,56 @@ int	ft_cmd_valid(t_data *data, t_simple_cmd *cmd)
 			return (free(full_cmd), 1);
 		free(full_cmd);
 	}
-	if (access(cmd->cmd_args[0], X_OK) != -1)
+	if (ft_is_directory(cmd->cmd_args[0]))
+		return (0);
+	if (ft_is_path_looking(cmd->cmd_args[0]))
+	{
+		if (access(cmd->cmd_args[0], X_OK) == -1)
+			return (fd_printf(STDERR_FILENO, E_NO_FILE, cmd->cmd_args[0]), 0);
 		return (1);
+	}
+	data->exit_status = 127;
 	if (!data->paths)
 		perror(cmd->cmd_args[0]);
 	else
 		fd_printf(STDERR_FILENO, E_CMD_NOT_FOUND, cmd->cmd_args[0]);
-	data->exit_status = 127;
+	return (0);
+}
+
+int	ft_is_directory(char *path)
+{
+    struct stat statbuf;
+	
+	if (ft_is_path_looking(path))
+	{
+		if (stat(path, &statbuf) != 0)
+        	return 0; 
+		if (S_ISDIR(statbuf.st_mode))
+		{
+			fd_printf(STDERR_FILENO, E_IS_DIR, path);
+			return (1);
+		}
+		return (0);
+	}
+    if (stat(path, &statbuf) != 0)
+	{
+        return (0);
+	}
+	if (S_ISDIR(statbuf.st_mode))
+	{
+		fd_printf(STDERR_FILENO, E_CMD_NOT_FOUND, path);
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_is_path_looking(char *path)
+{
+	if (path[strlen(path) - 1] == '/')
+		return (1);
+	if (ft_strncmp(path, "./", 2) == 0)
+		return (1);
+	if (ft_strncmp(path, "../", 3) == 0)
+		return (1);
 	return (0);
 }
