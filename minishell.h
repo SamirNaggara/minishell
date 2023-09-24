@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 13:13:29 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/24 15:45:12 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define E_SIG_HEREDOC "warning: here-document at line delimited \
 by end-of-file\n"
 # define E_EXPORT_NVALID "Erreur : export: '%s' not a valid identifier\n"
+# define E_IS_DIR "%s: Is a directory\n"
+# define E_NO_FILE "%s: No such file or directory\n"
 
 /* Un enum de la liste des builtin*/
 typedef enum s_builtin
@@ -148,10 +150,10 @@ void			ft_free_for_next_command(t_data *data);
 void			ft_free_path(t_data *data);
 int				ft_sup_sup_operator(t_simple_cmd *cmd, t_lexer *redirection);
 int				ft_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection);
-int				ft_handle_here_docs(t_data *data);
+int				ft_handle_here_docs(t_simple_cmd *cmd);
 int				ft_inf_inf_operator(t_simple_cmd *cmd, t_lexer *redirection);
 int				ft_is_same_str(char *str1, char *str2);
-void			ft_delete_here_doc_files(t_data *data);
+void			ft_delete_here_doc_files(void);
 int				ft_exec_one_cmd(t_data *data);
 int				ft_child_one_cmd(t_data *data);
 void			ft_finish_child(t_data *data, t_simple_cmd *cmd);
@@ -166,6 +168,8 @@ int				ft_end_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection,
 					char *stdin_line, char *file_name);
 int				ft_how_to_exec(t_data *data);
 void			ft_init_pipe(t_data *data);
+int				ft_is_directory(char *path);
+int				ft_is_path_looking(char *path);
 /* Lexer */
 int				ft_minishell_loop(t_data *data);
 char			*read_input();
@@ -272,6 +276,7 @@ int				ft_is_before(const char *s1, const char *s2);
 int				ft_test_key_and_print(t_data *data);
 int				ft_check_error(t_data *data, t_simple_cmd *cmd);
 char			*ft_key_from_arg(t_simple_cmd *cmd, int *i);
+int				ft_echo_loop(t_data *data, t_lexer *begin_lexer);
 // Signaux
 int				ft_signal(void);
 void			handler_c(int signum);

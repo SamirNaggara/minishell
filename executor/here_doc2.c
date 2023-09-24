@@ -6,48 +6,45 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:48:34 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 14:58:29 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:15:57 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_delete_here_doc_files(t_data *data)
+void	ft_delete_here_doc_files()
 {
-	t_lexer			*redirection;
-	t_simple_cmd	*cmd;
+    DIR 			*dir;
+    struct dirent 	*file_name;
 
-	cmd = data->first_cmd;
-	redirection = cmd->redirections;
-	while (cmd)
+    dir = opendir(".");
+    if (dir == NULL) {
+        perror("Erreur lors de l'ouverture du répertoire");
+        return;
+    }
+	file_name = readdir(dir);
+    while (file_name)
 	{
-		redirection = cmd->redirections;
-		while (redirection)
-		{
-			if (!ft_strncmp(TMP_FILE_NAME, redirection->word, 19))
-				unlink(redirection->word);
-			redirection = redirection->next;
-		}
-		cmd = cmd->next;
-	}
+        if (strncmp(file_name->d_name, TMP_FILE_NAME, 18) == 0) {
+            
+            if (unlink(file_name->d_name) == -1)
+                perror("Erreur lors de la suppression du fichier");
+        }
+		file_name = readdir(dir);
+    }
+    closedir(dir);
 }
 
-int	ft_handle_here_docs(t_data *data)
+int	ft_handle_here_docs(t_simple_cmd *cmd)
 {
 	t_lexer			*redirection;
-	t_simple_cmd	*cmd;
 
-	cmd = data->first_cmd;
-	while (cmd)
+	redirection = cmd->redirections;
+	while (redirection)
 	{
-		redirection = cmd->redirections;
-		while (redirection)
-		{
-			if (!ft_inf_inf_operator(cmd, redirection))
-				return (0);
-			redirection = redirection->next;
-		}
-		cmd = cmd->next;
+		if (!ft_inf_inf_operator(cmd, redirection))
+			return (0);
+		redirection = redirection->next;
 	}
 	return (1);
 }
