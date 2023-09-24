@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 14:48:35 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:23:36 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,17 @@ int	ft_minishell_loop(t_data *data)
 		data->child = NULL;
 		g_global_state = 1;
 		executor(data);
-		free(data->full_cmd);
-		ft_clean_lexer(data->lexer);
-		ft_free_for_next_command(data);
-		free(data->input);
+		ft_free_after_execute(data);
 	}
 	return (1);
+}
+
+void	ft_free_after_execute(t_data *data)
+{
+	free(data->full_cmd);
+	ft_clean_lexer(data->lexer);
+	ft_free_for_next_command(data);
+	free(data->input);
 }
 
 //vérifie si le répertoire actuel est accessible
@@ -61,7 +66,7 @@ int	is_current_directory_accessible(void)
 	Si le répertoire n'est pas accessible (effacé quand on y était par exemple)
 	alors on retourne au précédent
 */
-char	*read_input()
+char	*read_input(void)
 {
 	char	*ret;
 	char	cwd[1024];
@@ -88,13 +93,11 @@ int	ft_lex_ex_parse(t_data *data)
 		ft_free_lexer(data->lexer);
 		return (free(data->input), 0);
 	}
-	//ft_visualise_lexer(data);
 	if (!ft_parser(data))
 	{
 		free(data->full_cmd);
 		ft_free_lexer(data->lexer);
 		return (free(data->input), 0);
 	}
-	//ft_visualise_cmd(data);
 	return (1);
 }

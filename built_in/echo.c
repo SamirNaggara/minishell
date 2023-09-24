@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:44:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 13:30:37 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:33:34 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ft_echo(t_data *data, t_simple_cmd *cmd)
 		return (data->exit_status = 1, 0);
 	if (!ft_echo_loop(data, begin_lexer))
 		return (0);
-
 	if (!ft_is_flag_n(cmd->cmd_args[1]))
 	{
 		if (write(1, "\n", 1) == -1)
@@ -48,13 +47,13 @@ int	ft_echo_loop(t_data *data, t_lexer *begin_lexer)
 		if (ft_is_space_lexer(begin_lexer) && begin_lexer->next
 			&& (begin_lexer->next->operator == PIPE))
 			break ;
-		
 		if (write(1, begin_lexer->word, ft_strlen(begin_lexer->word)) == -1)
 			return (perror("echo"), data->exit_status = 1, 0);
 		begin_lexer = begin_lexer->next;
 	}
 	return (1);
 }
+
 /*
 	Permet seulement de visualiser un lexer en fonction du lexer
 	Juste a des fins de deboggage

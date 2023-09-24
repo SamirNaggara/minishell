@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 14:13:45 by sgoigoux         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:32:41 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	ft_any_number(char *str)
 
 void	ft_exit(t_data *data)
 {
-	t_simple_cmd *cmd;
-	int i;
+	t_simple_cmd	*cmd;
+	int				i;
 
 	cmd = data->first_cmd;
 	i = 1;
@@ -60,7 +60,7 @@ int	ft_check_error(t_data *data, t_simple_cmd *cmd)
 	i = 1;
 	while (cmd->cmd_args[i])
 	{
-		if(i >= 2)
+		if (i >= 2)
 		{
 			fd_printf(STDERR_FILENO, "too many arguments");
 			return (data->exit_status = 1);
