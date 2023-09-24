@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/23 23:23:04 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 13:30:50 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,7 @@ int				ft_is_before(const char *s1, const char *s2);
 int				ft_test_key_and_print(t_data *data);
 int				ft_check_error(t_data *data, t_lexer *lexer);
 char			*ft_key_from_arg(t_simple_cmd *cmd, int *i);
+int				ft_echo_loop(t_data *data, t_lexer *begin_lexer);
 // Signaux
 int				ft_signal(void);
 void			handler_c(int signum);
