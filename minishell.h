@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgoigoux <sgoigoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/23 23:23:04 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 13:13:29 by sgoigoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,7 @@ char			**ft_order_tab(char **tab);
 char			*ft_found_smaller(char **tab, char *smaller);
 int				ft_is_before(const char *s1, const char *s2);
 int				ft_test_key_and_print(t_data *data);
-int				ft_check_error(t_data *data, t_lexer *lexer);
+int				ft_check_error(t_data *data, t_simple_cmd *cmd);
 char			*ft_key_from_arg(t_simple_cmd *cmd, int *i);
 // Signaux
 int				ft_signal(void);
