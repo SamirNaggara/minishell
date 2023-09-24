@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 15:45:12 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:08:57 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,8 @@ int				ft_is_directory(char *path);
 int				ft_is_path_looking(char *path);
 /* Lexer */
 int				ft_minishell_loop(t_data *data);
-char			*read_input();
+char			*read_input(void);
+void			ft_free_after_execute(t_data *data);
 int				ft_lexer(t_data *data);
 int				ft_is_space(char c);
 t_lexer			*ft_delimite(t_lexer *lexer);
@@ -277,6 +278,11 @@ int				ft_test_key_and_print(t_data *data);
 int				ft_check_error(t_data *data, t_simple_cmd *cmd);
 char			*ft_key_from_arg(t_simple_cmd *cmd, int *i);
 int				ft_echo_loop(t_data *data, t_lexer *begin_lexer);
+int				ft_expander_loop(t_data *data, t_lexer *lexer, char **new_word);
+int				ft_handle_expander(t_data *data, t_lexer *lexer, int *state, int *i, char **new_word);
+int				ft_is_expand_sign(t_lexer *lexer, int *state, int *i);
+void			ft_end_of_dollar(t_lexer *lexer, int *state, int *i);
+
 // Signaux
 int				ft_signal(void);
 void			handler_c(int signum);
