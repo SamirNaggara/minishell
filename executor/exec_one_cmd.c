@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 13:50:15 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:12:36 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,9 @@ int	ft_child_one_cmd(t_data *data)
 
 	cmd = data->first_cmd;
 	if (!ft_handle_here_docs(cmd))
-	{
-		ft_close_redir_fds(data);
-		ft_close_pipes(data);
-		ft_free_for_next_command(data);
-		exit(data->exit_status);
-	}
+		ft_exit_exec_one_cmd(data);
 	if (!ft_test_cmd_and_redirections(data, cmd))
-	{
-		ft_close_redir_fds(data);
-		ft_close_pipes(data);
-		ft_free_for_next_command(data);
-		exit(data->exit_status);
-	}
+		ft_exit_exec_one_cmd(data);
 	if (cmd->fd_in != -1)
 	{
 		if (!ft_redirect_fdin(cmd))
@@ -65,6 +55,14 @@ int	ft_child_one_cmd(t_data *data)
 	ft_finish_child(data, cmd);
 	exit(data->exit_status);
 	return (1);
+}
+
+void	ft_exit_exec_one_cmd(t_data *data)
+{
+	ft_close_redir_fds(data);
+	ft_close_pipes(data);
+	ft_free_for_next_command(data);
+	exit(data->exit_status);
 }
 
 int	ft_exec_without_fork(t_simple_cmd *cmd)

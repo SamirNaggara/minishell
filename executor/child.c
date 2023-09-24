@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:26:37 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 13:55:18 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:59:51 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_child(t_data *data, t_simple_cmd *browse, int i)
 		return (perror(E_PIPE));
 	ft_finish_child(data, browse);
 	ft_free_lexer(browse->redirections);
-
 	exit(data->exit_status);
 }
 

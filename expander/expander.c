@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:11:19 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 20:20:23 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:15:10 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,140 +40,61 @@ int	ft_expander(t_data *data)
 */
 int	ft_replace_dollar(t_data *data, t_lexer *lexer)
 {
-	int		i;
-	int		state;
-	char	*key;
-	char	*value;
-	char	*new_word;
-
-	state = 0;
 	if (!lexer)
 		return (1);
 	if (!lexer->word)
 		return (1);
-	i = 0;
-	new_word = (char *)malloc(sizeof(char));
-	if (!new_word)
+	data->new_word = (char *)malloc(sizeof(char));
+	if (!data->new_word)
 		return (0);
-	new_word[0] = '\0';
-	while (lexer->word[i])
-	{
-		if (state == 1)
-		{
-			if (ft_char_is_stop_dollar(lexer->word[i]))
-			{
-				state = 0;
-				continue ;
-			}
-			i++;
-		}
-		else if (state == 0 && lexer->word[i] == '$' &&
-			lexer->word[i + 1] && lexer->word[i + 1] == '?')
-		{
-			new_word = ft_strjoin_custom(new_word, ft_itoa(data->exit_status));
-			if (!new_word)
-				return (free(value), 0);
-			state = 1;
-			i++;
-		}
-		else if (state == 0 && lexer->word[i] == '$')
-		{
-			if (!lexer->word[i + 1])
-			{
-				if ((lexer->next && lexer->next->str_type != NO_QUOTE))
-					break ;
-			}
-			if (ft_is_just_dollar_char(lexer, lexer->word + i))
-			{
-				new_word = ft_join_char(new_word, lexer->word[i]);
-				if (!new_word)
-					return (0);
-				i++;
-				continue ;
-			}
-			key = ft_extract_word(lexer->word + i);
-			if (!key)
-				return (0);
-			value = ft_found_replace_value(data, key);
-			if (!value)
-				return (free(key), 0);
-			free(key);
-			new_word = ft_strjoin_custom(new_word, value);
-			if (!new_word)
-				return (free(value), 0);
-			state = 1;
-		}
-		else if (state == 0)
-		{
-			new_word = ft_join_char(new_word, lexer->word[i]);
-			if (!new_word)
-				return (0);
-		}
-		i++;
-	}
+	data->new_word[0] = '\0';
+	if (!ft_expander_loop(data, lexer))
+		return (free(lexer->word), 0);
 	free(lexer->word);
-	lexer->word = new_word;
+	lexer->word = data->new_word;
 	return (1);
 }
 
-int	ft_is_just_dollar_char(t_lexer *lexer, char *str)
-{
-	if (lexer->next)
-		return (0);
-	if (!str[1])
-		return (1);
-	if (ft_char_is_stop_dollar(str[1]))
-		return (1);
-	return (0);
-}
-
-char	*ft_extract_word(char *str)
+int	ft_expander_loop(t_data *data, t_lexer *lexer)
 {
 	int		i;
-	char	*word;
-
-	if (!str || !*str)
-		return (NULL);
-	word = (char *)malloc(sizeof(char));
-	if (!word)
-		return (NULL);
-	word[0] = '\0';
-	i = 1;
-	while (str[i] && !ft_char_is_stop_dollar(str[i]))
-	{
-		word = ft_join_char(word, str[i]);
-		i++;
-	}
-	return (word);
-}
-
-char	*ft_join_char(char *str, char c)
-{
-	char	*new;
-	int		size;
-	int		i;
+	int		state;
 
 	i = 0;
-	if (!str)
+	state = 0;
+	while (state != 2 && lexer->word[i])
 	{
-		new = (char *)malloc(sizeof(char) * 2);
-		new[0] = c;
-		new[1] = '\0';
-		return (new);
+		if (state == 3)
+			state = 0;
+		if (!ft_expander_heart_loop(data, lexer, &state, &i))
+			return (0);
+		if (state < 2)
+			i++;
 	}
-	size = ft_strlen(str) + 2;
-	new = (char *)malloc(sizeof(char) * size);
-	if (!new)
-		return (0);
-	while (str[i])
+	return (1);
+}
+
+int	ft_expander_heart_loop(t_data *data, t_lexer *lexer, int *state, int *i)
+{
+	if (*state == 1)
+		ft_end_of_dollar(lexer, state, i);
+	else if (ft_is_expand_sign(lexer, state, i))
 	{
-		new[i] = str[i];
-		i++;
+		if (!ft_add_expand_word(data, state, i))
+			return (0);
 	}
-	new[i] = c;
-	new[i + 1] = '\0';
-	free(str);
-	return (new);
+	else if (*state == 0 && lexer->word[*i] == '$')
+	{
+		if (!ft_handle_expander(data, lexer, state, i))
+			return (0);
+	}
+	else if (*state == 0)
+	{
+		data->new_word = ft_join_char(data->new_word, lexer->word[*i]);
+		if (!data->new_word)
+			return (0);
+	}
+	return (1);
 }
 
 // /*
