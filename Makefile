@@ -3,7 +3,7 @@ LIB_PATH	= 	libft-plus
 LIBFT 		= 	$(LIB_PATH)/libft.a
 PRINTF		=	$(LIB_PATH)/printf.a 
 GNL			=	$(LIB_PATH)/gnl.a 
-FLAGS		= 	-Wall -Wextra -Werror 
+FLAGS		= 	-Wall -Wextra -Werror -g3 
 RM			= 	rm -f
 GREEN		= 	\033[0;32m
 BIG		= 	\033[0;1m
@@ -19,6 +19,7 @@ SOURCES	=	./main.c \
 			./executor/process.c \
 			./executor/pipe.c \
 			./executor/exec.c \
+			./executor/exec2.c \
 			./executor/redirections.c \
 			./executor/redirections2.c \
 			./executor/child.c \
@@ -60,6 +61,7 @@ SOURCES	=	./main.c \
 			./built_in/echo.c \
 			./built_in/fill_secret_envp.c \
 			./expander/expander.c \
+			./expander/expander2.c \
 			./expander/replace.c \
 			./signaux/signaux.c \
 			./signaux/terminal.c \

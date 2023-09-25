@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/21 16:46:45 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:23:36 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,29 @@ int	ft_minishell_loop(t_data *data)
 		data->child = NULL;
 		g_global_state = 1;
 		executor(data);
-		free(data->full_cmd);
-		ft_clean_lexer(data->lexer);
-		free(data->input);
+		ft_free_after_execute(data);
 	}
 	return (1);
+}
+
+void	ft_free_after_execute(t_data *data)
+{
+	free(data->full_cmd);
+	ft_clean_lexer(data->lexer);
+	ft_free_for_next_command(data);
+	free(data->input);
 }
 
 //vérifie si le répertoire actuel est accessible
 int	is_current_directory_accessible(void)
 {
-	struct stat	st;
+	char	cwd[1024];
 
-	if (stat(".", &st) == 0)
-		return (1);
-	return (0);
+	ft_bzero(cwd, sizeof(cwd));
+	getcwd(cwd, 1024);
+	if (!*cwd)
+		return (0);
+	return (1);
 }
 
 /*
@@ -63,7 +71,7 @@ char	*read_input(void)
 	char	*ret;
 	char	cwd[1024];
 
-	if (!is_current_directory_accessible())
+	while (!is_current_directory_accessible())
 		chdir("..");
 	ft_bzero(cwd, 1024);
 	getcwd(cwd, sizeof(cwd));

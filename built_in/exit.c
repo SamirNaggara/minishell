@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/20 18:28:42 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:00:35 by sgoigoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,18 @@ int	ft_any_number(char *str)
 
 void	ft_exit(t_data *data)
 {
-	t_lexer	*lexer;
+	t_simple_cmd	*cmd;
+	int				i;
 
-	lexer = data->lexer;
-	while (lexer && lexer->word && lexer->next)
+	cmd = data->first_cmd;
+	i = 1;
+	if (cmd->cmd_args[i])
 	{
-		lexer = lexer->next;
-		ft_check_error(data, lexer);
+		if(!ft_check_error(data, cmd))
+			return ;
 	}
-	ft_clean_lexer(data->lexer);
 	ft_free_simple_cmd(data);
+	ft_clean_lexer(data->lexer);
 	if (data->secret_envp)
 		ft_free_double_tab(data->secret_envp);
 	if (data->paths)
@@ -52,28 +54,28 @@ void	ft_exit(t_data *data)
 	exit(data->exit_status);
 }
 
-int	ft_check_error(t_data *data, t_lexer *lexer)
+int	ft_check_error(t_data *data, t_simple_cmd *cmd)
 {
-	if (lexer->next == NULL)
+	int	i;
+
+	i = 1;
+	while (cmd->cmd_args[i])
 	{
-		if (ft_any_number(lexer->word))
-			data->exit_status = ft_atoi(lexer->word);
-		else if (lexer->index >= 4)
+		if (i >= 2)
 		{
 			data->exit_status = 1;
-			fd_printf(STDERR_FILENO, "too many arguments");
+			fd_printf(STDERR_FILENO, "too many arguments\n");
+			return (0);
 		}
-		else
-		{
-			data->exit_status = 2;
-			fd_printf(STDERR_FILENO, "numeric argument required");
-		}
-		if ((ft_strncmp(lexer->prev->word, " ", \
-		ft_strlen(lexer->prev->word))))
-		{
-			if (lexer->prev->word[0] == '-')
-				data->exit_status += 56;
-		}
+		i++;
+	}
+	i = 1;
+	if (ft_any_number(cmd->cmd_args[i]))
+		data->exit_status = ft_atoi(cmd->cmd_args[i]);
+	else
+	{
+		data->exit_status = 2;
+		fd_printf(STDERR_FILENO, "numeric argument required\n");
 	}
 	return (1);
 }

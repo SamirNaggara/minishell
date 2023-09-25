@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/21 17:10:04 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:12:48 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define E_SIG_HEREDOC "warning: here-document at line delimited \
 by end-of-file\n"
 # define E_EXPORT_NVALID "Erreur : export: '%s' not a valid identifier\n"
+# define E_IS_DIR "%s: Is a directory\n"
+# define E_NO_FILE "%s: No such file or directory\n"
 
 /* Un enum de la liste des builtin*/
 typedef enum s_builtin
@@ -106,6 +108,7 @@ typedef struct s_data
 	int				pipe[2][2];
 	int				loop;
 	char			*input;
+	char			*new_word;
 	struct termios	terminal;
 }	t_data;
 
@@ -148,10 +151,10 @@ void			ft_free_for_next_command(t_data *data);
 void			ft_free_path(t_data *data);
 int				ft_sup_sup_operator(t_simple_cmd *cmd, t_lexer *redirection);
 int				ft_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection);
-int				ft_handle_here_docs(t_data *data);
+int				ft_handle_here_docs(t_simple_cmd *cmd);
 int				ft_inf_inf_operator(t_simple_cmd *cmd, t_lexer *redirection);
 int				ft_is_same_str(char *str1, char *str2);
-void			ft_delete_here_doc_files(t_data *data);
+void			ft_delete_here_doc_files(void);
 int				ft_exec_one_cmd(t_data *data);
 int				ft_child_one_cmd(t_data *data);
 void			ft_finish_child(t_data *data, t_simple_cmd *cmd);
@@ -166,9 +169,14 @@ int				ft_end_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection,
 					char *stdin_line, char *file_name);
 int				ft_how_to_exec(t_data *data);
 void			ft_init_pipe(t_data *data);
+int				ft_is_directory(char *path);
+int				ft_is_path_looking(char *path);
+int				ft_test_cmd(t_data *data, t_simple_cmd *cmd, int *i);
+void			ft_exit_exec_one_cmd(t_data *data);
 /* Lexer */
 int				ft_minishell_loop(t_data *data);
 char			*read_input(void);
+void			ft_free_after_execute(t_data *data);
 int				ft_lexer(t_data *data);
 int				ft_is_space(char c);
 t_lexer			*ft_delimite(t_lexer *lexer);
@@ -231,7 +239,9 @@ int				ft_add_arg_to_cmd2(int *new_arg, t_simple_cmd *cmd,
 					t_lexer *lexer);
 int				ft_add_arg_from_lexer(int *new_arg, t_simple_cmd **cmd,
 					t_lexer **lexer);
-
+int				ft_char_is_stop_dollar(char c);
+char			*ft_join_char(char *str, char c);
+int				ft_is_just_dollar_char(t_lexer *lexer, char *str);
 /* Builtin */
 void			ft_exit(t_data *data);
 void			ft_pwd(void);
@@ -260,19 +270,27 @@ t_lexer			*ft_found_begin_echo(t_lexer *lexer);
 int				ft_is_flag_n(char *str);
 void			ft_visualise_lexer2(t_lexer *lexer);
 int				ft_expander(t_data *data);
-int				ft_replace_dollar(t_data *data, char **str);
-char			*ft_replace(char *str, char *dollar, char *replace_str);
+int				ft_replace_dollar(t_data *data, t_lexer *lexer);
 char			*ft_found_replace_value(t_data *data, char *word);
 char			*ft_extract_word(char *str);
-int				ft_should_replace(t_lexer *lexer);
-int				ft_is_here_doc_file(t_lexer *lexer);
-char			*ft_malloc_replace_char(char *str, char *replace_str);
+int				re_doc_file(t_lexer *lexer);
 char			**ft_order_tab(char **tab);
 char			*ft_found_smaller(char **tab, char *smaller);
 int				ft_is_before(const char *s1, const char *s2);
 int				ft_test_key_and_print(t_data *data);
-int				ft_check_error(t_data *data, t_lexer *lexer);
+int				ft_check_error(t_data *data, t_simple_cmd *cmd);
 char			*ft_key_from_arg(t_simple_cmd *cmd, int *i);
+int				ft_echo_loop(t_data *data, t_lexer *begin_lexer);
+int				ft_expander_loop(t_data *data, t_lexer *lexer);
+int				ft_handle_expander(t_data *data, t_lexer *lexer,
+					int *state, int *i);
+int				ft_is_expand_sign(t_lexer *lexer, int *state, int *i);
+void			ft_end_of_dollar(t_lexer *lexer, int *state, int *i);
+int				ft_add_value_word(t_data *data, t_lexer *lexer,
+					int *state, int *i);
+int				ft_add_expand_word(t_data *data, int *state, int *i);
+int				ft_expander_heart_loop(t_data *data, t_lexer *lexer,
+					int *state, int *i);
 // Signaux
 int				ft_signal(void);
 void			handler_c(int signum);

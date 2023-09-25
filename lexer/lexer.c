@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 23:57:33 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 15:00:34 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:52:59 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ t_lexer	*ft_begin_lexer(void)
 	new = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!new)
 		return (NULL);
-	new->word = NULL;
+	new->word = (char *)malloc(sizeof(char));
+	if (!new->word)
+		return (NULL);
+	new->word[0] = '\0';
 	new->operator = NONE;
 	new->index = 0;
 	new->str_type = NO_QUOTE;

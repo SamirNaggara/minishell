@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:44:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/19 15:39:13 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:33:34 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,39 @@ int	ft_echo(t_data *data, t_simple_cmd *cmd)
 
 	if (!cmd->cmd_args[1])
 	{
-		write(1, "\n", 1);
-		exit(0);
+		if (write(1, "\n", 1) == -1)
+			perror("echo");
+		return (data->exit_status = 0, 1);
 	}
 	begin_lexer = ft_found_begin_echo(cmd->lexer);
 	if (!begin_lexer)
-		exit(data->exit_status);
+		return (data->exit_status = 1, 0);
+	if (!ft_echo_loop(data, begin_lexer))
+		return (0);
+	if (!ft_is_flag_n(cmd->cmd_args[1]))
+	{
+		if (write(1, "\n", 1) == -1)
+			return (perror("echo"), data->exit_status = 1, 0);
+	}
+	return (data->exit_status = 0, 1);
+}
+
+int	ft_echo_loop(t_data *data, t_lexer *begin_lexer)
+{
 	while (begin_lexer && begin_lexer->operator != PIPE)
 	{
+		if (!begin_lexer->word)
+		{
+			begin_lexer = begin_lexer->next;
+			continue ;
+		}
 		if (ft_is_space_lexer(begin_lexer) && begin_lexer->next
-			&& begin_lexer->next->operator == PIPE)
+			&& (begin_lexer->next->operator == PIPE))
 			break ;
-		write(1, begin_lexer->word, ft_strlen(begin_lexer->word));
+		if (write(1, begin_lexer->word, ft_strlen(begin_lexer->word)) == -1)
+			return (perror("echo"), data->exit_status = 1, 0);
 		begin_lexer = begin_lexer->next;
 	}
-	if (!ft_is_flag_n(cmd->cmd_args[1]))
-		write(1, "\n", 1);
-	exit(0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:58:01 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 15:07:47 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:50:16 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	ft_redir_in_simple_cmd(t_lexer *current_lexer, t_simple_cmd *current_cmd)
 		return (0);
 	if (!ft_syntax_redirection(current_lexer))
 		return (0);
-	ft_add_in_cmd_redir(current_cmd, current_lexer);
+	if (!ft_add_in_cmd_redir(current_cmd, current_lexer))
+		return (0);
 	return (1);
 }
 
@@ -51,9 +52,10 @@ int	ft_add_in_cmd_redir(t_simple_cmd *cmd, t_lexer *lexer)
 	new = ft_begin_lexer();
 	if (!new)
 		return (0);
+	free(new->word);
 	new->word = ft_get_redirection_file_name(lexer);
 	if (!new->word)
-		return (0);
+		return (ft_clean_lexer(new), 0);
 	new->operator = lexer->operator;
 	new->str_type = lexer->str_type;
 	if (!cmd->redirections)
@@ -76,8 +78,14 @@ int	ft_add_in_cmd_redir(t_simple_cmd *cmd, t_lexer *lexer)
 */
 char	*ft_get_redirection_file_name(t_lexer *current_lexer)
 {
-	current_lexer = current_lexer->next;
-	if (!ft_is_space_lexer(current_lexer))
-		return (ft_strdup(current_lexer->word));
-	return (ft_strdup(current_lexer->next->word));
+	t_lexer	*next;
+	char	*redir_name;
+
+	next = current_lexer->next;
+	if (ft_is_space_lexer(next))
+		next = next->next;
+	redir_name = ft_strdup(next->word);
+	if (!redir_name)
+		return (NULL);
+	return (redir_name);
 }

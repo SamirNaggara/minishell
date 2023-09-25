@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 13:48:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/23 16:35:11 by snaggara         ###   ########.fr       */
+/*   Created: 2023/09/24 21:08:38 by snaggara          #+#    #+#             */
+/*   Updated: 2023/09/24 21:12:00 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_parser(t_data *data)
+void	ft_free_path_before(char **path, int i)
 {
-	if (!data->lexer || !data->lexer->word)
-		return (0);
-	if (ft_is_space_lexer(data->lexer) && !data->lexer->next)
-		return (0);
-	if (!ft_parse_pipe_and_redir(data))
-		return (0);
-	if (!ft_parse_cmds_arg(data))
-		return (0);
-	if (!ft_check_valids_cmds(data))
-		return (ft_syntaxe_error('\n'), 0);
-	ft_fill_built_in(data);
-	data->nb_cmd = ft_count_cmd(data);
-	return (1);
+	int	j;
+
+	j = 0;
+	while (j < i)
+		free(path[j++]);
+}
+
+int	ft_is_path_looking(char *path)
+{
+	if (path[strlen(path) - 1] == '/')
+		return (1);
+	if (ft_strncmp(path, "./", 2) == 0)
+		return (1);
+	if (ft_strncmp(path, "../", 3) == 0)
+		return (1);
+	return (0);
 }
