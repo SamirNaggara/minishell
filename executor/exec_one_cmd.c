@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 21:12:36 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:44:35 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	ft_child_one_cmd(t_data *data)
 	t_simple_cmd	*cmd;
 
 	cmd = data->first_cmd;
+	g_global_state = 2;
 	if (!ft_handle_here_docs(cmd))
 		ft_exit_exec_one_cmd(data);
 	if (!ft_test_cmd_and_redirections(data, cmd))

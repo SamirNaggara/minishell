@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:11:19 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 21:15:10 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:48:26 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int	ft_expander(t_data *data)
 	current_lexer = data->lexer;
 	while (current_lexer)
 	{
+		if (current_lexer->str_type == SINGLE_QUOTE)
+		{
+			current_lexer = current_lexer->next;
+			continue ;
+		}
 		if (!ft_replace_dollar(data, current_lexer))
 			return (0);
 		current_lexer = current_lexer->next;
@@ -96,50 +101,6 @@ int	ft_expander_heart_loop(t_data *data, t_lexer *lexer, int *state, int *i)
 	}
 	return (1);
 }
-
-// /*
-// 	On regarde si le lexer actuel contient un $
-// 	qu'il faudra apres remplacer
-// 	Donc il faut que le lexer ne soit pas un operateur
-// 	QUe le mot existe, qu'on ne soit pas en single quote
-
-// */
-// int	ft_should_replace(t_lexer *lexer)
-// {
-// 	char	*dollar;
-
-// 	if (lexer->operator != NONE)
-// 		return (0);
-// 	if (lexer->str_type == SINGLE_QUOTE)
-// 		return (0);
-// 	if (!lexer->word)
-// 		return (0);
-// 	if (ft_is_space_lexer(lexer))
-// 		return (0);
-// 	dollar = ft_strchr(lexer->word, '$');
-// 	if (!dollar)
-// 		return (0);
-// 	if (!dollar[1] || dollar[1] == ' ')
-// 		return (0);
-// 	if (ft_is_here_doc_file(lexer))
-// 		return (0);
-// 	return (1);
-// }
-
-// int	ft_is_here_doc_file(t_lexer *lexer)
-// {
-// 	if (!lexer)
-// 		return (0);
-// 	if (!lexer->prev)
-// 		return (0);
-// 	if (lexer->prev->operator == INFINF)
-// 		return (1);
-// 	if (!lexer->prev->prev)
-// 		return (0);
-// 	if (lexer->prev->prev->operator == INFINF)
-// 		return (1);
-// 	return (0);
-// }
 
 int	ft_char_is_stop_dollar(char c)
 {

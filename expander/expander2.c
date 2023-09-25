@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 20:51:52 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 20:55:21 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:31:32 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	ft_add_value_word(t_data *data, t_lexer *lexer, int *state, int *i)
 
 	if (*state < 2)
 	{
+		*state = 1;
 		key = ft_extract_word(lexer->word + *i);
 		if (!key)
 			return (0);
@@ -49,7 +50,6 @@ int	ft_add_value_word(t_data *data, t_lexer *lexer, int *state, int *i)
 		data->new_word = ft_strjoin_custom(data->new_word, value);
 		if (!data->new_word)
 			return (free(value), 0);
-		*state = 1;
 	}
 	return (1);
 }
@@ -71,8 +71,6 @@ void	ft_end_of_dollar(t_lexer *lexer, int *state, int *i)
 {
 	if (ft_char_is_stop_dollar(lexer->word[*i]))
 		*state = 3;
-	else
-		(*i)++;
 }
 
 int	ft_is_just_dollar_char(t_lexer *lexer, char *str)
