@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 21:08:38 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 21:12:00 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:49:36 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	ft_is_path_looking(char *path)
 	if (ft_strncmp(path, "./", 2) == 0)
 		return (1);
 	if (ft_strncmp(path, "../", 3) == 0)
+		return (1);
+	if (path[0] == '/')
 		return (1);
 	return (0);
 }

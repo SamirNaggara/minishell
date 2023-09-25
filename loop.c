@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 20:23:36 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:42:32 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_minishell_loop(t_data *data)
 	while (1)
 	{
 		g_global_state = 0;
-		data->input = read_input();
+		data->input = read_input(data);
 		if (!data->input)
 			break ;
 		if (!*data->input)
@@ -66,13 +66,25 @@ int	is_current_directory_accessible(void)
 	Si le répertoire n'est pas accessible (effacé quand on y était par exemple)
 	alors on retourne au précédent
 */
-char	*read_input(void)
+char	*read_input(t_data *data)
 {
 	char	*ret;
 	char	cwd[1024];
+	char	*home;
 
 	while (!is_current_directory_accessible())
-		chdir("..");
+	{
+		if (chdir("..") == -1)
+		{
+			home = ft_found_replace_value(data, "HOME");
+			if (!home)
+				return (NULL);
+			if (chdir(home) == -1)
+				chdir("/");
+			free(home);
+		}
+
+	}
 	ft_bzero(cwd, 1024);
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, "  ", 1024);
