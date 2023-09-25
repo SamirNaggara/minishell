@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 23:57:33 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/22 18:52:59 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:22:06 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_lexer(t_data *data)
 */
 void	ft_delete_last_lexer_if_empty(t_lexer *current)
 {
-	if (current && current->word == NULL && current->prev)
+	if (current && (current->word == NULL || !*current->word) && current->prev)
 	{
 		current->prev->next = NULL;
 		free(current);
