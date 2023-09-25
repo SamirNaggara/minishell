@@ -19,6 +19,7 @@ SOURCES	=	./main.c \
 			./executor/process.c \
 			./executor/pipe.c \
 			./executor/exec.c \
+			./executor/exec2.c \
 			./executor/redirections.c \
 			./executor/redirections2.c \
 			./executor/child.c \
@@ -60,6 +61,7 @@ SOURCES	=	./main.c \
 			./built_in/echo.c \
 			./built_in/fill_secret_envp.c \
 			./expander/expander.c \
+			./expander/expander2.c \
 			./expander/replace.c \
 			./signaux/signaux.c \
 			./signaux/terminal.c \
