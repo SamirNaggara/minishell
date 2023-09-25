@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 21:32:41 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:00:35 by sgoigoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	ft_exit(t_data *data)
 	i = 1;
 	if (cmd->cmd_args[i])
 	{
-		ft_check_error(data, cmd);
+		if(!ft_check_error(data, cmd))
+			return ;
 	}
 	ft_free_simple_cmd(data);
 	ft_clean_lexer(data->lexer);
@@ -62,8 +63,9 @@ int	ft_check_error(t_data *data, t_simple_cmd *cmd)
 	{
 		if (i >= 2)
 		{
-			fd_printf(STDERR_FILENO, "too many arguments");
-			return (data->exit_status = 1);
+			data->exit_status = 1;
+			fd_printf(STDERR_FILENO, "too many arguments\n");
+			return (0);
 		}
 		i++;
 	}
@@ -73,7 +75,7 @@ int	ft_check_error(t_data *data, t_simple_cmd *cmd)
 	else
 	{
 		data->exit_status = 2;
-		fd_printf(STDERR_FILENO, "numeric argument required");
+		fd_printf(STDERR_FILENO, "numeric argument required\n");
 	}
 	return (1);
 }

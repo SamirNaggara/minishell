@@ -46,7 +46,7 @@ void	ft_wait_children(t_data *data)
 		return ;
 	while (i < data->nb_cmd)
 	{
-		waitpid(data->child[i++], &status, 0);
+		waitpid(data->child[i++], &status, WNOHANG);
 		if (WIFEXITED(status))
 			data->exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
