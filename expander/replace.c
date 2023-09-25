@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:53:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 20:53:24 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:05:24 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_add_expand_word(t_data *data, int *state, int *i)
 	if (!data->new_word)
 		return (free(value), 0);
 	*state = 1;
-	(i)++;
+	(*i)++;
 	return (1);
 }
 

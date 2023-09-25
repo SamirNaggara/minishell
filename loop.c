@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/25 13:42:32 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:58:05 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ char	*read_input(t_data *data)
 				chdir("/");
 			free(home);
 		}
-
 	}
 	ft_bzero(cwd, 1024);
 	getcwd(cwd, sizeof(cwd));

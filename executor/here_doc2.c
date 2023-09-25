@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:48:34 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/24 20:59:28 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:43:47 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	ft_handle_here_docs(t_simple_cmd *cmd)
 	while (redirection)
 	{
 		if (!ft_inf_inf_operator(cmd, redirection))
-			return (0);
+			return (g_global_state = 1, 0);
 		redirection = redirection->next;
 	}
-	return (1);
+	return (g_global_state = 1, 1);
 }
