@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 19:40:40 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:11:25 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,67 +31,29 @@ void	handler_c(int signum)
 	}
 }
 
-/*
-	Gerer le signal du controle plus c
-*/
-int	ft_signal(void)
-{
-	struct sigaction	sa;
-
-	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = handler_c;
-	sa.sa_flags = 0;
-	if (sigaction(SIGINT, &sa, NULL) == -1)
-	{
-		perror("sigaction failed");
-		return (1);
-	}
-	return (1);
-}
-
-/*
-	Pour les moments ou on a besoin d'ignorer le signal
-*/
-int	ft_signal_ignore(void)
-{
-	struct sigaction	sa;
-
-	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = SIG_IGN;
-	sa.sa_flags = 0;
-	if (sigaction(SIGINT, &sa, NULL) == -1)
-	{
-		perror("sigaction failed");
-		exit(EXIT_FAILURE);
-	}
-	return (1);
-}
-
 void	ft_init_signal_loop(void)
 {
-	struct sigaction initSa;
-	struct sigaction ignoreSa;
+	struct sigaction	init_sa;
+	struct sigaction	ignore_sa;
 
-    sigemptyset(&initSa.sa_mask);
-    sigemptyset(&ignoreSa.sa_mask);
-
-    initSa.sa_handler = handler_c;
-    initSa.sa_flags = 0;
-	ignoreSa.sa_handler = SIG_IGN;
-    ignoreSa.sa_flags = 0;
-
-    sigaction(SIGINT, &initSa, NULL);
-    sigaction(SIGQUIT, &ignoreSa, NULL);
+	sigemptyset(&init_sa.sa_mask);
+	sigemptyset(&ignore_sa.sa_mask);
+	init_sa.sa_handler = handler_c;
+	init_sa.sa_flags = 0;
+	ignore_sa.sa_handler = SIG_IGN;
+	ignore_sa.sa_flags = 0;
+	sigaction(SIGINT, &init_sa, NULL);
+	sigaction(SIGQUIT, &ignore_sa, NULL);
 }
 
 void	ft_signal_reinit(void)
 {
-        struct sigaction sa_default;
+	struct sigaction	sa_default;
 
-        sa_default.sa_handler = SIG_IGN;
-        sigemptyset(&sa_default.sa_mask);
-        sa_default.sa_flags = 0;
-        sigaction(SIGINT, &sa_default, NULL);
+	sa_default.sa_handler = SIG_IGN;
+	sigemptyset(&sa_default.sa_mask);
+	sa_default.sa_flags = 0;
+	sigaction(SIGINT, &sa_default, NULL);
 }
 
 void	handler_here_doc(int signum)
@@ -103,22 +65,12 @@ void	handler_here_doc(int signum)
 	}
 }
 
-void	ft_here_doc()
+void	ft_here_doc(void)
 {
-	struct sigaction hereDocSa;
+	struct sigaction	here_doc_ds;
 
-    sigemptyset(&hereDocSa.sa_mask);
-    hereDocSa.sa_handler = handler_here_doc;
-    hereDocSa.sa_flags = 0;
-    sigaction(SIGINT, &hereDocSa, NULL);
-}
-
-void	ft_signal_slash_reinit(void)
-{
-	struct sigaction slash_default;
-
-	slash_default.sa_handler = SIG_DFL;
-	sigemptyset(&slash_default.sa_mask);
-	slash_default.sa_flags = 0;
-	sigaction(SIGQUIT, &slash_default, NULL);
+	sigemptyset(&here_doc_ds.sa_mask);
+	here_doc_ds.sa_handler = handler_here_doc;
+	here_doc_ds.sa_flags = 0;
+	sigaction(SIGINT, &here_doc_ds, NULL);
 }
