@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/25 13:58:05 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:55:05 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_minishell_loop(t_data *data)
 {
 	while (1)
 	{
-		g_global_state = 0;
+		ft_init_signal_loop();
 		data->input = read_input(data);
 		if (!data->input)
 			break ;
@@ -32,12 +32,13 @@ int	ft_minishell_loop(t_data *data)
 		if (!ft_lex_ex_parse(data))
 			continue ;
 		data->child = NULL;
-		g_global_state = 1;
 		executor(data);
 		ft_free_after_execute(data);
 	}
 	return (1);
 }
+
+
 
 void	ft_free_after_execute(t_data *data)
 {
@@ -88,7 +89,7 @@ char	*read_input(t_data *data)
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, "  ", 1024);
 	ret = readline(cwd);
-	return (g_global_state = 0, ret);
+	return (ret);
 }
 
 /*

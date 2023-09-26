@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 15:50:50 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:52:28 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define E_CD_ARG "cd: trop d'arguments\n"
 # define E_HERE_DOC "Here doc not created properly\n"
 # define E_SIG_HEREDOC "warning: here-document at line delimited \
-by end-of-file\n"
+by end-of-file"
 # define E_EXPORT_NVALID "Erreur : export: '%s' not a valid identifier\n"
 # define E_IS_DIR "%s: Is a directory\n"
 # define E_NO_FILE "%s: No such file or directory\n"
@@ -100,7 +100,6 @@ typedef struct s_data
 	char			**envp;
 	char			**secret_envp;
 	char			*full_cmd;
-	int				exit_status;
 	int				nb_cmd;
 	t_simple_cmd	*first_cmd;
 	pid_t			*child;
@@ -308,6 +307,11 @@ int				ft_add_old_pwd(t_data *data);
 int				ft_add_pwd(t_data *data);
 int				ft_exist_in_secret_env(t_data *data, char *key);
 long			ft_atoi_long(const char *nptr);
+void			ft_init_signal_loop(void);
+void			ft_here_doc_signal(void);
+void			handler_here_doc(int signum);
+void			ft_here_doc();
+void			ft_signal_reinit(void);
 extern int		g_global_state;
 
 #endif

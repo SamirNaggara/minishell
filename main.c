@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/20 17:35:23 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:46:56 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	main(int ac, char **av, char **envp)
 
 	ft_memset(&data, 0, sizeof(data));
 	ft_set_terminal_settings(&data);
-	ft_signal();
-	ft_signal_slash_ignore();
 	(void)ac;
 	(void)av;
 	data.envp = envp;
@@ -29,5 +27,5 @@ int	main(int ac, char **av, char **envp)
 	ft_minishell_loop(&data);
 	ft_restore_terminal(&data);
 	ft_free_double_tab(data.secret_envp);
-	return (data.exit_status);
+	return (g_global_state);
 }

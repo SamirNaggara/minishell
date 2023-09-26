@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 15:51:09 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:02:49 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_exec_one_cmd(t_data *data)
 {
+	ft_signal_reinit();
 	if (!ft_malloc_child_pid(data))
 		return (0);
 	data->child[0] = fork();
@@ -21,14 +22,14 @@ int	ft_exec_one_cmd(t_data *data)
 		return (perror(E_CHILD), 0);
 	if (data->child[0] == 0)
 		ft_child_one_cmd(data);
-	if (data->child[0] > 1)
-	{
-		if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
-		{
-			ft_signal_ignore();
-			ft_signal_slash_ignore();
-		}
-	}
+	// if (data->child[0] > 1)
+	// {
+	// 	if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
+	// 	{
+	// 		ft_signal_ignore();
+	// 		ft_signal_slash_ignore();
+	// 	}
+	// }
 	return (1);
 }
 
@@ -36,11 +37,10 @@ int	ft_child_one_cmd(t_data *data)
 {
 	t_simple_cmd	*cmd;
 
+	ft_here_doc();
 	cmd = data->first_cmd;
-	g_global_state = -2;
 	if (!ft_handle_here_docs(cmd))
 		ft_exit_exec_one_cmd(data);
-	ft_signal_slash();
 	if (!ft_test_cmd_and_redirections(data, cmd))
 		ft_exit_exec_one_cmd(data);
 	if (cmd->fd_in != -1)
@@ -54,7 +54,7 @@ int	ft_child_one_cmd(t_data *data)
 			return (0);
 	}
 	ft_finish_child(data, cmd);
-	exit(data->exit_status);
+	exit(g_global_state);
 	return (1);
 }
 
@@ -63,7 +63,7 @@ void	ft_exit_exec_one_cmd(t_data *data)
 	ft_close_redir_fds(data);
 	ft_close_pipes(data);
 	ft_free_for_next_command(data);
-	exit(data->exit_status);
+	exit(g_global_state);
 }
 
 int	ft_exec_without_fork(t_simple_cmd *cmd)

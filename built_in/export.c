@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:55:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/20 19:32:58 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:57:12 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	ft_export(t_data *data, t_simple_cmd *cmd)
 	if (!cmd->cmd_args[1])
 	{
 		ft_print_all_export(data);
-		return (data->exit_status = 0, 1);
+		return (g_global_state = 0, 1);
 	}
 	if (data->nb_cmd != 1)
-		return (data->exit_status = 0, 1);
+		return (g_global_state = 0, 1);
 	if (!ft_add_to_env(data, cmd))
-		return (data->exit_status = 1, 0);
-	return (data->exit_status = 0, 1);
+		return (g_global_state = 1, 0);
+	return (g_global_state = 0, 1);
 }
 
 /*

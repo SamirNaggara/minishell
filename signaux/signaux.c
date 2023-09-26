@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 15:19:51 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:21:43 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,11 @@ void	handler_c(int signum)
 {
 	if (signum == SIGINT)
 	{
-		if (g_global_state == -1)
-			return ;
-		if (g_global_state == 0)
-		{
-			ft_printf("\n");
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
-		}
-		else if (g_global_state == -2)
-			g_global_state = -3;
+		ft_printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_global_state = 130;
 	}
 }
 
@@ -71,4 +65,52 @@ int	ft_signal_ignore(void)
 		exit(EXIT_FAILURE);
 	}
 	return (1);
+}
+
+void	ft_init_signal_loop(void)
+{
+	struct sigaction initSa;
+	struct sigaction ignoreSa;
+
+    sigemptyset(&initSa.sa_mask);
+    sigemptyset(&ignoreSa.sa_mask);
+
+    initSa.sa_handler = handler_c;
+    initSa.sa_flags = 0;
+	ignoreSa.sa_handler = SIG_IGN;
+    ignoreSa.sa_flags = 0;
+
+    sigaction(SIGINT, &initSa, NULL);
+    sigaction(SIGQUIT, &ignoreSa, NULL);
+}
+
+void	ft_signal_reinit(void)
+{
+        // Rétablir le gestionnaire de signal par défaut pour le processus enfant
+        struct sigaction sa_default;
+
+        sa_default.sa_handler = SIG_IGN;
+        sigemptyset(&sa_default.sa_mask);
+		sigaddset(&sa_default.sa_mask, SIGINT);
+        sa_default.sa_flags = 0;
+        sigaction(SIGINT, &sa_default, NULL);
+}
+
+void	handler_here_doc(int signum)
+{
+	if (signum == SIGINT)
+	{
+		fd_printf(STDERR_FILENO, "\n");
+		close(0);
+	}
+}
+
+void	ft_here_doc()
+{
+	struct sigaction hereDocSa;
+
+    sigemptyset(&hereDocSa.sa_mask);
+    hereDocSa.sa_handler = handler_here_doc;
+    hereDocSa.sa_flags = 0;
+    sigaction(SIGINT, &hereDocSa, NULL);
 }

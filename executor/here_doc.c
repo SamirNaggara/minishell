@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:37:03 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 15:21:09 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:19:28 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,23 @@ int	ft_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection)
 	if (!ft_open_here_doc_file(cmd, file_name))
 		return (free(file_name), 0);
 	stdin_line = get_next_line(STDIN_FILENO);
+	if (!isatty(STDIN_FILENO))
+		return (free(file_name), 0);
 	while (!stdin_line || !ft_is_same_str(stdin_line, redirection->word))
 	{
-		if (g_global_state == -3)
-			break ;
+		
 		if (!stdin_line)
 		{
-			fd_printf(STDERR_FILENO, "%s", E_SIG_HEREDOC);
+			fd_printf(STDERR_FILENO, "%s\n", E_SIG_HEREDOC);
 			break ;
 		}
 		write(cmd->fd_in, stdin_line, ft_strlen(stdin_line));
 		free(stdin_line);
 		stdin_line = get_next_line(STDIN_FILENO);
+		if (!isatty(STDIN_FILENO))
+			return (free(file_name), 0);
 	}
+
 	if (!ft_end_handle_here_doc(cmd, redirection, stdin_line, file_name))
 		return (0);
 	return (1);
@@ -79,7 +83,7 @@ char	*ft_create_here_doc_filename(t_simple_cmd *cmd)
 int	ft_open_here_doc_file(t_simple_cmd *cmd, char *file_name)
 {
 	cmd->fd_in = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0655);
-	if (!cmd->fd_in)
+	if (cmd->fd_in == -1)
 		return (perror(file_name), 0);
 	return (1);
 }

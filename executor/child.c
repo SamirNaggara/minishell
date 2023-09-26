@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:26:37 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 15:50:59 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:52:22 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,25 @@
 */
 void	ft_child(t_data *data, t_simple_cmd *browse, int i)
 {
-	g_global_state = -2;
 	if (!ft_handle_here_docs(browse))
 	{
 		ft_close_redir_fds(data);
 		ft_close_pipes(data);
 		ft_free_for_next_command(data);
-		exit(data->exit_status);
+		exit(g_global_state);
 	}
-	ft_signal_slash();
 	if (!ft_test_cmd_and_redirections(data, browse))
 	{
 		ft_close_redir_fds(data);
 		ft_close_pipes(data);
 		ft_free_for_next_command(data);
-		exit(data->exit_status);
+		exit(g_global_state);
 	}
 	if (!ft_discriminate_child(data, browse, i))
 		return (perror(E_PIPE));
 	ft_finish_child(data, browse);
 	ft_free_lexer(browse->redirections);
-	exit(data->exit_status);
+	exit(g_global_state);
 }
 
 int	ft_discriminate_child(t_data *data, t_simple_cmd *cmd, int i)

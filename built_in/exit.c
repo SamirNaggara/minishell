@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 13:41:05 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:59:04 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,19 @@ void	ft_exit(t_data *data)
 	free(data->input);
 	ft_restore_terminal(data);
 	fd_printf(STDERR_FILENO, "exit\n");
-	exit(data->exit_status);
+	exit(g_global_state);
 }
 
 int	ft_check_error(t_data *data, t_simple_cmd *cmd)
 {
 	int	i;
 
+	(void)data;
 	if (ft_any_number(cmd->cmd_args[1]))
-		data->exit_status = ft_atoi_long(cmd->cmd_args[1]);
+		g_global_state = ft_atoi_long(cmd->cmd_args[1]);
 	else
 	{
-		data->exit_status = 2;
+		g_global_state = 2;
 		fd_printf(STDERR_FILENO, "exit: %s: numeric argument required\n",
 			cmd->cmd_args[1]);
 		return (1);
@@ -83,7 +84,7 @@ int	ft_check_error(t_data *data, t_simple_cmd *cmd)
 		if (i >= 2)
 		{
 			fd_printf(STDERR_FILENO, "exit: too many arguments\n");
-			return (data->exit_status = 1, 0);
+			return (g_global_state = 1, 0);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:06:08 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 21:48:13 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:57:12 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_unset(t_data *data, t_simple_cmd *cmd)
 
 	j = 1;
 	if (!cmd->cmd_args[1])
-		return (data->exit_status = 0, 1);
+		return (g_global_state = 0, 1);
 	while (cmd->cmd_args[j])
 	{
 		i = 0;
@@ -32,12 +32,12 @@ int	ft_unset(t_data *data, t_simple_cmd *cmd)
 			i++;
 		if (!data->secret_envp[i])
 		{
-			data->exit_status = 0;
+			g_global_state = 0;
 			break ;
 		}
 		if (!ft_update_secret_env_without(data, i))
 		{
-			data->exit_status = 1;
+			g_global_state = 1;
 			break ;
 		}
 		j++;
