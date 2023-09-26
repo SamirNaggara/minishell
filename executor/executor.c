@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:10:45 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/25 14:41:23 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:21:08 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	executor(t_data *data)
 */
 int	ft_how_to_exec(t_data *data)
 {
-	g_global_state = 1;
+	g_global_state = -1;
 	if (data->nb_cmd > 1)
 	{
 		if (!ft_create_all_process(data))

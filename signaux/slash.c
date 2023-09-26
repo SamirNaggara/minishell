@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:16:21 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 15:12:08 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:53:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@
 void	handler_slash(int signum)
 {
 	if (signum == SIGQUIT)
-	{
 		fd_printf(STDERR_FILENO, "Quit (core dumped)\n");
-		exit(1);
-	}
 }
 
 /*

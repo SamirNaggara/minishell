@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/25 13:00:29 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:54:22 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ void	ft_wait_children(t_data *data)
 		if (WIFEXITED(status))
 			data->exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
+		{
 			data->exit_status = WTERMSIG(status);
+			if (data->exit_status == SIGQUIT)
+				fd_printf(STDERR_FILENO, "Quit (core dumped)\n");
+		}
 		if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
 			ft_signal();
 		ft_signal_slash_ignore();
