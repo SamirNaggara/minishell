@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:49:28 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/24 23:51:33 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 00:57:52 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_close_redir_fds(t_data *data)
 {
 	t_simple_cmd	*browse;
 
-	if (!data->first_cmd)
+	if (!data->first_cmd || !data->first_cmd->cmd_args)
 		return ;
 	browse = data->first_cmd;
 	while (browse)

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:12:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 16:46:56 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 00:52:22 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 
+	data = (t_data){0};
 	ft_memset(&data, 0, sizeof(data));
 	ft_set_terminal_settings(&data);
 	(void)ac;

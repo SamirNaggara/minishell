@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:56:16 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 15:08:44 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 00:55:00 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_simple_cmd	*ft_create_one_simple_cmd(void)
 	new = (t_simple_cmd *)malloc(sizeof(t_simple_cmd));
 	if (!new)
 		return (NULL);
+	*new = (t_simple_cmd){0};
 	new->cmd_args = NULL;
 	new->builtin = NO_BUILTIN;
 	new->redirections = NULL;
