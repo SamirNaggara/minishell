@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/25 13:39:00 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:05:17 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,6 +307,7 @@ int				ft_increment_shell_level(t_data *data);
 int				ft_add_old_pwd(t_data *data);
 int				ft_add_pwd(t_data *data);
 int				ft_exist_in_secret_env(t_data *data, char *key);
+long			ft_atoi_long(const char *nptr);
 extern int		g_global_state;
 
 #endif

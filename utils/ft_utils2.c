@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 10:55:34 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/20 19:33:57 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:20:03 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,26 @@ int	ft_same_key(char *str, char const *key)
 	if (str[size_key] == '=')
 		return (1);
 	return (0);
+}
+
+long	ft_atoi_long(const char *nptr)
+{
+	size_t	i;
+	int		sign;
+	long	resultat;
+
+	i = 0;
+	sign = 1;
+	resultat = 0;
+	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+		resultat = resultat * 10 + nptr[i++] - '0';
+	return (sign * resultat);
 }

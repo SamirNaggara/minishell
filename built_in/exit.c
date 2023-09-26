@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/25 15:20:19 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:29:39 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,22 @@ int	ft_any_number(char *str)
 	int	i;
 
 	i = 0;
+	if (*str == '-')
+		str++;
 	while (str[i])
 	{
-		if (str[i] >= '0' && str[i] <= '9')
-			return (1);
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
 		i++;
 	}
-	return (0);
+	if (ft_strlen(str) > 19)
+		return (0);
+	else if (ft_strlen(str) == 19)
+	{
+		if (ft_strncmp(str, "9223372036854775807", 20) > 0)
+			return (0);
+	}
+	return (1);
 }
 
 void	ft_exit(t_data *data)
@@ -51,6 +60,7 @@ void	ft_exit(t_data *data)
 		ft_free_double_tab(data->paths);
 	free(data->input);
 	ft_restore_terminal(data);
+	fd_printf(STDERR_FILENO, "exit\n");
 	exit(data->exit_status);
 }
 
@@ -59,11 +69,11 @@ int	ft_check_error(t_data *data, t_simple_cmd *cmd)
 	int	i;
 
 	if (ft_any_number(cmd->cmd_args[1]))
-		data->exit_status = ft_atoi(cmd->cmd_args[1]);
+		data->exit_status = ft_atoi_long(cmd->cmd_args[1]);
 	else
 	{
 		data->exit_status = 2;
-		fd_printf(STDERR_FILENO, "numeric argument required\n");
+		fd_printf(STDERR_FILENO, "exit: %s: numeric argument required\n", cmd->cmd_args[1]);
 		return (1);
 	}
 	i = 1;
@@ -71,7 +81,7 @@ int	ft_check_error(t_data *data, t_simple_cmd *cmd)
 	{
 		if (i >= 2)
 		{
-			fd_printf(STDERR_FILENO, "too many arguments\n");
+			fd_printf(STDERR_FILENO, "exit: too many arguments\n");
 			return (data->exit_status = 1, 0);
 		}
 		i++;
