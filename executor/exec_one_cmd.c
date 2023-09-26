@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:12:43 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 20:12:00 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 00:41:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ft_exec_one_cmd(t_data *data)
 {
+	if (!data->first_cmd->cmd_args[0] || !data->first_cmd->cmd_args[0][0])
+		return (0);
 	ft_signal_reinit();
 	if (!ft_malloc_child_pid(data))
 		return (0);
