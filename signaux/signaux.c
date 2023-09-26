@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 18:21:43 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:40:40 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,10 @@ void	ft_init_signal_loop(void)
 
 void	ft_signal_reinit(void)
 {
-        // Rétablir le gestionnaire de signal par défaut pour le processus enfant
         struct sigaction sa_default;
 
         sa_default.sa_handler = SIG_IGN;
         sigemptyset(&sa_default.sa_mask);
-		sigaddset(&sa_default.sa_mask, SIGINT);
         sa_default.sa_flags = 0;
         sigaction(SIGINT, &sa_default, NULL);
 }
@@ -113,4 +111,14 @@ void	ft_here_doc()
     hereDocSa.sa_handler = handler_here_doc;
     hereDocSa.sa_flags = 0;
     sigaction(SIGINT, &hereDocSa, NULL);
+}
+
+void	ft_signal_slash_reinit(void)
+{
+	struct sigaction slash_default;
+
+	slash_default.sa_handler = SIG_DFL;
+	sigemptyset(&slash_default.sa_mask);
+	slash_default.sa_flags = 0;
+	sigaction(SIGQUIT, &slash_default, NULL);
 }
