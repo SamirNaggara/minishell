@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/25 13:00:29 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:59:44 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,15 @@ void	ft_wait_children(t_data *data)
 	{
 		waitpid(data->child[i++], &status, 0);
 		if (WIFEXITED(status))
-			data->exit_status = WEXITSTATUS(status);
+			g_global_state = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			data->exit_status = WTERMSIG(status);
-		if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
-			ft_signal();
-		ft_signal_slash_ignore();
+		{
+			g_global_state = WTERMSIG(status);
+			if (g_global_state == SIGQUIT)
+				fd_printf(STDERR_FILENO, "Quit (core dumped)\n");
+		}
+		// if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
+		// 	ft_signal();
 	}
 }
 
@@ -74,14 +77,14 @@ void	ft_create_process(t_data *data, t_simple_cmd *browse, int i)
 		return (perror(E_CHILD));
 	if (data->child[i] == 0)
 		ft_child(data, browse, i);
-	if (data->child[0] >= 1)
-	{
-		if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
-		{
-			ft_signal_ignore();
-			ft_signal_slash_ignore();
-		}
-	}
+	// if (data->child[0] >= 1)
+	// {
+	// 	if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
+	// 	{
+	// 		ft_signal_ignore();
+	// 		ft_signal_slash_ignore();
+	// 	}
+	// }
 	if (i != 0)
 		ft_close_pipe(data->pipe[(i - 1) % 2]);
 }

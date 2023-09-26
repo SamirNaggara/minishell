@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:03:47 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 14:22:11 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:57:12 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	ft_env(t_data *data)
 			printf("%s\n", data->secret_envp[i]);
 		i++;
 	}
-	data->exit_status = 1;
-	exit(data->exit_status);
+	g_global_state = 1;
+	exit(g_global_state);
 }

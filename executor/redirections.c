@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:24:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/23 17:22:46 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:57:12 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int	ft_handle_redirection(t_data *data, t_simple_cmd *cmd)
 	while (redirection)
 	{
 		if (!ft_inf_operator(cmd, redirection))
-			return (data->exit_status = 1, 0);
+			return (g_global_state = 1, 0);
 		if (!ft_sup_operator(cmd, redirection))
-			return (data->exit_status = 1, 0);
+			return (g_global_state = 1, 0);
 		if (!ft_sup_sup_operator(cmd, redirection))
-			return (data->exit_status = 1, 0);
+			return (g_global_state = 1, 0);
 		redirection = redirection->next;
 	}
 	return (1);

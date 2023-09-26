@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:53:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/25 14:05:24 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:57:12 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_found_replace_value(t_data *data, char *word)
 	char	*to_return;
 
 	if (word[0] == '?')
-		return (ft_itoa(data->exit_status));
+		return (ft_itoa(g_global_state));
 	i = 0;
 	while (data->secret_envp[i] && !ft_same_key(data->secret_envp[i], word))
 		i++;
@@ -41,7 +41,7 @@ int	ft_add_expand_word(t_data *data, int *state, int *i)
 {
 	char	*value;
 
-	value = ft_itoa(data->exit_status);
+	value = ft_itoa(g_global_state);
 	if (!value)
 		return (0);
 	data->new_word = ft_strjoin_custom(data->new_word, value);
