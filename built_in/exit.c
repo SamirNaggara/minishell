@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 13:29:39 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:41:05 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	ft_check_error(t_data *data, t_simple_cmd *cmd)
 	else
 	{
 		data->exit_status = 2;
-		fd_printf(STDERR_FILENO, "exit: %s: numeric argument required\n", cmd->cmd_args[1]);
+		fd_printf(STDERR_FILENO, "exit: %s: numeric argument required\n",
+			cmd->cmd_args[1]);
 		return (1);
 	}
 	i = 1;
