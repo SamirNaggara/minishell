@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 17:59:44 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:37:36 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	ft_wait_children(t_data *data)
 		{
 			g_global_state = WTERMSIG(status);
 			if (g_global_state == SIGQUIT)
-				fd_printf(STDERR_FILENO, "Quit (core dumped)\n");
+				fd_printf(STDERR_FILENO, "Quit (core dumped)");
+			fd_printf(STDERR_FILENO, "\n");
 		}
 		// if (ft_is_end_of_str(data->first_cmd->cmd_args[0], "/minishell"))
 		// 	ft_signal();

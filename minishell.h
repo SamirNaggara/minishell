@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 17:52:28 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:31:07 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,6 +312,7 @@ void			ft_here_doc_signal(void);
 void			handler_here_doc(int signum);
 void			ft_here_doc();
 void			ft_signal_reinit(void);
+void			ft_signal_slash_reinit(void);
 extern int		g_global_state;
 
 #endif
