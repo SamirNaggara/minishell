@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 19:31:07 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:08:56 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,15 +291,10 @@ int				ft_add_expand_word(t_data *data, int *state, int *i);
 int				ft_expander_heart_loop(t_data *data, t_lexer *lexer,
 					int *state, int *i);
 // Signaux
-int				ft_signal(void);
 void			handler_c(int signum);
-int				ft_signal_ignore(void);
 void			ft_set_terminal_settings(t_data *data);
 int				ft_is_end_of_str(char *str, char *needle);
 char			*ft_reverse_str(char *str);
-void			handler_slash(int signum);
-int				ft_signal_slash(void);
-int				ft_signal_slash_ignore(void);
 void			ft_restore_terminal(t_data *data);
 size_t			ft_strcat(char *dest, const char *src);
 int				ft_increment_shell_level(t_data *data);
@@ -310,7 +305,7 @@ long			ft_atoi_long(const char *nptr);
 void			ft_init_signal_loop(void);
 void			ft_here_doc_signal(void);
 void			handler_here_doc(int signum);
-void			ft_here_doc();
+void			ft_here_doc(void);
 void			ft_signal_reinit(void);
 void			ft_signal_slash_reinit(void);
 extern int		g_global_state;
