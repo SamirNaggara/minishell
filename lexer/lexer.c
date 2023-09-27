@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 23:57:33 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/25 13:22:06 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:33:59 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int	ft_lexer(t_data *data)
 	while (1)
 	{
 		data->loop = 1;
-		if (current->str_type == NO_QUOTE && !data->input[i])
+		if (current->str_type != NO_QUOTE && !data->input[i])
+			return (fd_printf(STDERR_FILENO, "syntax error\n"), 0);
+		if (!data->input[i])
 			break ;
 		if (!ft_lexer_in_loop(data, &current, &i))
 			return (0);
@@ -66,8 +68,8 @@ void	ft_delete_last_lexer_if_empty(t_lexer *current)
 */
 int	ft_lexer_in_loop(t_data *data, t_lexer **current, int *i)
 {
-	if (!ft_quote_not_over(data, i))
-		return (0);
+	// if (!ft_quote_not_over(data, i))
+	// 	return (0);
 	if (!ft_is_second_part_op(data, current, i))
 		return (0);
 	if (!ft_delimite_op(data, current, i))
