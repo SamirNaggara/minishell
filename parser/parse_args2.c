@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:00:22 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/27 14:51:39 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:33:17 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_charjoin(char *str, char c)
 
 	if (!str)
 	{
-		to_return = (char *)malloc(sizeof(char));
+		to_return = (char *)malloc(sizeof(char) * 2);
 		if (!to_return)
 			return (NULL);
 		to_return[0] = c;
@@ -77,7 +77,6 @@ char	*ft_charjoin(char *str, char c)
 	}
 	to_return[i] = c;
 	to_return[i + 1] = '\0';
-
 	return (free(str), to_return);
 }
 
