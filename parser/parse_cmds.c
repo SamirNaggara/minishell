@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:35:10 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/23 17:02:46 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 01:13:33 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int	ft_check_valids_cmds(t_data *data)
 		return (0);
 	if (!ft_is_space_lexer(current_lexer))
 		return (1);
-	if (!current_lexer->prev)
+	if (!current_lexer->next)
 		return (1);
-	if (current_lexer->prev->operator == PIPE)
+	if (current_lexer->next->operator == PIPE)
 		return (0);
 	return (1);
 }
