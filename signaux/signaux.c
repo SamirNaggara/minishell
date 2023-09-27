@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:16:55 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 20:11:25 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:23:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,8 @@ void	ft_signal_reinit(void)
 void	handler_here_doc(int signum)
 {
 	if (signum == SIGINT)
-	{
-		fd_printf(STDERR_FILENO, "\n");
 		close(0);
-	}
+	g_global_state = 130;
 }
 
 void	ft_here_doc(void)
