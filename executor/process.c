@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 20:11:45 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:21:01 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void	ft_wait_children(t_data *data)
 {
 	int	i;
 	int	status;
+	int	signal;
 
+	signal = 1;
 	i = 0;
 	status = 0;
 	if (data->nb_cmd == 1 && ft_exec_without_fork(data->first_cmd))
@@ -49,8 +51,9 @@ void	ft_wait_children(t_data *data)
 		waitpid(data->child[i++], &status, 0);
 		if (WIFEXITED(status))
 			g_global_state = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
+		else if (signal && WIFSIGNALED(status))
 		{
+			signal = 0;
 			if (WTERMSIG(status) == SIGQUIT)
 				fd_printf(STDERR_FILENO, "Quit (core dumped)");
 			fd_printf(STDERR_FILENO, "\n");
@@ -71,6 +74,7 @@ void	ft_create_process(t_data *data, t_simple_cmd *browse, int i)
 {
 	if (browse->next)
 		pipe(data->pipe[i % 2]);
+	ft_signal_reinit();
 	data->child[i] = fork();
 	if (data->child[i] == -1)
 		return (perror(E_CHILD));
