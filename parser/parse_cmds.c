@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:35:10 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/27 21:55:37 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:19:38 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ int	ft_check_valids_cmds(t_data *data)
 
 	cmd = data->first_cmd;
 	if (!cmd)
-		return (0);
+		return (1);
+	if (data->nb_cmd <= 1)
+		return (1);
 	while (cmd)
 	{
 		if (!cmd->cmd_args || !cmd->cmd_args[0])

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 23:57:33 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/27 21:54:04 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:12:35 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	ft_delete_last_lexer_if_empty(t_lexer *current)
 	if (current && (current->word == NULL || !*current->word) && current->prev)
 	{
 		current->prev->next = NULL;
+		if (current->word)
+			free(current->word);
 		free(current);
 	}
 }
