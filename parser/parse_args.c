@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:36:51 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/27 14:47:25 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:54:31 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_add_arg_to_cmd2(int *new_arg, t_simple_cmd *cmd, t_lexer *lexer)
 	if (*new_arg)
 	{
 		if (!ft_add_arg_to_cmd(cmd, lexer->word))
-			return (0);		
+			return (0);
 		*new_arg = 0;
 	}
 	else

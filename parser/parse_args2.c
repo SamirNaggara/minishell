@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:00:22 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/27 18:33:17 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:55:12 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ int	ft_add_arg_to_cmd(t_simple_cmd *cmd, char *arg)
 		i++;
 	if (!ft_add_multiple_word_arg(cmd, arg, i))
 		return (0);
-	// cmd->cmd_args[i] = ft_strdup(arg);
-	// if (!cmd->cmd_args[i])
-	// 	return (0);
 	return (1);
 }
 
@@ -48,7 +45,6 @@ int	ft_add_multiple_word_arg(t_simple_cmd *cmd, char *arg, int i)
 		}
 		j++;
 	}
-
 	return (1);
 }
 
@@ -69,7 +65,7 @@ char	*ft_charjoin(char *str, char c)
 	i = 0;
 	to_return = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2));
 	if (!to_return)
-			return (NULL);
+		return (NULL);
 	while (str[i])
 	{
 		to_return[i] = str[i];
