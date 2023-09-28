@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:00:22 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/27 21:55:12 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:58:52 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ int	ft_add_multiple_word_arg(t_simple_cmd *cmd, char *arg, int i)
 	int	j;
 
 	j = 0;
+	if (!arg[0])
+	{
+		cmd->cmd_args[i] = (char *)malloc(sizeof(char));
+		cmd->cmd_args[i][0] = '\0';
+	}
 	while (arg[j])
 	{
 		if (ft_is_space(arg[j]) && (j == 0 || !ft_is_space(arg[j - 1])))

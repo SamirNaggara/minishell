@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 15:59:04 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:38:12 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_exit(t_data *data)
 
 	cmd = data->first_cmd;
 	i = 1;
+	fd_printf(STDERR_FILENO, "exit\n");
 	if (cmd->cmd_args[i])
 	{
 		if (!ft_check_error(data, cmd))
@@ -60,7 +61,6 @@ void	ft_exit(t_data *data)
 		ft_free_double_tab(data->paths);
 	free(data->input);
 	ft_restore_terminal(data);
-	fd_printf(STDERR_FILENO, "exit\n");
 	exit(g_global_state);
 }
 
