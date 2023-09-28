@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:35:10 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/27 11:50:37 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:55:37 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	ft_check_valids_cmds(t_data *data)
 		{
 			if (!cmd->redirections)
 				return (0);
-		}	
+		}
 		cmd = cmd->next;
 	}
 	return (1);
