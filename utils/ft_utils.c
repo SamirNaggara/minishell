@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 10:59:01 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/14 15:13:01 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:17:03 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,27 @@ char	*ft_strdup_plus_n(const char *s)
 	}
 	result[i] = '\0';
 	return (result);
+}
+
+char	*ft_get_parent_file(char *str)
+{
+	char	*slash;
+	char	*to_return;
+	int		i;
+
+	slash = ft_strrchr(str, '/');
+	if (!slash)
+		return (NULL);
+	to_return = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!to_return)
+		return (NULL);
+	i = 0;
+	while (str[i] && str + i != slash)
+	{
+		to_return[i] = str[i];
+		i++;
+	}
+	to_return[i] = '\0';
+	free(str);
+	return (to_return);
 }

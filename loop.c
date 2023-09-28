@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:13:20 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/28 15:14:08 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:57:38 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,19 @@ char	*read_input(t_data *data)
 {
 	char	*ret;
 	char	cwd[1024];
-	char	*home;
+	char	*new;
 
+	new = ft_found_replace_value(data, "PWD");
+	if (!new)
+		return (NULL);
 	while (!is_current_directory_accessible())
 	{
-		if (chdir("..") == -1)
-		{
-			home = ft_found_replace_value(data, "HOME");
-			if (!home)
-				return (NULL);
-			if (chdir(home) == -1)
-				chdir("/");
-			free(home);
-		}
+		new = ft_get_parent_file(new);
+		if (!new)
+			return (0);
+		chdir(new);
 	}
+	free(new);
 	ft_bzero(cwd, 1024);
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, "  ", 1024);

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:59:32 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/28 15:02:25 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:58:48 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ t_lexer	*ft_delimite(t_lexer *lexer)
 {
 	t_lexer	*new;
 
-	if (lexer->word == NULL)
+	if (lexer->str_type == NO_QUOTE && lexer->word == NULL)
 		return (lexer);
-	if (lexer->str_type != NO_QUOTE && !*(lexer->word))
+	if (lexer->str_type == NO_QUOTE && !*(lexer->word))
 		return (lexer);
-	if (lexer->prev && !*lexer->word && (lexer->prev))
+	if (lexer->str_type == NO_QUOTE && lexer->prev && !*lexer->word
+		&& (lexer->prev))
 		return (lexer);
 	new = ft_begin_lexer();
 	if (!new)

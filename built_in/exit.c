@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:10:12 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/28 13:38:12 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:44:58 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,6 @@
     C'est la fonction appele lorsque l'utilisateur rentre la commande exit
     Attention, la commande doit tout free, ce qui n'est pas le cas la
 */
-
-int	ft_any_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (*str == '-')
-		str++;
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	if (ft_strlen(str) > 19)
-		return (0);
-	else if (ft_strlen(str) == 19)
-	{
-		if (ft_strncmp(str, "9223372036854775807", 20) > 0)
-			return (0);
-	}
-	return (1);
-}
 
 void	ft_exit(t_data *data)
 {
@@ -62,6 +39,31 @@ void	ft_exit(t_data *data)
 	free(data->input);
 	ft_restore_terminal(data);
 	exit(g_global_state);
+}
+
+int	ft_any_number(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!*str)
+		return (0);
+	if (*str == '-')
+		str++;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	if (ft_strlen(str) > 19)
+		return (0);
+	else if (ft_strlen(str) == 19)
+	{
+		if (ft_strncmp(str, "9223372036854775807", 20) > 0)
+			return (0);
+	}
+	return (1);
 }
 
 int	ft_check_error(t_data *data, t_simple_cmd *cmd)

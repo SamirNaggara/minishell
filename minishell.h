@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/27 14:33:05 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:37:46 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@
 # define E_PIPE "error: Pipe error "
 # define E_CHILD "error: Fork went wrong "
 # define E_CMD_NOT_FOUND "%s: command not found\n"
-# define E_SYNTAXE "erreur de syntaxe près du symbole inattendu "
+# define E_SYNTAXE "syntax error near unexpected token "
 # define TMP_FILE_NAME ".tmp_here_doc_name_"
 # define E_CD "cd: %s: Aucun fichier ou dossier de ce type\n"
 # define E_CD_ARG "cd: trop d'arguments\n"
 # define E_HERE_DOC "Here doc not created properly\n"
 # define E_SIG_HEREDOC "warning: here-document at line delimited \
 by end-of-file"
-# define E_EXPORT_NVALID "Erreur : export: '%s' not a valid identifier\n"
+# define E_EXPORT_NVALID "export: '%s' not a valid identifier\n"
 # define E_IS_DIR "%s: Is a directory\n"
 # define E_NO_FILE "%s: No such file or directory\n"
 
@@ -293,6 +293,8 @@ int				ft_add_value_word(t_data *data, t_lexer *lexer,
 int				ft_add_expand_word(t_data *data, int *state, int *i);
 int				ft_expander_heart_loop(t_data *data, t_lexer *lexer,
 					int *state, int *i);
+char			*ft_get_parent_file(char *str);
+void			ft_printf_good_error(t_data *data, t_simple_cmd *cmd);
 // Signaux
 void			handler_c(int signum);
 void			ft_set_terminal_settings(t_data *data);

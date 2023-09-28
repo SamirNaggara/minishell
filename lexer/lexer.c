@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 23:57:33 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/28 14:18:46 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:55:38 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ void	ft_visualise_lexer(t_data *data)
 	{
 		printf("L'element %d : %s\n", browse->index, browse->word);
 		if (browse->operator != NONE)
-			printf("Operator : %d\n", browse->operator);
+			printf("   Operator : %d\n", browse->operator);
+		printf("   str type %d \n", browse->str_type);
 		browse = browse->next;
 	}
 }

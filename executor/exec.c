@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:30:11 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 18:24:25 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:18:57 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	ft_cmd_valid(t_data *data, t_simple_cmd *cmd)
 
 	if (!cmd->cmd_args[0])
 		return (0);
+	if (!*cmd->cmd_args[0])
+		return (fd_printf(STDERR_FILENO, E_CMD_NOT_FOUND, cmd->cmd_args[0]), 0);
 	i = 0;
 	if (cmd->builtin != NO_BUILTIN)
 		return (1);
@@ -53,11 +55,16 @@ int	ft_cmd_valid(t_data *data, t_simple_cmd *cmd)
 			return (fd_printf(STDERR_FILENO, E_NO_FILE, cmd->cmd_args[0]), 0);
 		return (1);
 	}
+	ft_printf_good_error(data, cmd);
+	return (g_global_state = 127, 0);
+}
+
+void	ft_printf_good_error(t_data *data, t_simple_cmd *cmd)
+{
 	if (!data->paths)
 		perror(cmd->cmd_args[0]);
 	else
 		fd_printf(STDERR_FILENO, E_CMD_NOT_FOUND, cmd->cmd_args[0]);
-	return (g_global_state = 127, 0);
 }
 
 int	ft_test_cmd(t_data *data, t_simple_cmd *cmd, int *i)
