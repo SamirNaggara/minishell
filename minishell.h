@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:14:00 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/28 18:19:08 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:37:46 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define E_PIPE "error: Pipe error "
 # define E_CHILD "error: Fork went wrong "
 # define E_CMD_NOT_FOUND "%s: command not found\n"
-# define E_SYNTAXE "erreur de syntaxe près du symbole inattendu "
+# define E_SYNTAXE "syntax error near unexpected token "
 # define TMP_FILE_NAME ".tmp_here_doc_name_"
 # define E_CD "cd: %s: Aucun fichier ou dossier de ce type\n"
 # define E_CD_ARG "cd: trop d'arguments\n"

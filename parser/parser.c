@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:48:58 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/28 16:38:43 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:56:01 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	ft_parser(t_data *data)
 {
 	if (!data->lexer || !data->lexer->word)
 		return (0);
-	if (ft_is_space_lexer(data->lexer) && !data->lexer->next)
+	if (!*data->lexer->word && !data->lexer->next
+		&& data->lexer->str_type == NO_QUOTE)
 		return (0);
 	if (!ft_parse_pipe_and_redir(data))
 		return (ft_free_simple_cmd(data), 0);

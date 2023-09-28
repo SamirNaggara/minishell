@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:57:03 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/28 15:18:42 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:38:27 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_syntaxe_error(char const c)
 {
 	fd_printf(STDERR_FILENO, E_SYNTAXE);
 	if (c == '\n')
-		fd_printf(STDERR_FILENO, "<< newline >>\n");
+		fd_printf(STDERR_FILENO, "`newline`\n");
 	else
-		fd_printf(STDERR_FILENO, "<< %c >>\n", c);
+		fd_printf(STDERR_FILENO, "`%c`\n", c);
 }
