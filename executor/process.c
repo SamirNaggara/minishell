@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:45:53 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/28 18:43:52 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:05:49 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ void	ft_wait_children(t_data *data)
 		{
 			signal = 0;
 			if (WTERMSIG(status) == SIGQUIT)
-				fd_printf(STDERR_FILENO, "Quit (core dumped)");
-			if (g_global_state > 1)
-				fd_printf(STDERR_FILENO, "\n");
+				fd_printf(STDERR_FILENO, "Quit (core dumped)\n");
 			g_global_state = 130;
 		}
 	}
