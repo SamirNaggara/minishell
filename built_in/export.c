@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:55:39 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 15:57:12 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:48:05 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int	ft_add_to_env(t_data *data, t_simple_cmd *cmd)
 		if (!ft_isalpha(key[0]) && key[0] != '_')
 		{
 			fd_printf(STDERR_FILENO, E_EXPORT_NVALID, cmd->cmd_args[i]);
-			return (free(key), 0);
+			free(key);
+			i++;
+			g_global_state = 1;
+			continue ;
 		}
 		if (!ft_add_one_export(data, key, cmd->cmd_args[i]))
 			return (free(key), 0);

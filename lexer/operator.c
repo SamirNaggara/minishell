@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:54:24 by snaggara          #+#    #+#             */
-/*   Updated: 2023/08/27 19:04:46 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:02:49 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_start_begin_op(t_data *data, t_lexer **current, int *i)
 	if ((*current)->str_type != NO_QUOTE)
 		return (1);
 	if (!ft_is_beg_ope(data->input[*i]))
+		return (1);
+	if (*i == 0)
 		return (1);
 	*current = ft_delimite(*current);
 	if (!*current)

@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 20:34:54 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/26 16:11:40 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:44:37 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	ft_cd(t_data *data)
 	if (!dest_file)
 		return (0);
 	if (!ft_test_dir(data, dest_file))
-		return (free(dest_file), 0);
+		return (free(dest_file), g_global_state = 1, 0);
 	if (!ft_change_directory(data, dest_file))
-		return (free(dest_file), 0);
+		return (free(dest_file), g_global_state = 1, 0);
 	if (!ft_update_oldpwd_envp(data))
-		return (free(dest_file), 0);
+		return (free(dest_file), g_global_state = 1, 0);
 	if (!ft_update_pwd_envp(data))
-		return (free(dest_file), 0);
+		return (free(dest_file), g_global_state = 1, 0);
 	return (free(dest_file), g_global_state = 0, 1);
 }
 

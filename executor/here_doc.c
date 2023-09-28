@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:37:03 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/27 12:02:52 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:53:53 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_handle_here_doc(t_simple_cmd *cmd, t_lexer *redirection)
 			return (free(file_name), 0);
 		if (!stdin_line)
 		{
-			fd_printf(STDERR_FILENO, "%s\n", E_SIG_HEREDOC);
+			fd_printf(STDERR_FILENO, "\n%s\n", E_SIG_HEREDOC);
 			break ;
 		}
 		write(cmd->fd_in, stdin_line, ft_strlen(stdin_line));

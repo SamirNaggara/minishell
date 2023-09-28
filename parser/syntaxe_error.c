@@ -6,7 +6,7 @@
 /*   By: snaggara <snaggara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:57:03 by snaggara          #+#    #+#             */
-/*   Updated: 2023/09/27 01:11:05 by snaggara         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:18:42 by snaggara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@
 int	ft_syntax_redirection(t_lexer *current_lexer)
 {
 	if (!current_lexer)
-		return (ft_syntaxe_error('a'), 0);
+		return (ft_syntaxe_error('\n'), 0);
 	if (!current_lexer->next)
-		return (ft_syntaxe_error('b'), 0);
+		return (ft_syntaxe_error('\n'), 0);
 	current_lexer = current_lexer->next;
 	while (ft_is_space_lexer(current_lexer))
 		current_lexer = current_lexer->next;
 	if (!current_lexer)
-		return (ft_syntaxe_error('c'), 0);
+		return (ft_syntaxe_error('\n'), 0);
 	if (current_lexer->operator != NONE)
-		return (ft_syntaxe_error('e'), 0);
+		return (ft_syntaxe_error(current_lexer->word[0]), 0);
 	if (!current_lexer->word || !*current_lexer->word)
-		return (ft_syntaxe_error('d'), 0);
+		return (ft_syntaxe_error('\n'), 0);
 	if (!ft_is_space_lexer(current_lexer))
 		return (1);
 	return (ft_syntax_redirection(current_lexer));
